@@ -4,15 +4,15 @@
 */
 
 @font-face {
-  font-family: 'Open Sans_my';
-  src: url('opensans.woff2') format('woff');
+  font-family: 'PT Sans';
+  src: url('pt-sans-v8-latin_cyrillic-regular.woff2') format('woff');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Open Sans_my';
-  src: url('opensans_bold.woff2') format('woff');
-  font-weight: bold;
+  font-family: 'PT Sans';
+  src: url('pt-sans-v8-latin_cyrillic-700.woff2') format('woff');
+  font-weight: 700;
   font-style: normal;
 }

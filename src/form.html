@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Бронирование</title>
+  <link rel="stylesheet" href="css/style.min.css">
+</head>
+<body>
+
+  <header class="page-header">
+    <div class="page-header__inner">
+
+      <a href="" class="logo"><img src="http://placehold.it/143x49" alt=""></a>
+
+      <nav class="main-nav">
+        <a class="main-nav__toggler"><span></span></a>
+        <ul class="main-nav__list">
+          <li class="main-nav__item"><a href="" class="main-nav__link  main-nav__link--active">Номера</a></li>
+          <li class="main-nav__item"><a href="" class="main-nav__link">Коттедж</a></li>
+          <li class="main-nav__item"><a href="" class="main-nav__link">Ресторан</a></li>
+          <li class="main-nav__item"><a href="" class="main-nav__link">Отдых</a></li>
+          <li class="main-nav__item"><a href="" class="main-nav__link">Контакты</a></li>
+        </ul>
+      </nav>
+
+      <div class="page-header__contacts">
+        <a href="tel:+7 812 777-55-88" class="">+7 812 777-55-88</a>
+        <address class="page-header__address"></address>
+      </div>
+
+      <a href="" class="btn  btn--icon-calendar  btn--min-width-invisible">Забронировать</a>
+
+    </div>
+  </header>
+
+  <main>
+
+    <form action="" class="form">
+
+      <section class="form__header">
+        <div class="form__header-inner">
+          <h1 class="form__header-title">Бронирование</h1>
+          <p class="form__text">Чтобы забронировать номер в отеле или коттедж, заполните форму ниже или просто позвоните по телефону: <a href="" class="form__text-phone">+7 812 777-55-88</a></p>
+        </div>
+      </section>
+
+      <div class="form__step  form__step--bg-lightgrey">
+        <div class="form__step-inner">
+          <span class="form__step-number-title">шаг 1</span>
+          <h2 class="item-title">Дата отдыха</h2>
+          <div class="entry-and-departure">
+
+            <label class="entry-and-departure__item">
+              <span class="entry-and-departure__step-input-title">Дата въезда</span>
+              <div for="" class="entry-and-departure__item-input-block">
+                <input type="number" class="entry-and-departure__item-input">
+                <input type="number" class="entry-and-departure__item-input">
+                <input type="number" class="entry-and-departure__item-input" name="entry-year">
+              </div>
+            </label>
+
+            <label class="entry-and-departure__item">
+              <span class="entry-and-departure__step-input-title">Дата выезда</span>
+              <div for="" class="entry-and-departure__item-input-block">
+                <input type="text" class="entry-and-departure__item-input">
+                <input type="text" class="entry-and-departure__item-input">
+                <input type="text" class="entry-and-departure__item-input" name="departure-year">
+              </div>
+            </label>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="form__step">
+        <div class="form__step-inner">
+          <span class="form__step-number-title">шаг 2</span>
+          <h2 class="item-title">Место проживания</h2>
+          <div class="choise-block">
+
+            <div class="choise-block__item">
+              <label class="accommodation-choice  accommodation-choice--hotel">
+                <input class="accommodation-choice__input" name="accommodation" type="radio" value="hotel" checked>
+                <span class="form__step-subtitle">Отель</span>
+              </label>
+            </div>
+
+            <div class="choise-block__item">
+              <label class="accommodation-choice  accommodation-choice--cottage">
+                <input class="accommodation-choice__input" name="accommodation" type="radio" value="cottage">
+                <span class="form__step-subtitle">Коттедж</span>
+              </label>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="form__step  form__step--bg-lightgrey">
+        <div class="form__step-inner">
+          <span class="form__step-number-title">шаг 3</span>
+          <h2 class="item-title">Тип коттеджа</h2>
+          <div class="choise-block">
+
+            <div class="choise-block__item">
+              <label class="cottages-type">
+                <input class="cottages-type__input" name="grade" type="radio" value="flagman"><span class="cottages-type__title">Флагман</span>
+              </label>
+            </div>
+
+            <div class="choise-block__item">
+              <label class="cottages-type">
+                <input class="cottages-type__input" name="grade" type="radio" value="ozyorniy"><span class="cottages-type__title">Озерный</span>
+              </label>
+            </div>
+
+            <div class="choise-block__item">
+              <label class="cottages-type">
+                <input class="cottages-type__input" name="grade" type="radio" value="olhovka"><span class="cottages-type__title">Ольховка</span>
+              </label>
+            </div>
+
+            <div class="choise-block__item">
+              <label class="cottages-type">
+                <input class="cottages-type__input" name="grade" type="radio" value="portoviy"><span class="cottages-type__title">Портовый</span>
+              </label>
+            </div>
+
+          </div>
+
+          <div class="cottages-type__descr  cottages-type__descr--flagman">
+            <ul class="cottages-type__descr-list">
+              <li class="cottages-type__descr-list-item">Площадь 100м<sup>2</sup></li>
+              <li class="cottages-type__descr-list-item">3 комнаты</li>
+              <li class="cottages-type__descr-list-item">5 спальных мест</li>
+              <li class="cottages-type__descr-list-item">Раздельный санузел</li>
+              <li class="cottages-type__descr-list-item">Wi-fi</li>
+            </ul>
+          </div>
+
+          <div class="cottages-type__descr  cottages-type__descr--ozyorniy">
+            <ul class="cottages-type__descr-list">
+              <li class="cottages-type__descr-list-item">Площадь 100м<sup>2</sup></li>
+              <li class="cottages-type__descr-list-item">3 комнаты</li>
+              <li class="cottages-type__descr-list-item">5 спальных мест</li>
+              <li class="cottages-type__descr-list-item">Раздельный санузел</li>
+              <li class="cottages-type__descr-list-item">Wi-fi</li>
+            </ul>
+          </div>
+
+          <div class="cottages-type__descr  cottages-type__descr--olhovka">
+            <ul class="cottages-type__descr-list">
+              <li class="cottages-type__descr-list-item">Площадь 100м<sup>2</sup></li>
+              <li class="cottages-type__descr-list-item">3 комнаты</li>
+              <li class="cottages-type__descr-list-item">5 спальных мест</li>
+              <li class="cottages-type__descr-list-item">Раздельный санузел</li>
+              <li class="cottages-type__descr-list-item">Wi-fi</li>
+            </ul>
+          </div>
+
+          <div class="cottages-type__descr  cottages-type__descr--portoviy">
+            <ul class="cottages-type__descr-list">
+              <li class="cottages-type__descr-list-item">Площадь 100м<sup>2</sup></li>
+              <li class="cottages-type__descr-list-item">3 комнаты</li>
+              <li class="cottages-type__descr-list-item">5 спальных мест</li>
+              <li class="cottages-type__descr-list-item">Раздельный санузел</li>
+              <li class="cottages-type__descr-list-item">Wi-fi</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="form__step">
+        <div class="form__step-inner">
+          <span class="form__step-number-title">шаг 4</span>
+          <h2 class="item-title">Персональная информация</h2>
+          <div class="personal-info">
+            <div class="field-text">
+              <input type="text" class="field-text__input">
+            </div>
+            <div class="field-text">
+              <input type="text" class="field-text__input">
+            </div>
+            <div class="field-text">
+              <input type="text" class="field-text__input">
+              <p class="field-text__descr">Мы свяжемся с вами в случае необходимости.</p>
+            </div>
+            <div class="field-text">
+              <input type="text" class="field-text__input">
+              <p class="field-text__descr">На этот адрес мы вышлем вам подтверждение о забронированном номере.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form__step  form__step--bg-lightgrey">
+        <div class="form__step-inner">
+          <span class="form__step-number-title">шаг 5</span>
+          <h2 class="item-title">Способ оплаты</h2>
+          <div class="payment-form">
+
+            <div class="payment-form__to-pay-block">
+
+              <div class="payment-form__arrival">
+                <input type="radio" class="payment-form__arrival-input">
+                <h3 class="payment-form__block-title">По приезду</h3>
+                <p class="field-text-descr">На этот адрес мы вышлем вам подтверждение о забронированном номере.</p>
+              </div>
+
+              <div class="payment-form__now-arrival">
+                <input type="radio" class="payment-form__arrival-input">
+                <h3 class="payment-form__block-title">Сейчас</h3>
+                <p class="field-text-descr">Прямо сейчас вы можете произвести оплату с помощью банковской карты.</p>
+
+                <label class="field-text  field-text--large">
+                  <span class="field-text__title">Номер карты</span>
+                  <input type="text" class="field-text__input">
+                </label>
+
+                <label class="field-text  field-text--large">
+                  <span class="field-text__title">Фамилия владельца карты</span>
+                  <input type="text" class="field-text__input">
+                </label>
+
+                <label class="field-text  field-text--small">
+                  <span class="field-text__title">Код CVV</span>
+                  <input type="text" class="field-text__input">
+                </label>
+
+                <label class="field-text  field-text--small">
+                  <span class="field-text__title">Действует до</span>
+                  <input type="text" class="field-text__input">
+                </label>
+              </div>
+
+            </div>
+
+            <div class="payment-form__bill-block">
+              <h3 class="payment-form__block-title  payment-form__block-title--grey">К оплате</h3>
+              <p class="payment-form__bill-sum">14 000 руб.</p>
+              <p class="field-text-descr">Пожалуйста, <a href="" class="payment-form__bill-notice-link">выберите дату</a> въезда и выезда, чтобы увидеть сумму к оплате</p>
+            </div>
+
+            <div class="payment-form__btn">
+              <button class="btn  btn--large  btn--rectangle  btn--green">
+                Забронировать
+              </button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </form>
+
+  </main>
+
+  <footer class="page-footer">
+
+    <p class="page-footer__address">г. Санкт-Петербург Приморское ш.600</p>
+
+    <div class="logo-set">
+      <a href="" class="logo"><img src="" alt=""></a>
+      <ul class="page-footer__social-links">
+        <li class="page-footer__social-item">
+          <a href="https://vk.com" class="page-footer__link  page-footer__link--vk">Вконтакте</a>
+        </li>
+        <li class="page-footer__social-item">
+          <a href="https://www.instagram.com/" class="page-footer__link  page-footer__link--instagram">Инстаграм</a>
+        </li>
+        <li class="page-footer__social-item">
+          <a href="https://facebook.com" class="page-footer__link  page-footer__link--fb">Фейсбук</a>
+        </li>
+      </ul>
+    </div>
+
+    <p class="page-footer__contacts">+7 812 777-55-88 info@greenvalley.ru</p>
+
+  </footer>
+
+</body>
+</html>

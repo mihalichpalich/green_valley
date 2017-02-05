@@ -1,0 +1,49 @@
+.btn {
+  text-decoration: none;
+  text-transform: uppercase;
+  color: @btn-and-white-caption;
+  font-size: @font-size--small;
+  font-weight: 500;
+  font-family: @font-family;
+  letter-spacing: 0.05em;
+  line-height: 18px;
+  border:none;
+
+  &--icon-calendar {
+    padding: 13px 20px;
+
+    &::before {
+      background-image: url() no-repeat;
+      background-position: 19px 10px;
+    }
+
+    &:hover {
+      background-color: @color-btn--darken;
+    }
+  }
+
+  &--bordered {
+    background-color: @color-form-btn;
+    border: 2px solid white;
+
+    &:hover {
+      background-color: #fff;
+      color: @color-form-btn;
+    }
+  }
+
+  &--large {
+    width: 100%;
+    padding: 14px 0;
+    background-color: @color-form-btn;
+
+    &:hover {
+      background-color: @color-form-btn--dark;
+    }
+  }
+
+  &--min-width-invisible {
+    display: none;
+  }
+
+}
