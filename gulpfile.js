@@ -25,12 +25,15 @@ const uglify = require('gulp-uglify');
 const concat = require('gulp-concat');
 const cheerio = require('gulp-cheerio');
 const svgstore = require('gulp-svgstore');
+const browserify = require('browserify');
 const svgmin = require('gulp-svgmin');
 const base64 = require('gulp-base64');
 const notify = require('gulp-notify');
 const plumber = require('gulp-plumber');
 const cleanCSS = require('gulp-cleancss');
+const csscomb = require('gulp-csscomb');
 const pug = require('gulp-pug');
+const gulpBrowser =   require("gulp-browser");
 
 // ЗАДАЧА: Компиляция препроцессора
 gulp.task('less', function(){
@@ -42,6 +45,7 @@ gulp.task('less', function(){
         autoprefixer({ browsers: ['last 2 version'] }),     // автопрефиксирование
         mqpacker({ sort: true }),                           // объединение медиавыражений
     ]))
+    .pipe(csscomb())
     .pipe(sourcemaps.write('/'))                            // записываем карту кода как отдельный файл (путь из константы)
     .pipe(gulp.dest(dirs.build + '/css/'))                  // записываем CSS-файл (путь из константы)
     .pipe(browserSync.stream())
@@ -150,7 +154,7 @@ gulp.task('js', function () {
 
 // ЗАДАЧА: Кодирование в base64 шрифта в формате WOFF
 gulp.task('css:fonts:woff', function (callback) {
-  let fontCssPath = dirs.source + '/fonts/font_opensans_woff.css'; // с каким исходным файлом работаем
+  let fontCssPath = [dirs.source + '/fonts/font_fira-sans_woff.css', dirs.source + '/fonts/font_pt-sans_woff.css']; // с каким исходным файлом работаем
   if(fileExist(fontCssPath) !== false) { // если исходный файл существует, продолжим
     return gulp.src(fontCssPath)
       .pipe(plumber({ errorHandler: onError }))
@@ -172,7 +176,7 @@ gulp.task('css:fonts:woff', function (callback) {
 
 // ЗАДАЧА: Кодирование в base64 шрифта в формате WOFF2
 gulp.task('css:fonts:woff2', function (callback) {
-  let fontCssPath = dirs.source + '/fonts/font_opensans_woff2.css'; // с каким исходным файлом работаем
+  let fontCssPath = [dirs.source + '/fonts/font_fira-sans_woff2.css', dirs.source + '/fonts/font_pt-sans_woff2.css'] // с каким исходным файлом работаем
   if(fileExist(fontCssPath) !== false) { // если исходный файл существует, продолжим
     return gulp.src(fontCssPath)
       .pipe(plumber({ errorHandler: onError }))
@@ -249,6 +253,15 @@ gulp.task('serve', gulp.series('build', function() {
   );
 
 }));
+
+gulp.task('js2', function() {
+    const stream = gulp.src('src/js/app.js')
+
+        .pipe(gulpBrowser.browserify())
+        .pipe(gulp.dest('build/js'))
+
+    return stream;
+});
 
 // ЗАДАЧА, ВЫПОЛНЯЕМАЯ ТОЛЬКО ВРУЧНУЮ: Отправка в GH pages (ветку gh-pages репозитория)
 gulp.task('deploy', function() {

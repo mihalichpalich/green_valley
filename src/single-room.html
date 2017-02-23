@@ -1,36 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Бронирование</title>
-</head>
-<body>
-
-  <header class="page-header">
-    <div class="page-header__inner">
-
-      <a href="" class="logo"><img src="" alt=""></a>
-
-      <nav class="main-nav">
-        <ul class="main-nav__list">
-          <li class="main-nav__item"><a href="" class="main-nav__link"></a></li>
-          <li class="main-nav__item"><a href="" class="main-nav__link"></a></li>
-          <li class="main-nav__item"><a href="" class="main-nav__link"></a></li>
-          <li class="main-nav__item"><a href="" class="main-nav__link"></a></li>
-          <li class="main-nav__item"><a href="" class="main-nav__link"></a></li>
-        </ul>
-        <span class="main-nav__toggler"></span>
-      </nav>
-
-      <div class="page-header__contacts">
-        <a href="tel:+7 812 777-55-88" class="">+7 812 777-55-88</a>
-        address
-      </div>
-
-      <a href="" class="btn  btn--icon-calendar">Забронировать</a>
-
-    </div>
-  </header>
+@@include('_include/page-header.html', {"title": "Описание номера"})
 
   <main>
 
@@ -112,28 +80,4 @@
 
   </main>
 
-  <footer class="page-footer">
-
-    <p class="page-footer__address">г. Санкт-Петербург Приморское ш.600</p>
-
-    <div class="logo-set">
-      <a href="" class="logo"><img src="" alt=""></a>
-      <ul class="page-footer__social-links">
-        <li class="page-footer__social-item">
-          <a href="https://vk.com" class="page-footer__link  page-footer__link--vk">Вконтакте</a>
-        </li>
-        <li class="page-footer__social-item">
-          <a href="https://www.instagram.com/" class="page-footer__link  page-footer__link--instagram">Инстаграм</a>
-        </li>
-        <li class="page-footer__social-item">
-          <a href="https://facebook.com" class="page-footer__link  page-footer__link--fb">Фейсбук</a>
-        </li>
-      </ul>
-    </div>
-
-    <p class="page-footer__contacts">+7 812 777-55-88 info@greenvalley.ru</p>
-
-  </footer>
-
-</body>
-</html>
+@@include('_include/page-footer.html')

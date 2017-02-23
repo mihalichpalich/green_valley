@@ -1,0 +1,17 @@
+{
+  "name": "green_valley",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Mikhail Pavlov"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/mihalichpalich/green_valley",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
