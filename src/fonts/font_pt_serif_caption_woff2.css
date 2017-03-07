@@ -1,0 +1,11 @@
+/*
+Файл для отдельной подгрузки WOFF2-версии файла JS-ом.
+Будет обработан при сборке: в url() будет подставлена base64 кодированная версия указанного файла
+*/
+
+@font-face {
+  font-family: 'PT Serif Caption';
+  src: url('ptserifcaption-400-normal.woff2') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}

@@ -145,6 +145,8 @@ gulp.task('js', function () {
       dirs.source + '/js/jquery-migrate-1.4.1.min.js',
       dirs.source + '/js/owl.carousel.min.js',
       dirs.source + '/js/script.js',
+      dirs.source + '/js/app.js',
+      dirs.source + '/js/live.js',
     ])
     .pipe(plumber({ errorHandler: onError }))
     .pipe(concat('script.min.js'))
@@ -154,7 +156,7 @@ gulp.task('js', function () {
 
 // ЗАДАЧА: Кодирование в base64 шрифта в формате WOFF
 gulp.task('css:fonts:woff', function (callback) {
-  let fontCssPath = [dirs.source + '/fonts/font_fira-sans_woff.css', dirs.source + '/fonts/font_pt-sans_woff.css']; // с каким исходным файлом работаем
+  let fontCssPath = [dirs.source + '/fonts/font_fira-sans_woff.css', dirs.source + '/fonts/font_pt-sans_woff.css', dirs.source + '/fonts/font_pt_serif_woff.css', dirs.source + '/fonts/font_pt_serif_caption_woff.css']; // с каким исходным файлом работаем
   if(fileExist(fontCssPath) !== false) { // если исходный файл существует, продолжим
     return gulp.src(fontCssPath)
       .pipe(plumber({ errorHandler: onError }))
@@ -176,7 +178,7 @@ gulp.task('css:fonts:woff', function (callback) {
 
 // ЗАДАЧА: Кодирование в base64 шрифта в формате WOFF2
 gulp.task('css:fonts:woff2', function (callback) {
-  let fontCssPath = [dirs.source + '/fonts/font_fira-sans_woff2.css', dirs.source + '/fonts/font_pt-sans_woff2.css'] // с каким исходным файлом работаем
+  let fontCssPath = [dirs.source + '/fonts/font_fira-sans_woff2.css', dirs.source + '/fonts/font_pt-sans_woff2.css', dirs.source + '/fonts/font_pt_serif_woff2.css', dirs.source + '/fonts/font_pt_serif_caption_woff2.css'] // с каким исходным файлом работаем
   if(fileExist(fontCssPath) !== false) { // если исходный файл существует, продолжим
     return gulp.src(fontCssPath)
       .pipe(plumber({ errorHandler: onError }))
@@ -215,7 +217,7 @@ gulp.task('serve', gulp.series('build', function() {
       baseDir: "./build/"
     },
     port: 3000,                                             // порт, на котором будет работать сервер
-    startPath: '/pug/index.html',                           // файл, который буде открываться в браузере при старте сервера
+    startPath: 'index.html',                           // файл, который буде открываться в браузере при старте сервера
     // open: false                                          // возможно, каждый раз стартовать сервер не нужно...
   });
 

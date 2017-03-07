@@ -1,17 +1,26 @@
 .promo-main {
+  padding: 19px 0 160px;
+  background-image: url(../img/promo-main-background-320px.jpg);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 
   &__inner {
-    padding: 7px 0 161px;
+    .container-fixed();
+    padding: 9px 0 5px;
+    background-color: white;
+    opacity: 0.9;
   }
 
   &__title {
     text-align: center;
     font-size: @font-size--promo;
     line-height: 26px;
+    font-family: 'PT Serif Caption', serif;
+    font-weight: normal;
   }
 
   &__title:first-child {
-    margin-bottom: 0;
+    margin: 0;
   }
 
   &__title:nth-child(2) {
@@ -21,6 +30,7 @@
   &__text {
     text-align: center;
     padding: 0 2px;
+    margin-bottom: 0;
     font-size: @font-size;
     line-height: 24px;
   }
