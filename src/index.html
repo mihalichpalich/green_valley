@@ -158,18 +158,38 @@
     </section>
 
     <section class="accommodation">
-      <div class="accomodation__inner">
+      <div class="accommodation__inner">
         <h2 class="block-title  block-title--white">Где вы хотите отдохнуть?</h2>
-        <div class="accomodation-place">
-          <img src="" alt="" class="accomodation-place__image">
-          <div class="accomodation-place__descr">
+        <div class="accommodation-place">
+          <picture>
+            <source
+              media="(min-width: 320px)"
+              srcset="img/accommodation-place__image-1-320px.jpg">
+            <source
+              media="(min-width: 768px)"
+              srcset="img/accommodation-place__image-1-768px.jpg">
+            <source
+              srcset="img/accommodation-place__image-1-1200px.jpg">
+            <img src="img/accommodation-place__image-1-320px.jpg" alt="" class="accommodation-place__image">
+          </picture>
+          <div class="accommodation-place__descr">
             <h2 class="item-title">В отеле</h2>
             <p class="room-price">от <span class="room-price__number">4000</span> руб./сутки</p>
           </div>
         </div>
-        <div class="accomodation-place">
-          <img src="" alt="" class="accomodation-place__image">
-          <div class="accomodation-place__descr">
+        <div class="accommodation-place">
+          <picture>
+            <source
+              media="(min-width: 320px)"
+              srcset="img/accommodation-place__image-2-320px.jpg">
+            <source
+              media="(min-width: 768px)"
+              srcset="img/accommodation-place__image-2-768px.jpg">
+            <source
+              srcset="img/accommodation-place__image-2-1200px.jpg">
+            <img src="img/accommodation-place__image-2-320px.jpg" alt="" class="accommodation-place__image">
+          </picture>
+          <div class="accommodation-place__descr">
             <h2 class="item-title">В коттедже</h2>
             <p class="room-price">от <span class="room-price__number">6800</span> руб./сутки</p>
           </div>
