@@ -6,13 +6,13 @@
 .container-fixed(@gutter: @grid-gutter-width) {
   margin-right: auto;
   margin-left: auto;
-  padding-left:  floor((@gutter / 2));
+  padding-left: floor((@gutter / 2));
   padding-right: ceil((@gutter / 2));
 }
 
 // Creates a wrapper for a series of columns
 .make-row(@gutter: @grid-gutter-width) {
-  margin-left:  ceil((@gutter / -2));
+  margin-left: ceil((@gutter / -2));
   margin-right: floor((@gutter / -2));
   font-size: 0;
 
@@ -28,11 +28,10 @@
   position: relative;
   display: inline-block;
   vertical-align: top;
-  width: 100%;
   font-size: @font-size-base;
   width: percentage((@columns / @grid-columns));
   min-height: 1px;
-  padding-left:  (@gutter / 2);
+  padding-left: (@gutter / 2);
   padding-right: (@gutter / 2);
 }
 .make-xs-column-offset(@columns) {
@@ -53,7 +52,7 @@
   vertical-align: top;
   width: 100%;
   font-size: @font-size-base;
-  padding-left:  (@gutter / 2);
+  padding-left: (@gutter / 2);
   padding-right: (@gutter / 2);
 
   @media (min-width: @screen-sm-min) {
@@ -61,16 +60,19 @@
   }
 }
 .make-sm-column-offset(@columns) {
+
   @media (min-width: @screen-sm-min) {
     margin-left: percentage((@columns / @grid-columns));
   }
 }
 .make-sm-column-push(@columns) {
+
   @media (min-width: @screen-sm-min) {
     left: percentage((@columns / @grid-columns));
   }
 }
 .make-sm-column-pull(@columns) {
+
   @media (min-width: @screen-sm-min) {
     right: percentage((@columns / @grid-columns));
   }
@@ -84,7 +86,7 @@
   vertical-align: top;
   width: 100%;
   font-size: @font-size-base;
-  padding-left:  (@gutter / 2);
+  padding-left: (@gutter / 2);
   padding-right: (@gutter / 2);
 
   @media (min-width: @screen-md-min) {
@@ -92,16 +94,19 @@
   }
 }
 .make-md-column-offset(@columns) {
+
   @media (min-width: @screen-md-min) {
     margin-left: percentage((@columns / @grid-columns));
   }
 }
 .make-md-column-push(@columns) {
+
   @media (min-width: @screen-md-min) {
     left: percentage((@columns / @grid-columns));
   }
 }
 .make-md-column-pull(@columns) {
+
   @media (min-width: @screen-md-min) {
     right: percentage((@columns / @grid-columns));
   }
@@ -115,7 +120,7 @@
   vertical-align: top;
   width: 100%;
   font-size: @font-size-base;
-  padding-left:  (@gutter / 2);
+  padding-left: (@gutter / 2);
   padding-right: (@gutter / 2);
 
   @media (min-width: @screen-lg-min) {
@@ -123,16 +128,19 @@
   }
 }
 .make-lg-column-offset(@columns) {
+
   @media (min-width: @screen-lg-min) {
     margin-left: percentage((@columns / @grid-columns));
   }
 }
 .make-lg-column-push(@columns) {
+
   @media (min-width: @screen-lg-min) {
     left: percentage((@columns / @grid-columns));
   }
 }
 .make-lg-column-pull(@columns) {
+
   @media (min-width: @screen-lg-min) {
     right: percentage((@columns / @grid-columns));
   }
@@ -148,32 +156,72 @@
 
 .visible-sm {
   .responsive-visibility();
-  @media (min-width: @screen-tablet) { .responsive-invisibility(); }
-  @media (min-width: @screen-desktop) { .responsive-invisibility(); }
+
+  @media (min-width: @screen-tablet) {
+    .responsive-invisibility();
+  }
+
+  @media (min-width: @screen-desktop) {
+    .responsive-invisibility();
+  }
 }
+
 .visible-md {
   .responsive-invisibility();
-  @media (min-width: @screen-tablet) { .responsive-visibility(); }
-  @media (min-width: @screen-desktop) { .responsive-invisibility(); }
+
+  @media (min-width: @screen-tablet) {
+    .responsive-visibility();
+  }
+
+  @media (min-width: @screen-desktop) {
+    .responsive-invisibility();
+  }
 }
+
 .visible-lg {
   .responsive-invisibility();
-  @media (min-width: @screen-tablet) { .responsive-invisibility(); }
-  @media (min-width: @screen-desktop) { .responsive-visibility(); }
+
+  @media (min-width: @screen-tablet) {
+    .responsive-invisibility();
+  }
+
+  @media (min-width: @screen-desktop) {
+    .responsive-visibility();
+  }
 }
 
 .hidden-sm {
   .responsive-invisibility();
-  @media (min-width: @screen-tablet) { .responsive-visibility(); }
-  @media (min-width: @screen-desktop) { .responsive-visibility(); }
+
+  @media (min-width: @screen-tablet) {
+    .responsive-visibility();
+  }
+
+  @media (min-width: @screen-desktop) {
+    .responsive-visibility();
+  }
 }
+
 .hidden-md {
   .responsive-visibility();
-  @media (min-width: @screen-tablet) { .responsive-invisibility(); }
-  @media (min-width: @screen-desktop) { .responsive-visibility(); }
+
+  @media (min-width: @screen-tablet) {
+    .responsive-invisibility();
+  }
+
+  @media (min-width: @screen-desktop) {
+    .responsive-visibility();
+  }
 }
+
 .hidden-lg {
   .responsive-visibility();
-  @media (min-width: @screen-tablet) { .responsive-visibility(); }
-  @media (min-width: @screen-lg-desktop) { .responsive-invisibility(); }
+
+  @media (min-width: @screen-tablet) {
+    .responsive-visibility();
+  }
+
+  @media (min-width: @screen-lg-desktop) {
+    .responsive-invisibility();
+  }
 }

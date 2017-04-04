@@ -1,32 +1,49 @@
 .rest-tabs {
+  background-image: url(../img/rest-tabs-background-320px.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  &__inner {
+    .container-fixed();
+  }
 
   &__switcher {
+    .make-row();
     list-style: none;
     margin: 0;
     padding: 0;
-    padding-bottom: 20px;
-    margin-bottom: 20px;
+    padding-bottom: 15px;
   }
 
-  &__item {
+  &__tab {
+    .make-grid(xs);
     display: inline-block;
+
+    &:first-child {
+      margin-right: 11px;
+    }
+
+    &:last-child {
+      margin-left: 11px;
+    }
   }
 
-  &__bottom {
-
+  &__link {
+    font-size: @font-size--small;
+    color: #838383;
+    line-height: 55px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
   }
 
-  &__bottom-item {
-
-  }
-
-  &__bottom-item-inner {
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-
-  &__bottom-title {
-    margin-bottom: 40px;
+  &__item-header {
+    text-align: center;
+    font-family: @font-family--caption;
+    color: @colour-main;
+    font-size: @font-size--block-title;
+    font-weight: 400;
+    line-height: 32px;
+    letter-spacing: 0.05em;
   }
 
   &__list {
