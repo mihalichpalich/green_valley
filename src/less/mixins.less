@@ -137,3 +137,43 @@
     right: percentage((@columns / @grid-columns));
   }
 }
+
+.responsive-visibility() {
+  display: inline;
+}
+
+.responsive-invisibility() {
+  display: hidden;
+}
+
+.visible-sm {
+  .responsive-visibility();
+  @media (min-width: @screen-tablet) { .responsive-invisibility(); }
+  @media (min-width: @screen-desktop) { .responsive-invisibility(); }
+}
+.visible-md {
+  .responsive-invisibility();
+  @media (min-width: @screen-tablet) { .responsive-visibility(); }
+  @media (min-width: @screen-desktop) { .responsive-invisibility(); }
+}
+.visible-lg {
+  .responsive-invisibility();
+  @media (min-width: @screen-tablet) { .responsive-invisibility(); }
+  @media (min-width: @screen-desktop) { .responsive-visibility(); }
+}
+
+.hidden-sm {
+  .responsive-invisibility();
+  @media (min-width: @screen-tablet) { .responsive-visibility(); }
+  @media (min-width: @screen-desktop) { .responsive-visibility(); }
+}
+.hidden-md {
+  .responsive-visibility();
+  @media (min-width: @screen-tablet) { .responsive-invisibility(); }
+  @media (min-width: @screen-desktop) { .responsive-visibility(); }
+}
+.hidden-lg {
+  .responsive-visibility();
+  @media (min-width: @screen-tablet) { .responsive-visibility(); }
+  @media (min-width: @screen-lg-desktop) { .responsive-invisibility(); }
+}

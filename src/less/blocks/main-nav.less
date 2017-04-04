@@ -34,4 +34,38 @@
       color: @color-btn;
     }
   }
+
+  &__mobile {
+    .hidden-lg;
+  }
+
+  &__mobile-list {
+    padding: 0;
+    margin: 0;
+    margin-top: 81px;
+    width: 100%;
+    display: none;
+    padding: 0 20px;
+    position: absolute;
+    top: 11%;
+    right: 0;
+    z-index: 2;
+    list-style: none;
+    background-color: #fff;
+
+    &--visible {
+      display: inline-block;
+    }
+  }
+
+  &__mobile-item {
+    padding: 10px 20px;
+    display: block;
+    text-align: center;
+    border-bottom: 1px solid #ebebeb;
+  }
+
+  &__mobile-link {
+    color: @colour-main;
+  }
 }
