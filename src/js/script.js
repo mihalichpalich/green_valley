@@ -19,4 +19,24 @@ $(document).ready(function() {
     $(this).closest('.rest-tabs__inner').find(ident).addClass('rest-tabs__item--active');
   });
 
+  //gallery
+  $('.gallery__main-img-list').slick({
+    infinite: true,
+    cssEase:"ease-in-out",
+    speed:400,
+    prevArrow:false,
+    nextArrow:false,
+    // slidesToShow: 1,
+    // centerMode: true
+  });
+
+  var windowWidth = $(window).width();
+  if(windowWidth > 768)
+  {
+      jQuery('.gallery__main-img-list').slick({
+          slidesToShow: 1,
+          centerMode: true
+      });
+  }
+
 });

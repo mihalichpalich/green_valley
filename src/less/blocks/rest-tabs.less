@@ -1,5 +1,5 @@
 .rest-tabs {
-  padding-bottom: 96px;
+  padding-bottom: 80px;
   background-image: url(../img/rest-tabs-background-320px.png);
   background-size: cover;
   background-repeat: no-repeat;
@@ -32,27 +32,26 @@
     &:last-child {
       margin-left: 11px;
     }
+  }
 
-    &--active {
+  &__tab--active {
 
-      & a {
-        color: @color-btn;
-        font-weight: 500;
-
-        &:after {
-          content: "";
-          display: block;
-          position: relative;
-          width: 30px;
-          height: 2px;
-          background-color: #ff7435;
-          -webkit-transform: translate(-50%);
-          transform: translate(-50%);
-          left: 50%;
-          top: -14px;
-        }
-      }
+    & a {
+      color: @color-btn;
+      font-weight: 500;
     }
+  }
+
+  &__tab--active a:after {
+    content: '';
+    display: block;
+    position: relative;
+    width: 30px;
+    height: 2px;
+    background-color: #ff7435;
+    transform: translate(-50%);
+    left: 50%;
+    top: -14px;
   }
 
   &__link {
@@ -61,7 +60,6 @@
     &:hover {
       text-decoration: none;
     }
-
   }
 
   &__item {
