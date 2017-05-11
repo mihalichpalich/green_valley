@@ -34,6 +34,7 @@ const cleanCSS = require('gulp-cleancss');
 const csscomb = require('gulp-csscomb');
 const pug = require('gulp-pug');
 const gulpBrowser =   require("gulp-browser");
+const wrapCommonjs = require('gulp-wrap-commonjs');
 
 // ЗАДАЧА: Компиляция препроцессора
 gulp.task('less', function(){
@@ -139,20 +140,39 @@ gulp.task('clean', function () {
 
 // ЗАДАЧА: Конкатенация и углификация Javascript
 gulp.task('js', function () {
-  return gulp.src([
-      // список обрабатываемых файлов
-      dirs.source + '/js/jquery-3.1.0.min.js',
-      dirs.source + '/js/jquery-migrate-1.4.1.min.js',
-      dirs.source + '/js/owl.carousel.min.js',
-      dirs.source + '/js/slick.min.js',
-      dirs.source + '/js/script.js',
-      dirs.source + '/js/app.js',
-      dirs.source + '/js/live.js',
-    ])
-    .pipe(plumber({ errorHandler: onError }))
-    .pipe(concat('script.min.js'))
-    .pipe(uglify())
-    .pipe(gulp.dest(dirs.build + '/js'));
+  return gulp.src('src/js/vendor.js')
+  .pipe(gulp.dest('build/js'))
+  .pipe(uglify())
+  .pipe(rename({ suffix: '.min' }))
+  .pipe(gulp.dest('build/js'));
+});
+
+gulp.task('js2', function() {
+    const stream = gulp.src('src/js/vendor.js')
+
+        .pipe(gulpBrowser.browserify())
+        .pipe(uglify())
+        .pipe(rename({ suffix: '.min' }))
+        .pipe(gulp.dest('build/js'))
+
+    return stream;
+});
+
+gulp.task('js3', function () {
+  return gulp.src('src/js/custom.js')
+  .pipe(gulp.dest('build/js'))
+  .pipe(uglify())
+  .pipe(rename({ suffix: '.min' }))
+  .pipe(gulp.dest('build/js'));
+});
+
+gulp.task('js4', function() {
+    const stream = gulp.src('src/js/custom.js')
+
+        .pipe(gulpBrowser.browserify())
+        .pipe(gulp.dest('build/js'))
+
+    return stream;
 });
 
 // ЗАДАЧА: Кодирование в base64 шрифта в формате WOFF
@@ -204,7 +224,7 @@ gulp.task('css:fonts:woff2', function (callback) {
 gulp.task('build', gulp.series(                             // последовательно:
   'clean',                                                  // последовательно: очистку папки сборки
   'svgstore',
-  gulp.parallel('less', 'img', 'js', 'css:fonts:woff', 'css:fonts:woff2'),
+  gulp.parallel('less', 'img', 'js', 'js2', 'js3', 'js4', 'css:fonts:woff', 'css:fonts:woff2'),
   'pug',
   'html'                                                    // последовательно: сборку разметки
 ));
@@ -256,15 +276,6 @@ gulp.task('serve', gulp.series('build', function() {
   );
 
 }));
-
-gulp.task('js2', function() {
-    const stream = gulp.src('src/js/app.js')
-
-        .pipe(gulpBrowser.browserify())
-        .pipe(gulp.dest('build/js'))
-
-    return stream;
-});
 
 // ЗАДАЧА, ВЫПОЛНЯЕМАЯ ТОЛЬКО ВРУЧНУЮ: Отправка в GH pages (ветку gh-pages репозитория)
 gulp.task('deploy', function() {

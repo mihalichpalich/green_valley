@@ -1,11 +1,22 @@
 .gallery {
 
+  &__inner {
+    margin-right: auto;
+    margin-left: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+  }
+
   &__main-img-list {
-    overflow-y: hidden;
+    padding: 0;
+    overflow: hidden;
   }
 
   &__main-img {
     width: 100%;
+    height: 100%;
   }
 
 }
