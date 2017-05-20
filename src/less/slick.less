@@ -98,7 +98,6 @@
   position: absolute;
   left: 50%;
   top: 314px;
-  -webkit-transform: translate(-50%);
   transform: translate(-50%);
   bottom: -42px;
 
@@ -134,13 +133,14 @@
         top: 0;
       }
 
-      &:focus, &:hover {
+      &:focus,
+      &:hover {
         outline: 0;
       }
     }
   }
 }
 
-.slick-dots li.slick-active button:before {
-    background-color: @color-btn;
+.slick-active button:before {
+  background-color: @color-btn;
 }
