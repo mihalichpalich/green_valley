@@ -35,11 +35,22 @@ jQuery(function($) {
   var windowWidth = $(window).width();
   if(windowWidth > 768)
   {
-      jQuery('.gallery__main-img-list').slick({
-          slidesToShow: 1,
-          centerMode: true
-      });
+    jQuery('.gallery__main-img-list').slick({
+        slidesToShow: 1,
+        centerMode: true
+    });
   }
+
+  //offers
+  $('.offers__slider').slick({
+    infinite: true,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: false,
+    cssEase: 'ease-in-out',
+    speed: 400,
+    dots: true
+  });
 
 });
 
