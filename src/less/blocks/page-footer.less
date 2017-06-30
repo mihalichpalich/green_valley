@@ -1,5 +1,5 @@
 .page-footer {
-  padding: 25px 0 24px;
+  padding: 25px 0 7px;
   text-align: center;
   border-top: 1px solid @gray--light;
 
@@ -8,8 +8,22 @@
     font-size: @font-size--small;
   }
 
-  &__social-links {
+  &__logo-set {
+    text-align: center;
+  }
 
+  &__logo {
+    margin-left: 0;
+  }
+
+  &__social-links {
+    padding-left: 0;
+    margin-left: 90px;
+    width: 143px;
+    height: 20px;
+    display: flex;
+    justify-content: space-between;
+    background-image: url(../img/sprite.png);
   }
 
   &__social-item {
@@ -19,6 +33,7 @@
   &__link {
     text-align: center;
     vertical-align: top;
+    color: transparent;
     text-decoration: none;
 
     &--vk {
