@@ -35,6 +35,12 @@ const csscomb = require('gulp-csscomb');
 const pug = require('gulp-pug');
 const gulpBrowser =   require("gulp-browser");
 const wrapCommonjs = require('gulp-wrap-commonjs');
+const spritesmith = require('gulp.spritesmith');
+const buffer = require('vinyl-buffer');
+const csso = require('gulp-csso');
+const merge = require('merge-stream');
+
+
 
 // ЗАДАЧА: Компиляция препроцессора
 gulp.task('less', function(){
@@ -100,6 +106,30 @@ gulp.task('img:opt', function () {
       use: [pngquant()]
     }))
     .pipe(gulp.dest(dirs.source + '/img'));                  // записываем файлы в исходную папку
+});
+
+// ЗАДАЧА: Сборка PNG-спрайта
+gulp.task('sprite', function () {
+  // Generate our spritesheet
+  var spriteData = gulp.src(dirs.source + '/img/png/*.png').pipe(spritesmith({
+    imgName: 'sprite.png',
+    cssName: 'spritepng.less'
+  }));
+
+  // Pipe image stream through image optimizer and onto disk
+  var imgStream = spriteData.img
+    // DEV: We must buffer our stream into a Buffer for `imagemin`
+    .pipe(buffer())
+    .pipe(imagemin())
+    .pipe(gulp.dest(dirs.source + '/img/png/'));
+
+  // Pipe CSS stream through CSS optimizer and onto disk
+  var cssStream = spriteData.css
+    .pipe(less())
+    .pipe(gulp.dest(dirs.source + '/less/'));
+
+  // Return a merged stream to handle both `end` events
+  return merge(imgStream, cssStream);
 });
 
 // ЗАДАЧА: Сборка SVG-спрайта
@@ -223,6 +253,7 @@ gulp.task('css:fonts:woff2', function (callback) {
 // ЗАДАЧА: Сборка всего
 gulp.task('build', gulp.series(                             // последовательно:
   'clean',                                                  // последовательно: очистку папки сборки
+  'sprite',
   'svgstore',
   gulp.parallel('less', 'img', 'js', 'js2', 'js3', 'js4', 'css:fonts:woff', 'css:fonts:woff2'),
   'pug',
@@ -265,6 +296,11 @@ gulp.task('serve', gulp.series('build', function() {
     gulp.series('svgstore', 'html', 'pug', reloader)
   );
 
+  gulp.watch(                                               // следим за PNG
+    dirs.source + '/img/png/*.png',
+    gulp.series('sprite', 'html', 'pug', reloader)
+  );
+
   gulp.watch(                                               // следим за изображениями
     dirs.source + '/img/*.{gif,png,jpg,jpeg,svg}',
     gulp.series('img', reloader)                            // при изменении оптимизируем, копируем и обновляем в браузере
@@ -273,6 +309,21 @@ gulp.task('serve', gulp.series('build', function() {
   gulp.watch(                                               // следим за JS
     dirs.source + '/js/*.js',
     gulp.series('js', reloader)                            // при изменении пересобираем и обновляем в браузере
+  );
+
+  gulp.watch(                                               // следим за JS
+    dirs.source + '/js/*.js',
+    gulp.series('js2', reloader)                            // при изменении пересобираем и обновляем в браузере
+  );
+
+  gulp.watch(                                               // следим за JS
+    dirs.source + '/js/*.js',
+    gulp.series('js3', reloader)                            // при изменении пересобираем и обновляем в браузере
+  );
+
+  gulp.watch(                                               // следим за JS
+    dirs.source + '/js/*.js',
+    gulp.series('js4', reloader)                            // при изменении пересобираем и обновляем в браузере
   );
 
 }));

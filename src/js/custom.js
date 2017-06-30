@@ -41,6 +41,18 @@ jQuery(function($) {
     });
   }
 
+  //reviews
+  $('#reviews').slick({
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: false,
+    fade: false,
+    cssEase: 'ease-in-out',
+    speed: 400,
+    accessibility: false,
+    arrows: false,
+  });
+
   //offers
   $('.offers__slider').slick({
     infinite: true,
