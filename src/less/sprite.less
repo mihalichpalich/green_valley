@@ -12,16 +12,16 @@ At the bottom of this section, we provide information about the spritesheet itse
 @spritesheet: width height image @spritesheet-sprites;
 */
 @page-footer-links-name: 'page-footer__links';
-@page-footer-links-x: 0px;
-@page-footer-links-y: 0px;
-@page-footer-links-offset-x: 0px;
-@page-footer-links-offset-y: 0px;
+@page-footer-links-x: 0;
+@page-footer-links-y: 0;
+@page-footer-links-offset-x: 0;
+@page-footer-links-offset-y: 0;
 @page-footer-links-width: 143px;
 @page-footer-links-height: 20px;
 @page-footer-links-total-width: 143px;
 @page-footer-links-total-height: 75px;
 @page-footer-links-image: 'sprite.png';
-@page-footer-links: 0px 0px 0px 0px 143px 20px 143px 75px 'sprite.png' 'page-footer__links';
+@page-footer-links: 0 0 0 0 143px 20px 143px 75px 'sprite.png' 'page-footer__links';
 @reviews-social-link-vk-name: 'reviews__social-link--vk';
 @reviews-social-link-vk-x: 58px;
 @reviews-social-link-vk-y: 20px;
@@ -34,27 +34,27 @@ At the bottom of this section, we provide information about the spritesheet itse
 @reviews-social-link-vk-image: 'sprite.png';
 @reviews-social-link-vk: 58px 20px -58px -20px 22px 13px 143px 75px 'sprite.png' 'reviews__social-link--vk';
 @transport-name-bus-background-name: 'transport__name--bus-background';
-@transport-name-bus-background-x: 0px;
+@transport-name-bus-background-x: 0;
 @transport-name-bus-background-y: 46px;
-@transport-name-bus-background-offset-x: 0px;
+@transport-name-bus-background-offset-x: 0;
 @transport-name-bus-background-offset-y: -46px;
 @transport-name-bus-background-width: 50px;
 @transport-name-bus-background-height: 29px;
 @transport-name-bus-background-total-width: 143px;
 @transport-name-bus-background-total-height: 75px;
 @transport-name-bus-background-image: 'sprite.png';
-@transport-name-bus-background: 0px 46px 0px -46px 50px 29px 143px 75px 'sprite.png' 'transport__name--bus-background';
+@transport-name-bus-background: 0 46px 0 -46px 50px 29px 143px 75px 'sprite.png' 'transport__name--bus-background';
 @transport-name-train-background-name: 'transport__name--train-background';
-@transport-name-train-background-x: 0px;
+@transport-name-train-background-x: 0;
 @transport-name-train-background-y: 20px;
-@transport-name-train-background-offset-x: 0px;
+@transport-name-train-background-offset-x: 0;
 @transport-name-train-background-offset-y: -20px;
 @transport-name-train-background-width: 58px;
 @transport-name-train-background-height: 26px;
 @transport-name-train-background-total-width: 143px;
 @transport-name-train-background-total-height: 75px;
 @transport-name-train-background-image: 'sprite.png';
-@transport-name-train-background: 0px 20px 0px -20px 58px 26px 143px 75px 'sprite.png' 'transport__name--train-background';
+@transport-name-train-background: 0 20px 0 -20px 58px 26px 143px 75px 'sprite.png' 'transport__name--train-background';
 @spritesheet-width: 143px;
 @spritesheet-height: 75px;
 @spritesheet-image: 'sprite.png';
@@ -102,7 +102,6 @@ To change `display` (e.g. `display: inline-block;`), we suggest using a common C
 
 .sprite-image(@sprite) {
   @sprite-image: extract(@sprite, 9);
-  @sprite-image-bare: ~`"@{sprite-image}".slice(1, -1)`;
   background-image: url(@sprite-image-bare);
 }
 
@@ -125,6 +124,7 @@ This must be run when you have at least 2 sprites.
 .sprites(@sprites, @i: 1) when (@i <= length(@sprites)) {
   @sprite: extract(@sprites, @i);
   @sprite-name: e(extract(@sprite, 10));
+
   .@{sprite-name} {
     .sprite(@sprite);
   }

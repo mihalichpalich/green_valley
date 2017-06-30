@@ -1,7 +1,28 @@
 .location {
+  &__inner {
+    margin-top: 71px;
+    margin-bottom: 57px;
+  }
+
+  &__title {
+    padding: 0 31px;
+    text-align: center;
+    color: @gray--darkest;
+    font-family: @font-family--caption;
+    font-size: @font-size--block-title;
+    line-height: 29px;
+    font-weight: 400;
+    letter-spacing: .06em;
+  }
+
   &__map {
-    margin-top: 40px;
-    min-height: 400px;
-    margin-bottom: 40px;
+    margin-top: 36px;
+    height: 400px;
+    margin-bottom: 84px;
+
+    iframe {
+      width: 100%;
+      min-height: 100%;
+    }
   }
 }
