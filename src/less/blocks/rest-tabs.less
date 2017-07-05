@@ -1,11 +1,12 @@
 .rest-tabs {
+  .container-fixed();
   padding-bottom: 80px;
   background-image: url(../img/rest-tabs-background-320px.png);
   background-size: cover;
   background-repeat: no-repeat;
 
   &__inner {
-    .container-fixed();
+
   }
 
   &__switcher {
@@ -17,20 +18,17 @@
   }
 
   &__tab {
-    .make-grid(xs);
+    .make-xs-column(6);
     display: inline-block;
+    padding: 0;
     font-family: @font-family;
     font-size: @font-size--small;
     line-height: 54px;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-
-    &:first-child {
-      margin-right: 11px;
-    }
+    letter-spacing: 0.06em;
 
     &:last-child {
-      margin-left: 11px;
+      padding-left: 15px;
     }
   }
 
@@ -49,12 +47,14 @@
     width: 30px;
     height: 2px;
     background-color: #ff7435;
-    transform: translate(-50%);
-    left: 50%;
+    transform: translate(-48%);
+    left: 48%;
     top: -14px;
   }
 
   &__link {
+    display: block;
+    text-align: center;
     color: #838383;
 
     &:hover {

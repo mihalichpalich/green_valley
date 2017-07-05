@@ -1,7 +1,13 @@
 .page-footer {
-  padding: 25px 0 7px;
+  .container-fixed();
+  padding: 25px 0 24px;
   text-align: center;
   border-top: 1px solid @gray--light;
+
+  &__inner {
+    .make-row();
+    .clearfix();
+  }
 
   &__address {
     display: none;
@@ -18,7 +24,7 @@
 
   &__social-links {
     padding-left: 0;
-    margin-left: 90px;
+    margin: 12px auto 0;
     width: 143px;
     height: 20px;
     display: flex;
@@ -33,6 +39,7 @@
   &__link {
     text-align: center;
     vertical-align: top;
+    font-size: @font-size--small;
     color: transparent;
     text-decoration: none;
 
