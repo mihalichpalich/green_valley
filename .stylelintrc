@@ -388,9 +388,6 @@
     "no-extra-semicolons": [true, {
       "message": "Две точки с запятой подряд не хочешь ты"
     }],
-    "no-missing-end-of-source-newline": [true, {
-      "message": "Файл пустой строкой кончаться должен: https://goo.gl/Co2tZ8"
-    }],
     "no-descending-specificity": [true, {
       "message": "Осторожно, выше по коду есть более специфичный селектор",
       "severity": "warning"

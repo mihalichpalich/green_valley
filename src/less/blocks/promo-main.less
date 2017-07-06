@@ -5,26 +5,65 @@
   background-repeat: no-repeat;
   background-size: 100% 100%;
 
+  @media (min-width: @screen-sm) {
+    padding-bottom: 134px;
+    background-image: url(../img/promo-main-background-768px.jpg);
+  }
+
   &__inner {
     padding: 9px 0 5px;
     background-color: #fff;
     opacity: 0.9;
+
+    @media (min-width: @screen-sm) {
+      .make-row();
+      padding-top: 0;
+      margin-left: 20px !important;
+      background-color: transparent;
+    }
   }
 
   &__title {
+    display: block;
     text-align: center;
     font-size: @font-size--promo;
     line-height: 26px;
     font-family: 'PT Serif Caption', serif;
+
+    @media (min-width: @screen-sm) {
+      text-align: left;
+      display: inline;
+      padding-left: 8px !important;
+      background-color: #fff;
+      color: #1c1c1c;
+      font-family: @font-family--caption;
+      font-size: @font-size--h1;
+      line-height: 42px;
+      letter-spacing: 0.05em;
+    }
   }
 
   &__title:first-child {
     margin: 0;
+
+    @media (min-width: @screen-sm) {
+      .make-sm-column(8);
+      display: block;
+      // width: 77% !important;
+      font-size: @font-size--h1;
+    }
   }
 
   &__title:nth-child(2) {
     margin-top: 0;
-    margin-bottom: 3px;
+    margin-bottom: 24px;
+
+    @media (min-width: @screen-sm) {
+      .make-sm-column(5);
+      display: block;
+      // width: 77% !important;
+      font-size: @font-size--h1;
+    }
   }
 
   &__text {
@@ -34,5 +73,24 @@
     margin-bottom: 0;
     font-size: @font-size;
     line-height: 24px;
+
+    @media (min-width: @screen-sm) {
+      .make-sm-column(9);
+      padding-left: 0;
+      text-align: left;
+      color: #1c1c1c;
+      font-family: @font-family;
+      font-size: @font-size--promo;
+    }
+
   }
+
+  &__text-line {
+
+    @media (min-width: @screen-sm) {
+      padding: 3px 10px 3px 13px;
+      background-color: #fff;
+    }
+  }
+
 }
