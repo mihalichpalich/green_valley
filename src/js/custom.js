@@ -39,7 +39,18 @@ jQuery(function($) {
         slidesToShow: 1,
         centerMode: true
     });
-  }
+  };
+
+  $(".gallery__nav-img-list").slick({
+    slidesToShow:5,
+    slidesToScroll:1,
+    asNavFor:".gallery__main-img-list",
+    dots:!1,
+    centerMode:!0,
+    accessibility:!1,
+    arrows:!1,
+    focusOnSelect:!0
+  });
 
   //reviews
   $('#reviews').slick({
