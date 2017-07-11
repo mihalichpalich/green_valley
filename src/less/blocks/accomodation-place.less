@@ -2,6 +2,19 @@
   margin: 0 auto 18px;
   background-color: #fff;
 
+  @media (min-width: @screen-sm) {
+    .make-sm-column(5);
+    width: 353px !important;
+    padding: 0;
+  }
+
+  &--left {
+
+    @media (min-width: @screen-sm) {
+      margin-right: 18px;
+    }
+  }
+
   &__image {
     width: 100%;
   }
