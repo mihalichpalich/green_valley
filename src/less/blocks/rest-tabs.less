@@ -15,7 +15,9 @@
   }
 
   &__switcher {
-    .make-row();
+    display: flex;
+    justify-content: center;
+    text-align: center;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -23,7 +25,6 @@
   }
 
   &__tab {
-    .make-xs-column(6);
     display: inline-block;
     padding: 0;
     font-family: @font-family;
@@ -35,14 +36,12 @@
     &:first-child {
 
       @media (min-width: @screen-sm) {
-        .make-sm-column(3);
-        .make-sm-column-offset(3);
-        padding-left: 28px;
+        padding-right: 17px;
       }
     }
 
     &:last-child {
-      padding-left: 15px;
+      padding-left: 17px;
     }
   }
 
@@ -73,7 +72,6 @@
 
     @media (min-width: @screen-sm) {
       display: inline;
-      position: absolute;
     }
 
     &:hover {
@@ -101,7 +99,6 @@
     letter-spacing: 0.05em;
 
     @media (min-width: @screen-sm) {
-      margin-top: 82px;
       font-size: @font-size--h2;
     }
   }
@@ -126,40 +123,26 @@
 
     @media (min-width: @screen-sm) {
       .make-row();
-      display: flex;
-      flex-direction: column;
+      width: 83%;
+      margin: 0 auto;
+      padding-left: 28px;
+      display: block;
+      text-align: center;
       list-style: none;
-    }
-  }
-
-  &__list-first-row {
-
-    @media (min-width: @screen-sm) {
-      .make-sm-column(9);
-      .make-sm-column-offset(1);
-      display: flex;
-      justify-content: space-between;
-    }
-  }
-
-  &__list-second-row {
-
-    @media (min-width: @screen-sm) {
-      .make-sm-column(4);
-      .make-sm-column-offset(3);
-      width: 39.5% !important;
-      margin-top: 27px;
-      padding-left: 37px;
-      display: flex;
-      justify-content: space-between;
     }
   }
 
   &__list-item {
 
     @media (min-width: @screen-sm) {
-      display: flex;
-      flex-direction: column;
+      display: inline-block;
+      margin-right: 52px;
+      width: 92px;
+      vertical-align: top;
+    }
+
+    &:nth-child(-n+4) {
+      margin-bottom: 27px;
     }
   }
 
@@ -172,6 +155,7 @@
   &__list-item-name {
 
     @media (min-width: @screen-sm) {
+      display: block;
       margin-top: 14px;
       text-align: center;
       color: @gray--darkest;
