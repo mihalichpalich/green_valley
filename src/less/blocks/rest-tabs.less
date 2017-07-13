@@ -10,8 +10,16 @@
     padding-bottom: 33px;
   }
 
+  @media (min-width: @screen-lg) {
+    background-image: none;
+    padding-bottom: 60px;
+  }
+
   &__inner {
 
+    @media (min-width: @screen-sm) {
+      padding-top: 22px;
+    }
   }
 
   &__switcher {
@@ -82,8 +90,15 @@
   &__item {
     display: none;
 
+    @media (min-width: @screen-lg) {
+      background-image: url(../img/rest-tabs-background-1200px.jpg);
+      background-size: 80% 100%;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
     &--active {
-      display: inline;
+      display: block;
     }
   }
 
@@ -101,6 +116,10 @@
     @media (min-width: @screen-sm) {
       font-size: @font-size--h2;
     }
+
+    @media (min-width: @screen-sm) {
+      margin-top: 38px;
+    }
   }
 
   &__item-text {
@@ -116,6 +135,10 @@
       padding: 0 36px;
       margin-bottom: 36px;
     }
+
+    @media (min-width: @screen-lg) {
+      padding: 0 326px;
+    }
   }
 
   &__list {
@@ -129,6 +152,10 @@
       display: block;
       text-align: center;
       list-style: none;
+    }
+
+    @media (min-width: @screen-lg) {
+      padding-left: 5%;
     }
   }
 
