@@ -8,16 +8,38 @@
   line-height: 18px;
   border: none;
 
-  &--icon-calendar {
-    padding: 13px 20px;
+    @media (min-width: @screen-lg) {
+      text-align: center;
+      padding: 7px 20px 6px;
+    }
 
-    &::before {
-      background-image: url() no-repeat;
-      background-position: 19px 10px;
+  &--icon-calendar {
+
+    @media (min-width: @screen-lg) {
+      border-radius: 18px;
+      background-color: @color-btn;
+    }
+
+    &:before {
+
+      @media (min-width: @screen-lg) {
+        content: '';
+        display: inline-block;
+        margin-right: 9px;
+        position: relative;
+        top: 2px;
+        width: 15px;
+        height: 16px;
+        background-image: url(../img/sprite.png);
+        background-position: -51px 29px;
+      }
     }
 
     &:hover {
-      background-color: @color-btn--darken;
+
+      @media (min-width: @screen-lg) {
+        background-color: @color-btn--darken;
+      }
     }
   }
 
@@ -45,5 +67,9 @@
 
   &--min-width-invisible {
     display: none;
+
+    @media (min-width: @screen-lg) {
+      display: inline-block;
+    }
   }
 }

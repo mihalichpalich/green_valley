@@ -2,8 +2,10 @@
   .container-fixed();
   padding: 12px 0 21px;
   position: relative;
-  text-align: center;
+  text-align: left;
   border: 1px solid #ebebeb;
+
+
 
   &__inner {
     .make-row();
@@ -12,5 +14,46 @@
 
   &__contacts {
     display: none;
+
+    @media (min-width: @screen-lg) {
+      display: block;
+      .make-lg-column(3);
+      width: 20% !important;
+      padding-left: 0;
+      padding-top: 12px;
+    }
+  }
+
+  &__telephone {
+
+    @media (min-width: @screen-lg) {
+      color: @gray--darkest;
+      font-family: "PT Sans", sans-serif;
+      font-size: @font-size--promo;
+      font-weight: 700;
+      line-height: 18px;
+      text-transform: uppercase;
+    }
+  }
+
+  &__address {
+
+    @media (min-width: @screen-lg) {
+      margin-top: 3px;
+      font-family: @font-family;
+      font-size: @font-size--small;
+      line-height: 18px;
+      font-style: normal;
+    }
+  }
+
+  &__booking-button {
+    display: none;
+
+    @media (min-width: @screen-lg) {
+      display: block;
+      .make-lg-column(2);
+      padding-top: 11px;
+    }
   }
 }

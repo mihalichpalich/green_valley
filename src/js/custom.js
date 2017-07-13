@@ -21,7 +21,7 @@ jQuery(function($) {
   });
 
   //gallery
-  $('.gallery__main-img-list').slick({
+  $('.gallery__main-img-list').not('.slick-initialized').slick({
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: false,
@@ -35,13 +35,13 @@ jQuery(function($) {
   var windowWidth = $(window).width();
   if(windowWidth > 768)
   {
-    jQuery('.gallery__main-img-list').slick({
+    jQuery('.gallery__main-img-list').not('.slick-initialized').slick({
         slidesToShow: 1,
         centerMode: true
     });
   };
 
-  $(".gallery__nav-img-list").slick({
+  $(".gallery__nav-img-list").not('.slick-initialized').slick({
     slidesToShow:5,
     slidesToScroll:1,
     asNavFor:".gallery__main-img-list",
@@ -53,7 +53,7 @@ jQuery(function($) {
   });
 
   //reviews
-  $('#reviews').slick({
+  $('#reviews').not('.slick-initialized').slick({
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: false,
@@ -65,7 +65,7 @@ jQuery(function($) {
   });
 
   //offers
-  $('.offers__slider').slick({
+  $('.offers__slider').not('.slick-initialized').slick({
     infinite: true,
     slidesToShow: 1,
     slidesToScroll: 1,

@@ -2,6 +2,13 @@
   .make-xs-column(12);
   padding: 0 35px;
 
+  @media (min-width: @screen-lg) {
+    .make-lg-column(2);
+    width: 12% !important;
+    margin-left: 7.5%;
+    padding-right: 0;
+  }
+
   &__image {
     width: 143px;
     height: 49px;
