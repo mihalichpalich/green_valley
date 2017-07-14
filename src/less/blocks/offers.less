@@ -2,6 +2,10 @@
   .container-fixed();
   padding: 0;
 
+  @media (min-width: @screen-lg) {
+    padding: 0 8%;
+  }
+
   &__inner {
     padding-bottom: 35px;
   }
@@ -22,6 +26,10 @@
       font-size: @font-size--h2;
       letter-spacing: 0.09em;
     }
+
+    @media (min-width: @screen-lg) {
+      margin-bottom: 35px;
+    }
   }
 
   &__item {
@@ -36,6 +44,12 @@
       padding-bottom: 24px;
       background-image: url(../img/offers_item-768px.jpg);
     }
+
+    @media (min-width: @screen-lg) {
+      padding-top: 198px;
+      padding-bottom: 20px;
+      background-image: url(../img/offers_item-1200px.jpg);
+    }
   }
 
   &__item-descr {
@@ -44,6 +58,10 @@
     max-width: 296px;
     opacity: 0.9;
     background-color: #fff;
+
+    @media (min-width: @screen-lg) {
+      max-width: 348px;
+    }
   }
 
   &__item-descr-title {
@@ -56,6 +74,10 @@
     text-transform: uppercase;
     color: #ff7435;
     letter-spacing: 0.015em;
+
+    @media (min-width: @screen-lg) {
+      font-size: @font-size--small;
+    }
   }
 
   &__item-descr-text {
@@ -63,5 +85,9 @@
     color: @gray--darkest;
     font-size: @font-size;
     line-height: 20px;
+
+    @media (min-width: @screen-lg) {
+      margin-top: 9px;
+    }
   }
 }

@@ -56,13 +56,22 @@ jQuery(function($) {
   $('#reviews').not('.slick-initialized').slick({
     slidesToShow: 1,
     slidesToScroll: 1,
+    infinite: true,
+    dots:!1,
     arrows: false,
     fade: false,
     cssEase: 'ease-in-out',
     speed: 400,
     accessibility: false,
-    arrows: false,
   });
+
+  var windowWidth = $(window).width();
+  if(windowWidth > 768)
+  {
+    jQuery('#reviews').not('.slick-initialized').slick({
+        arrows: true
+    });
+  };
 
   //offers
   $('.offers__slider').not('.slick-initialized').slick({

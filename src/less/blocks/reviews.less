@@ -12,8 +12,16 @@
     background-image: url(../img/reviews-background-768px.jpg);
   }
 
+  @media (min-width: @screen-sm) {
+    background-image: url(../img/reviews-background-1200px.jpg);
+  }
+
   &__inner {
     padding-top: 42px;
+
+    @media (min-width: @screen-sm) {
+      padding-top: 49px;
+    }
 
     @media (min-width: @screen-sm) {
       padding-top: 49px;
@@ -43,6 +51,12 @@
     @media (min-width: @screen-sm) {
       text-align: center;
     }
+
+    @media (min-width: @screen-lg) {
+      display: flex !important;
+      flex-direction: row;
+      text-align: center;
+    }
   }
 
   &__slide {
@@ -60,12 +74,20 @@
       margin: 34px auto 57px;
     }
 
+    @media (min-width: @screen-lg) {
+      width: 35%;
+      margin: 25px 11px 57px auto;
+    }
+
     &--hidden {
       display: none !important;
 
       @media (min-width: @screen-sm) {
         display: flex !important;
-        margin: 34px auto 66px;
+      }
+
+      @media (min-width: @screen-lg) {
+        margin: 25px auto 57px 11px !important;
       }
     }
   }
@@ -82,6 +104,10 @@
 
     @media (min-width: @screen-sm) {
       padding: 0 20px;
+    }
+
+    @media (min-width: @screen-lg) {
+      padding: 0 24px;
     }
   }
 
@@ -151,6 +177,10 @@
   &__btn {
     position: relative;
     top: -12px;
+
+    @media (min-width: @screen-lg) {
+      padding: 10px 26px 8px;
+    }
   }
 }
 
