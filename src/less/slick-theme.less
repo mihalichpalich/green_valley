@@ -1,34 +1,33 @@
-@charset "UTF-8";
+@charset 'UTF-8';
 
 // Default Variables
 
-@slick-font-path: "./fonts/";
-@slick-font-family: "slick";
-@slick-loader-path: "./";
-@slick-arrow-color: white;
-@slick-dot-color: black;
+@slick-font-path: './fonts/';
+@slick-font-family: 'slick';
+@slick-loader-path: './';
+@slick-arrow-color: #fff;
+@slick-dot-color: #000;
 @slick-dot-color-active: @slick-dot-color;
-@slick-prev-character: "←";
-@slick-next-character: "→";
-@slick-dot-character: "•";
+@slick-prev-character: '←';
+@slick-next-character: '→';
+@slick-dot-character: '•';
 @slick-dot-size: 6px;
 @slick-opacity-default: 0.75;
 @slick-opacity-on-hover: 1;
 @slick-opacity-not-active: 0.25;
 
 /* Slider */
-.slick-loading .slick-list{
-    background: #fff url('./ajax-loader.gif') center center no-repeat;
+.slick-loading .slick-list {
+  background: #fff url('./ajax-loader.gif') center center no-repeat;
 }
 
 /* Icons */
-@font-face{
-    font-family: 'slick';
-    font-weight: normal;
-    font-style: normal;
-
-    src: url('./fonts/slick.eot');
-    src: url('./fonts/slick.eot?#iefix') format('embedded-opentype'), url('./fonts/slick.woff') format('woff'), url('./fonts/slick.ttf') format('truetype'), url('./fonts/slick.svg#slick') format('svg');
+@font-face {
+  font-family: slick;
+  font-weight: 400;
+  font-style: normal;
+  src: url('./fonts/slick.eot');
+  src: url('./fonts/slick.eot?#iefix') format('embedded-opentype'), url('./fonts/slick.woff') format('woff'), url('./fonts/slick.ttf') format('truetype'), url('./fonts/slick.svg#slick') format('svg');
 }
 
 /* Arrows */
@@ -42,25 +41,25 @@
     display: block !important;
     height: 20px;
     width: 20px;
-    line-height: 0px;
-    font-size: 0px;
+    line-height: 0;
+    font-size: 0;
     cursor: pointer;
     background: transparent;
     color: transparent;
     top: 50%;
-    margin-top: -10px~'\9'; /*lte IE 8*/
-    -webkit-transform: translate(0, -50%);
-    -ms-transform: translate(0, -50%);
+    margin-top: -10px '\9'; /*lte IE 8*/
     transform: translate(0, -50%);
     padding: 0;
     border: none;
     outline: none;
     z-index: 1;
 
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
       outline: none;
       background: transparent;
       color: transparent;
+
       &:before {
         opacity: @slick-opacity-on-hover;
       }
@@ -72,7 +71,8 @@
   }
 }
 
-.slick-prev:before, .slick-next:before {
+.slick-prev:before,
+.slick-next:before {
 
   @media (min-width: @screen-lg) {
     content: '';
@@ -137,53 +137,60 @@
 /* Dots */
 
 .slick-slider {
-    // margin-bottom: 30px;
+  // margin-bottom: 30px;
 }
 
 .slick-dots {
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%);
-    bottom: -42px;
-    @media (min-width: 1200px) {
-        bottom: -52px;
-    }
-    li {
-      position: relative;
-      top: 47px;
-      display: inline-block;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+  bottom: -42px;
+
+  @media (min-width: 1200px) {
+    bottom: -52px;
+  }
+
+  li {
+    position: relative;
+    top: 47px;
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    margin: 0 10px;
+    cursor: pointer;
+
+    button {
+      font-size: 0;
+      line-height: 0;
+      display: block;
       width: 15px;
       height: 15px;
-      margin: 0 10px;
       cursor: pointer;
-        button {
-            font-size: 0;
-            line-height: 0;
-            display: block;
-            width: 15px;
-            height: 15px;
-            cursor: pointer;
-            color: transparent;
-            border: 0;
-            outline: none;
-            background: transparent;
-            &:hover, &:focus {
-                outline: none;
-            }
-            &:before {
-              content: '';
-              display: inline-block;
-              width: 15px;
-              height: 15px;
-              border: 2px solid @color-btn;
-              border-radius: 100%;
-              position: absolute;
-              left: 0;
-              top: 0;
-            }
-        }
-        &.slick-active button:before {
-            background-color: @color-btn;
-        }
+      color: transparent;
+      border: 0;
+      outline: none;
+      background: transparent;
+
+      &:hover,
+      &:focus {
+        outline: none;
+      }
+
+      &:before {
+        content: '';
+        display: inline-block;
+        width: 15px;
+        height: 15px;
+        border: 2px solid @color-btn;
+        border-radius: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
     }
+
+    &.slick-active button:before {
+      background-color: @color-btn;
+    }
+  }
 }
