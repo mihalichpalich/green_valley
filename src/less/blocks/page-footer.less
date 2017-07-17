@@ -10,6 +10,9 @@
 
     @media (min-width: @screen-sm) {
     }
+
+    @media (min-width: @screen-lg) {
+    }
   }
 
   &__address {
@@ -25,6 +28,10 @@
       font-family: @font-family;
       line-height: 18px;
     }
+
+    @media (min-width: @screen-lg) {
+      .make-lg-column(2);
+    }
   }
 
   &__logo-set {
@@ -33,10 +40,20 @@
     @media (min-width: @screen-sm) {
       .make-sm-column(6);
     }
+
+    @media (min-width: @screen-lg) {
+      .make-lg-column(7);
+    }
   }
 
   &__logo {
     margin-left: 0;
+
+    @media (min-width: @screen-lg) {
+      width: 25%!important;
+      margin-left: 0;
+      padding-left: 0;
+    }
   }
 
   &__social-links {
@@ -86,6 +103,12 @@
       font-family: @font-family;
       font-size: @font-size--small;
       line-height: 18px;
+    }
+
+    @media (min-width: @screen-lg) {
+      .make-lg-column(2);
+      width: 196px !important;
+      padding-left: 25px;
     }
   }
 }
