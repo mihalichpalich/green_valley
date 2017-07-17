@@ -58,7 +58,7 @@ jQuery(function($) {
     slidesToScroll: 1,
     infinite: true,
     dots:!1,
-    arrows: false,
+    arrows: true,
     fade: false,
     cssEase: 'ease-in-out',
     speed: 400,
@@ -66,10 +66,10 @@ jQuery(function($) {
   });
 
   var windowWidth = $(window).width();
-  if(windowWidth > 768)
+  if(windowWidth < 1200)
   {
-    jQuery('#reviews').not('.slick-initialized').slick({
-        arrows: true
+    $('#reviews').not('.slick-initialized').slick({
+      arrows: false,
     });
   };
 

@@ -243,11 +243,6 @@
       "message": "Селектор более чем 3-составной не хочешь ты",
       "severity": "warning"
     }],
-    "selector-no-qualifying-type": [true, {
-      "message": "Возможно, перенасыщенный селектор (использован селектор типа)",
-      ignore: ["attribute"],
-      # "severity": "warning"
-    }],
     "selector-pseudo-class-case": ["lower", {
       "message": "Псевдоклассы набирать буквами строчными надо"
     }],
@@ -387,10 +382,6 @@
     }],
     "no-extra-semicolons": [true, {
       "message": "Две точки с запятой подряд не хочешь ты"
-    }],
-    "no-descending-specificity": [true, {
-      "message": "Осторожно, выше по коду есть более специфичный селектор",
-      "severity": "warning"
     }],
     "selector-no-empty": [true, {
       "message": "Пустой селектор не хочешь ты"

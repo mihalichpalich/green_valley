@@ -2,6 +2,10 @@
   .container-fixed();
   padding: 0;
 
+  @media (min-width: @screen-lg) {
+    padding: 0 8%;
+  }
+
   &__inner {
     margin-top: 71px;
     margin-bottom: 40px;
@@ -9,6 +13,11 @@
     @media (min-width: @screen-sm) {
       margin-top: 47px;
       margin-bottom: 30px;
+    }
+
+    @media (min-width: @screen-lg) {
+      margin-top: 109px;
+      margin-bottom: 57px;
     }
   }
 
