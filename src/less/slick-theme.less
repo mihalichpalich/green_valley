@@ -152,12 +152,15 @@
 
   li {
     position: relative;
-    top: 47px;
     display: inline-block;
     width: 15px;
     height: 15px;
     margin: 0 10px;
     cursor: pointer;
+
+    @media (min-width: 1200px) {
+      top: 47px;
+    }
 
     button {
       font-size: 0;

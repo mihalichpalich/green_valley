@@ -12,7 +12,7 @@
     background-image: url(../img/reviews-background-768px.jpg);
   }
 
-  @media (min-width: @screen-sm) {
+  @media (min-width: @screen-lg) {
     background-image: url(../img/reviews-background-1200px.jpg);
   }
 
@@ -23,8 +23,8 @@
       padding-top: 49px;
     }
 
-    @media (min-width: @screen-sm) {
-      padding-top: 49px;
+    @media (min-width: @screen-lg) {
+      padding-top: 30px;
     }
   }
 
@@ -119,6 +119,10 @@
     font-family: @font-family;
     color: @gray--darkest;
     letter-spacing: 0.05em;
+
+    @media (min-width: @screen-sm) {
+      padding: 0 139px;
+    }
   }
 
   &__author {

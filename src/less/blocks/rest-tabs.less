@@ -17,8 +17,12 @@
 
   &__inner {
 
-    @media (min-width: @screen-sm) {
-      padding-top: 22px;
+    @media (min-width: @screen-lg) {
+      padding-top: 33px;
+      background-image: url(../img/rest-tabs-background-1200px.jpg);
+      background-size: 70% 55%;
+      background-position: center;
+      background-repeat: no-repeat;
     }
   }
 
@@ -91,10 +95,6 @@
     display: none;
 
     @media (min-width: @screen-lg) {
-      background-image: url(../img/rest-tabs-background-1200px.jpg);
-      background-size: 80% 100%;
-      background-position: center;
-      background-repeat: no-repeat;
     }
 
     &--active {
@@ -123,7 +123,7 @@
   }
 
   &__item-text {
-    padding: 0 19px;
+    padding: 0;
     margin-top: 36px;
     text-align: center;
     color: @colour-main;
