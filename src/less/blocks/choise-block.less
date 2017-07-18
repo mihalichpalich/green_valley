@@ -1,14 +1,30 @@
 .choise-block {
+  display: flex;
+  border: 1px solid #ebebeb;
+
   &__item {
-    font-size: 0;
+    .make-xs-column(6);
+    padding: 28px 0 5px;
     display: block;
+    font-size: 0;
+
+      &:first-child {
+
+        &:after {
+          content: '';
+          display: block;
+          position: relative;
+          width: 1px;
+          height: 107px;
+          background-color: @gray--light;
+          left: 100%;
+          top: -21px;
+        }
+      }
   }
 
-  &__item-title {
-    padding-bottom: 30px;
-    font-size: @font-size--form-title;
-    font-weight: 300;
-    font-family: @font-family--caption;
+  &__item-rest-place {
+
   }
 
   &__item-input-block {

@@ -237,19 +237,39 @@
 
 .placeholder-form (@rules) {
 
-    &::-webkit-input-placeholder {
-        @rules();
-    }
+  &::-webkit-input-placeholder {
 
-    &:-moz-placeholder {
-        @rules();
-    }
+    @rules();
+  }
 
-    &::-moz-placeholder {
-        @rules();
-    }
+  &:-moz-placeholder {
 
-    &:-ms-input-placeholder {
-        @rules();
-    }
+    @rules();
+  }
+
+  &::-moz-placeholder {
+
+    @rules();
+  }
+
+  &:-ms-input-placeholder {
+
+    @rules();
+  }
+
+  &:focus::-webkit-input-placeholder {
+    color: transparent;
+  }
+
+  &:focus:-moz-placeholder {
+    color: transparent;
+  }
+
+  &:focus::-moz-placeholder {
+    color: transparent;
+  }
+
+  &:focus:-ms-input-placeholder {
+    color: transparent;
+  }
 }

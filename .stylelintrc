@@ -332,10 +332,6 @@
     "at-rule-name-space-after": ["always", {
       "message": "После @-правила пробел ставить следует"
     }],
-    "at-rule-no-unknown": [true, {
-      "message": "Неизвестное @-правило",
-      ignoreAtRules: ["/^at-/"]
-    }],
     "at-rule-no-vendor-prefix": [true, {
       "message": "Для @-правил вендорные префиксы использовать не следует"
     }],

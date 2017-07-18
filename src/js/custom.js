@@ -4,7 +4,6 @@ jQuery(function($) {
   //hamburger
   var toggler = document.getElementById('toggler');
   toggler.onclick = function(){
-    toggler.classList.toggle('toggler-close');
     document.getElementById('nav').classList.toggle('main-nav__mobile-list--visible');
   };
 
