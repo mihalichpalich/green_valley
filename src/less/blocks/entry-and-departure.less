@@ -22,8 +22,18 @@
 
   &__item-input {
     width: 54px;
+    text-align: center;
     border: 0;
     border-right: 1px solid @gray--light;
+    text-transform: uppercase;
+    font-family: @font-family;
+    font-size: @font-size--small;
+    font-weight: 500;
+    line-height: 18px;
+    color: @color-form-btn;
+    .placeholder-form({
+      color: @gray;
+    });
   }
 
   &__item-input:last-child {
