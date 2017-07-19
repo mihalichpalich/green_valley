@@ -258,9 +258,6 @@
     "selector-pseudo-element-no-unknown": [true, {
       "message": "Псевдоэлемента такого на светлой строне силы нет"
     }],
-    "selector-root-no-composition": [true, {
-      "message": ":root всегда должен быть самостоятелен"
-    }],
     "selector-type-case": ["lower", {
       "message": "Селкторы буквами строчными набирать следует"
     }],
