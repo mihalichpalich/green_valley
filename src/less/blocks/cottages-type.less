@@ -1,18 +1,47 @@
 .cottages-type {
+  margin-top: 31px;
+  padding: 44px 0;
+  background-color: #fff;
+
+  &__item {
+
+    &:not(:last-child) {
+      padding-bottom: 33px;
+    }
+  }
+
   &__input {
 
+    &[type=radio] {
+      display: none;
+    }
   }
 
   &__title {
+    display: block;
+    position: relative;
     color: @gray;
     font-family: @font-family;
     font-size: @font-size--small;
     font-weight: 500;
     line-height: 18px;
     text-transform: uppercase;
+
+    &:before {
+      content: '';
+      display: none;
+      position: absolute;
+      top: 2px;
+      left: 29%;
+      background-image: url(../img/sprite.png);
+      background-position: -242px -102px;
+      width: 16px;
+      height: 12px;
+    }
   }
 
   &__descr {
+    display: none;
     position: absolute;
     left: 0;
     border: 1px solid @gray--light;
@@ -52,4 +81,12 @@
     text-transform: uppercase;
     font-weight: 500;
   }
+}
+
+.cottages-type__input:checked + .cottages-type__title {
+  color: @gray--darkest;
+}
+
+.cottages-type__input:checked + .cottages-type__title:before {
+  display: block;
 }

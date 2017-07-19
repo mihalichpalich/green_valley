@@ -39,6 +39,11 @@
     &--bg-lightgrey {
       background-color: #f1f1f1;
     }
+
+    &--wide {
+      padding-left: 0;
+      padding-right: 0;
+    }
   }
 
   &__step-inner {
@@ -79,7 +84,7 @@
         background-position: 0 -9px;
         width: 82px;
         height: 64px;
-        opacity: .4;
+        opacity: 0.4;
       }
 
       &:after {
@@ -107,7 +112,7 @@
         background-position: 80px -9px;
         width: 80px;
         height: 62px;
-        opacity: .4;
+        opacity: 0.4;
       }
 
       &:after {
@@ -125,18 +130,18 @@
   }
 }
 
-.accommodation-choice__input:checked+.form__step-subtitle--hotel:before {
+.accommodation-choice__input:checked + .form__step-subtitle--hotel:before {
   opacity: 1;
 }
 
-.accommodation-choice__input:checked+.form__step-subtitle--hotel:after {
+.accommodation-choice__input:checked + .form__step-subtitle--hotel:after {
   display: block;
 }
 
-.accommodation-choice__input:checked+.form__step-subtitle--cottage:before {
+.accommodation-choice__input:checked + .form__step-subtitle--cottage:before {
   opacity: 1;
 }
 
-.accommodation-choice__input:checked+.form__step-subtitle--cottage:after {
+.accommodation-choice__input:checked + .form__step-subtitle--cottage:after {
   display: block;
 }
