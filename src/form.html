@@ -2,7 +2,7 @@
 
   <main>
 
-    <form action="" class="form">
+    <form action="" class="form" id="form">
 
       <section class="form__header">
         <div class="form__header-inner">
@@ -20,18 +20,18 @@
             <label class="entry-and-departure__item">
               <span class="entry-and-departure__step-input-title">Дата въезда</span>
               <div for="" class="entry-and-departure__item-input-block">
-                <input type="number" placeholder="дд" class="entry-and-departure__item-input">
-                <input type="number" placeholder="мм" class="entry-and-departure__item-input">
-                <input type="number" placeholder="гггг" class="entry-and-departure__item-input" name="entry-year">
+                <input type="number" placeholder="дд" min="0" max="31" class="entry-and-departure__item-input" data-validation="number" data-validation-error-msg="Введите день въезда" data-validation-error-msg-container="#payment-form__bill-block-notice-link" >
+                <input type="number" placeholder="мм" min="0" max="12" data-validation="number" data-validation-error-msg="Введите месяц въезда" data-validation-error-msg-container="#payment-form__bill-block-notice-link" class="entry-and-departure__item-input">
+                <input type="number" placeholder="гггг" min="2016" data-validation="number" data-validation-error-msg="Введите год въезда" data-validation-error-msg-container="#payment-form__bill-block-notice-link" class="entry-and-departure__item-input" name="entry-year">
               </div>
             </label>
 
             <label class="entry-and-departure__item">
               <span class="entry-and-departure__step-input-title">Дата выезда</span>
               <div for="" class="entry-and-departure__item-input-block">
-                <input type="text" placeholder="дд" class="entry-and-departure__item-input">
-                <input type="text" placeholder="мм" class="entry-and-departure__item-input">
-                <input type="text" placeholder="гггг" class="entry-and-departure__item-input" name="departure-year">
+                <input type="text" placeholder="дд" min="0" max="31" data-validation="number" data-validation-error-msg="Введите день выезда" class="entry-and-departure__item-input" data-validation-error-msg-container="#payment-form__bill-block-notice-link">
+                <input type="text" placeholder="мм" min="0" max="31" data-validation="number" data-validation-error-msg="Введите месяц выезда" data-validation-error-msg-container="#payment-form__bill-block-notice-link" class="entry-and-departure__item-input">
+                <input type="text" placeholder="гггг" min="2016" data-validation="number" data-validation-error-msg="Введите год выезда" data-validation-error-msg-container="#payment-form__bill-block-notice-link" class="entry-and-departure__item-input" name="departure-year">
               </div>
             </label>
 
@@ -144,20 +144,20 @@
           <h2 class="item-title">Персональная информация</h2>
           <div class="personal-info">
             <div class="personal-info__block">
-              <input type="text" placeholder="имя" class="personal-info__input" required>
+              <input type="text" placeholder="имя" data-validation="required" data-validation-error-msg="Введите имя" data-validation-error-msg-container="#payment-form__bill-block-notice-link" class="personal-info__input">
               <span class="personal-info__check-mark"></span>
             </div>
             <div class="personal-info__block">
-              <input type="text" placeholder="фамилия" class="personal-info__input" required>
+              <input type="text" placeholder="фамилия" data-validation="required" data-validation-error-msg="Введите фамилию" data-validation-error-msg-container="#payment-form__bill-block-notice-link" class="personal-info__input">
               <span class="personal-info__check-mark"></span>
             </div>
             <div class="personal-info__block">
-              <input type="number" placeholder="номер телефона" class="personal-info__input" required>
+              <input type="number" placeholder="номер телефона" data-validation="number" data-validation-error-msg="Введите номер телефона" data-validation-error-msg-container="#payment-form__bill-block-notice-link" class="personal-info__input">
               <span class="personal-info__check-mark"></span>
               <p class="personal-info__descr">Мы свяжемся с вами в случае необходимости.</p>
             </div>
             <div class="personal-info__block">
-              <input type="text" placeholder="e-mail" class="personal-info__input" required>
+              <input type="text" placeholder="e-mail" data-validation="email" data-validation-error-msg="Введите e-mail" data-validation-error-msg-container="#payment-form__bill-block-notice-link" class="personal-info__input">
               <span class="personal-info__check-mark"></span>
               <p class="personal-info__descr">На этот адрес мы вышлем вам подтверждение о забронированном номере.</p>
             </div>
@@ -165,7 +165,7 @@
         </div>
       </div>
 
-      <div class="form__step  form__step--bg-lightgrey">
+      <div class="form__step  form__step--bg-lightgrey  form__step--wide">
         <div class="form__step-inner">
           <span class="form__step-number-title">шаг 5</span>
           <h2 class="item-title">Способ оплаты</h2>
@@ -174,47 +174,51 @@
             <div class="payment-form__to-pay-block">
 
               <div class="payment-form__arrival">
-                <input type="radio" class="payment-form__arrival-input">
-                <h3 class="payment-form__block-title">По приезду</h3>
-                <p class="field-text-descr">На этот адрес мы вышлем вам подтверждение о забронированном номере.</p>
+                <label for="payment-form__arrival-imput" class="payment-form__arrival-label">
+                  <input type="radio" name="arrival-type" value="whenarrive" class="payment-form__radio-input" id="payment-form__arrival-imput">
+                  <span class="payment-form__block-title">По приезду</span>
+                </label>
+                <p class="payment-form__arrival-descr">На этот адрес мы вышлем вам подтверждение о забронированном номере.</p>
               </div>
 
               <div class="payment-form__now-arrival">
-                <input type="radio" class="payment-form__arrival-input">
-                <h3 class="payment-form__block-title">Сейчас</h3>
-                <p class="field-text-descr">Прямо сейчас вы можете произвести оплату с помощью банковской карты.</p>
+                <label for="payment-form__now-input" class="payment-form__now-arrival-label">
+                  <input type="radio" name="arrival-type" value="now" class="payment-form__radio-input" id="payment-form__now-input" checked="checked">
+                  <span class="payment-form__block-title">Сейчас</span>
+                </label>
+                <p class="payment-form__now-arrival-descr">Прямо сейчас вы можете произвести оплату с помощью банковской карты.</p>
 
-                <label class="field-text  field-text--large">
-                  <span class="field-text__title">Номер карты</span>
-                  <input type="text" class="field-text__input">
+                <label class="payment-form__now-arrival-label">
+                  <span class="payment-form__now-arrival-input-title">Номер карты</span>
+                  <input type="number" placeholder="0000-0000-0000-0000" data-validation="number" data-validation-error-msg="Введите номер карты" data-validation-error-msg-container="#payment-form__bill-block-notice-link" class="payment-form__now-arrival-input" id="payment-form__now-arrival-input-card-number">
                 </label>
 
-                <label class="field-text  field-text--large">
-                  <span class="field-text__title">Фамилия владельца карты</span>
-                  <input type="text" class="field-text__input">
+                <label class="payment-form__now-arrival-label">
+                  <span class="payment-form__now-arrival-input-title">Фамилия владельца карты</span>
+                  <input type="text" placeholder="vladimir vladimirov" data-validation="required" data-validation-error-msg="Введите фамилию владельца карты" data-validation-error-msg-container="#payment-form__bill-block-notice-link" class="payment-form__now-arrival-input" id="payment-form__now-arrival-card-name">
                 </label>
 
-                <label class="field-text  field-text--small">
-                  <span class="field-text__title">Код CVV</span>
-                  <input type="text" class="field-text__input">
+                <label class="payment-form__now-arrival-label">
+                  <span class="payment-form__now-arrival-input-title">Код CVV</span>
+                  <input type="number" placeholder="123" data-validation="number" data-validation-error-msg="Введите код CVV" data-validation-error-msg-container="#payment-form__bill-block-notice-link" class="payment-form__now-arrival-input  payment-form__now-arrival-input--short" id="payment-form__now-arrival-input-cvv">
                 </label>
 
-                <label class="field-text  field-text--small">
-                  <span class="field-text__title">Действует до</span>
-                  <input type="text" class="field-text__input">
+                <label class="payment-form__now-arrival-label">
+                  <span class="payment-form__now-arrival-input-title">Действует до</span>
+                  <input type="number" placeholder="01/2018" data-validation="required" data-validation-error-msg="Введите период действия карты" data-validation-error-msg-container="#payment-form__bill-block-notice-link" class="payment-form__now-arrival-input  payment-form__now-arrival-input--short" id="payment-form__now-arrival-input-card-date">
                 </label>
               </div>
 
             </div>
 
             <div class="payment-form__bill-block">
-              <h3 class="payment-form__block-title  payment-form__block-title--grey">К оплате</h3>
-              <p class="payment-form__bill-sum">14 000 руб.</p>
-              <p class="field-text-descr">Пожалуйста, <a href="" class="payment-form__bill-notice-link">выберите дату</a> въезда и выезда, чтобы увидеть сумму к оплате</p>
+              <span class="payment-form__bill-block-title">К оплате</span>
+              <p class="payment-form__bill-block-sum">-</p>
+              <div class="payment-form__bill-block-notice" id="payment-form__bill-block-notice"></div>
             </div>
 
             <div class="payment-form__btn">
-              <button class="btn  btn--large  btn--green">
+              <button id="submit" type="submit" class="btn  btn--large  btn--green">
                 Забронировать
               </button>
             </div>

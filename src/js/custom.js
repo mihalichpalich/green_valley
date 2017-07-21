@@ -83,6 +83,34 @@ jQuery(function($) {
     dots: true
   });
 
+  // form valid
+  $.validate({
+    form: '#form',
+    scrollToTopOnError : false,
+    errorMessagePosition : $('#payment-form__bill-block-notice'),
+    errorMessageTemplate: {
+      container: '<div class="{errorMessageClass} alert alert-danger">{messages}</div>',
+      messages: '<ul>{fields}</ul>',
+      field: '<li>{msg}</li>'
+    },
+    validateOnBlur : false,
+    addSuggestions : false
+  });
+  $('#payment-form__now-input, #payment-form__arrival-imput').change(function(){
+    if ($('#payment-form__now-input').prop("checked")) {
+      $('#payment-form__now-arrival-input-card-number').attr('data-validation','number');
+      $('#payment-form__now-arrival-input-cvv').attr('data-validation','number');
+      $('#payment-form__now-arrival-card-name').attr('data-validation','required');
+      $('#payment-form__now-arrival-input-card-date').attr('data-validation','number');
+    } else {
+      $('#payment-form__now-arrival-input-card-number').removeAttr('data-validation');
+      $('#payment-form__now-arrival-input-cvv').removeAttr('data-validation');
+      $('#payment-form__now-arrival-card-name').removeAttr('data-validation');
+      $('#payment-form__now-arrival-input-card-date').removeAttr('data-validation');
+    }
+  });
+
 });
+
 
 },{}]},{},[1]);

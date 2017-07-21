@@ -1,0 +1,30 @@
+.form-error {
+
+  & strong {
+    display: none;
+  }
+
+  & ul {
+    margin: 0;
+    padding-left: 0;
+  }
+
+  & li {
+    padding-left: 18px;
+    text-align: left;
+    position: relative;
+    list-style: none;
+
+    &:before {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 2px;
+      left: 0;
+      background-image: url(../img/sprite.png);
+      background-position: -112px -102px;
+      width: 13px;
+      height: 12px;
+    }
+  }
+}

@@ -1,19 +1,29 @@
 .payment-form {
+  margin-top: 40px;
+
   &__to-pay-block {
 
   }
 
   &__arrival {
+    margin-bottom: 20px;
+    padding: 23px 40px 0;
+    min-height: 60px;
     background-color: #fff;
     border: 1px solid @gray--light;
     text-align: left;
   }
 
-  &__arrival-input {
+  &__radio-input {
 
+    &[type='radio'] {
+      display: none;
+    }
   }
 
   &__block-title {
+    display: block;
+    padding-left: 36px;
     position: relative;
     font-size: @font-size--small;
     line-height: 18px;
@@ -22,30 +32,131 @@
     text-transform: uppercase;
     font-weight: 500;
 
+    &:before {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 2px;
+      left: 0;
+      background-image: url(../img/sprite.png);
+      background-position: -242px -102px;
+      width: 16px;
+      height: 12px;
+    }
+
     &--grey {
 
     }
   }
 
+  &__arrival-descr {
+    display: none;
+  }
+
   &__now-arrival {
+    padding: 20px 40px 25px;
     background-color: #fff;
     border: 1px solid @gray--light;
     text-align: left;
   }
 
+  &__now-arrival-input {
+    width: 100%;
+    height: 40px;
+    text-align: center;
+    border: 1px solid #ebebeb;
+    color: @gray--darkest;
+    font-family: @font-family;
+    font-size: @font-size--small;
+    line-height: 18px;
+    .placeholder-form({
+    color: @gray;
+    font-family: @font-family;
+    font-size: @font-size--small;
+    line-height: 18px;
+    text-transform: uppercase;
+    });
+
+    &[type='radio'] {
+      display: none;
+    }
+
+    &--short {
+      width: 135px;
+    }
+  }
+
+  &__now-arrival-descr {
+    display: none;
+  }
+
+  &__now-arrival-label {
+
+  }
+
+  &__now-arrival-input-title {
+    display: block;
+    margin-top: 21px;
+    margin-bottom: 13px;
+    color: @gray--darker;
+    font-family: @font-family;
+    font-size: @font-size--small;
+    font-weight: 400;
+    line-height: 18px;
+    text-transform: uppercase;
+  }
+
   &__bill-block {
     width: 100%;
+    margin-top: 20px;
+    margin-bottom: 50px;
+    padding: 23px 40px 8px;
     display: inline-block;
     background-color: #fff;
     border: 1px solid @gray--light;
   }
 
-  &__bill-sum {
+  &__bill-block-title {
+    color: @gray--darker;
+    font-family: @font-family;
+    font-size: @font-size--small;
+    line-height: 18px;
+    text-transform: uppercase;
+  }
 
+  &__bill-block-sum {
+    color: @gray--darkest;
+    font-family: @font-family;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 18px;
+    text-transform: uppercase;
+  }
+
+  &__bill-block-descr {
+    display: none;
+    text-align: left;
+    color: @gray--darker;
+    font-family: @font-family;
+    font-size: @font-size--small;
+    line-height: 19px;
+  }
+
+  &__bill-block-notice {
+    font-size: @font-size--small;
+    font-family: @font-family;
+    line-height: 19px;
+    color: @gray--darker;
+    text-decoration: none;
   }
 
   &__btn {
     max-width: 280px;
-    margin: 0 auto;
+    margin: 0 auto 28px;
   }
 }
+
+.payment-form__radio-input:checked + .payment-form__block-title:before {
+  background-position: -258px -102px;
+}
+
