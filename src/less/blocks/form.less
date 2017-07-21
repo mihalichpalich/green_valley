@@ -7,6 +7,11 @@
   &__header-inner {
     padding: 57px 0 32px;
     text-align: center;
+
+    @media (min-width: @screen-sm) {
+      .make-row();
+      .clearfix();
+    }
   }
 
   &__header-title {
@@ -16,6 +21,10 @@
     font-size: @font-size--h2;
     font-weight: 400;
     letter-spacing: 0.05em;
+
+    @media (min-width: @screen-sm) {
+
+    }
   }
 
   &__text {
@@ -24,6 +33,11 @@
     font-size: @font-size;
     color: @colour-main;
     line-height: 20px;
+
+    @media (min-width: @screen-sm) {
+      .make-sm-column(6);
+      margin-top: 0;
+    }
   }
 
   &__text-phone {
