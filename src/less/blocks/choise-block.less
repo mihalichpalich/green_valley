@@ -2,6 +2,11 @@
   display: flex;
   border: 1px solid #ebebeb;
 
+  @media (min-width: @screen-sm) {
+    width: 57%;
+    margin: 0 auto;
+  }
+
   &__item {
     .make-xs-column(6);
     padding: 28px 0 5px;
