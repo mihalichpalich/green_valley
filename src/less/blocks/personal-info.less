@@ -2,8 +2,16 @@
   margin: 0 auto;
   margin-top: 39px;
 
+  @media (min-width: @screen-sm) {
+    margin-top: 31px;
+  }
+
   &__block {
     position: relative;
+
+    @media (min-width: @screen-sm) {
+      .make-sm-column(6);
+    }
 
     &:not(:last-child) {
       padding-bottom: 20px;
@@ -13,6 +21,20 @@
 
       & .personal-info__descr {
         margin-bottom: 0;
+      }
+    }
+
+    &:nth-child(odd) {
+
+      @media (min-width: @screen-sm) {
+        padding-right: 10px;
+      }
+    }
+
+    &:nth-child(even) {
+
+      @media (min-width: @screen-sm) {
+        padding-left: 10px;
       }
     }
   }
@@ -52,6 +74,11 @@
     font-family: @font-family;
     font-size: @font-size--small;
     line-height: 18px;
+
+    @media (min-width: @screen-sm) {
+      margin-top: 20px;
+      margin-bottom: 0;
+    }
   }
 }
 
