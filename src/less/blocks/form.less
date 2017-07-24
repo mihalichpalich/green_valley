@@ -65,6 +65,14 @@
     .clearfix();
     text-align: center;
     padding: 46px 7% 53px;
+
+    &--wide {
+
+      @media (min-width: @screen-sm) {
+        padding-left: 0;
+        padding-right: 0;
+      }
+    }
   }
 
   &__step-number-title {

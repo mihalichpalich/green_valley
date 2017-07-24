@@ -3,10 +3,32 @@
   padding: 44px 0;
   background-color: #fff;
 
+  @media (min-width: @screen-sm) {
+    padding: 25px 20px 28px 20px;
+  }
+
   &__item {
+
+    @media (min-width: @screen-sm) {
+      display: inline-block;
+      width: 25%;
+    }
 
     &:not(:last-child) {
       padding-bottom: 33px;
+
+      @media (min-width: @screen-sm) {
+        padding-bottom: 0;
+      }
+    }
+  }
+
+  &__label {
+
+    @media (min-width: @screen-sm) {
+      display: block;
+      padding: 36px 0 34px;
+      border-right: 1px solid @gray--light;
     }
   }
 
@@ -27,6 +49,10 @@
     line-height: 18px;
     text-transform: uppercase;
 
+    @media (min-width: @screen-sm) {
+
+    }
+
     &:before {
       content: '';
       display: none;
@@ -38,15 +64,42 @@
       background-position: -242px -102px;
       width: 16px;
       height: 12px;
+
+      @media (min-width: @screen-sm) {
+        left: 36%;
+        top: 30px;
+        transform: translate(0%);
+      }
+    }
+
+    &:after {
+
+      @media (min-width: @screen-sm) {
+        content: '';
+        background-image: url(../img/sprite.png);
+        background-position: -162px -88px;
+        width: 19px;
+        height: 17px;
+        position: absolute;
+        left: 50%;
+        top: 84px;
+        -webkit-transform: translate(-50%);
+        transform: translate(-50%);
+        display: none;
+      }
     }
   }
 
   &__descr {
     display: none;
-    position: absolute;
-    left: 0;
-    border: 1px solid @gray--light;
-    background-color: #fff;
+
+    @media (min-width: @screen-sm) {
+      width: 100%;
+      margin-top: 20px;
+      padding: 0 44px;
+      border: 1px solid @gray--light;
+      background-color: #fff;
+    }
 
     &--flagman {
 
@@ -63,23 +116,80 @@
     &--portoviy {
 
     }
+
+    &--active {
+      display: block;
+    }
   }
 
   &__descr-list {
-    margin-right: auto;
-    margin-left: auto;
-    position: relative;
+
+    @media (min-width: @screen-sm) {
+      padding-left: 0;
+    }
   }
 
   &__descr-list-item {
-    vertical-align: top;
-    position: relative;
-    font-size: 14px;
-    line-height: 18px;
-    font-family: @font-family;
-    color: @gray--darkest;
-    text-transform: uppercase;
-    font-weight: 500;
+
+    @media (min-width: @screen-sm) {
+      width: 20%;
+      padding: 39px 23px 22px;
+      display: inline-block;
+      vertical-align: top;
+      position: relative;
+      color: @gray--darkest;
+      font-family: @font-family;
+      font-size: @font-size--small;
+      font-weight: 500;
+      line-height: 18px;
+      text-transform: uppercase;
+    }
+
+    &:before {
+
+      @media (min-width: @screen-sm) {
+        content: '';
+        display: block;
+        position: relative;
+        margin: 0 auto;
+        top: -13px;
+        background-image: url(../img/sprite.png);
+      }
+    }
+
+    &--square:before {
+      width: 43px;
+      height: 43px;
+      background-position: -163px -1px;
+    }
+
+    &--rooms:before {
+      width: 27px;
+      height: 43px;
+      background-position: -162px -45px;
+    }
+
+    &--berth:before {
+      width: 55px;
+      height: 43px;
+      background-position: 0px -102px;
+    }
+
+    &--bathroom {
+      padding-top: 54px !important;
+
+      &:before {
+        width: 52px;
+        height: 28px;
+        background-position: -105px -102px;
+      }
+    }
+
+    &--wi-fi:before {
+      width: 50px;
+      height: 42px;
+      background-position: -55px -102px;
+    }
   }
 }
 
@@ -88,5 +198,9 @@
 }
 
 .cottages-type__input:checked + .cottages-type__title:before {
+  display: block;
+}
+
+.cottages-type__input:checked + .cottages-type__title:after {
   display: block;
 }
