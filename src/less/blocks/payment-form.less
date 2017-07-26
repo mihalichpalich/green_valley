@@ -1,8 +1,19 @@
 .payment-form {
   margin-top: 40px;
 
+  @media (min-width: @screen-sm) {
+    display: flex;
+  }
+
   &__to-pay-block {
 
+    @media (min-width: @screen-sm) {
+      order: 2;
+      .make-sm-column(7);
+      width: 59% !important;
+      padding-left: 0;
+      padding-right: 0;
+    }
   }
 
   &__arrival {
@@ -12,6 +23,25 @@
     background-color: #fff;
     border: 1px solid @gray--light;
     text-align: left;
+
+    @media (min-width: @screen-sm) {
+      .make-row();
+      .clearfix();
+      margin-left: 0;
+      margin-right: 0;
+      margin-bottom: 24px;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+  }
+
+  &__arrival-label {
+
+    @media (min-width: @screen-sm) {
+      .make-sm-column(4);
+      padding-left: 0;
+      padding-right: 0;
+    }
   }
 
   &__radio-input {
@@ -51,6 +81,18 @@
 
   &__arrival-descr {
     display: none;
+
+    @media (min-width: @screen-sm) {
+      display: block;
+      .make-sm-column(7);
+      margin-top: 0;
+      padding-left: 0;
+      padding-right: 33px;
+      color: @gray--darker;
+      font-family: @font-family;
+      font-size: @font-size--small;
+      line-height: 18px;
+    }
   }
 
   &__now-arrival {
@@ -58,6 +100,20 @@
     background-color: #fff;
     border: 1px solid @gray--light;
     text-align: left;
+
+    @media (min-width: @screen-sm) {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+  }
+
+  &__now-arrival-label {
+
+    @media (min-width: @screen-sm) {
+      .make-sm-column(4);
+      padding-left: 0;
+      padding-right: 0;
+    }
   }
 
   &__now-arrival-input {
@@ -83,15 +139,51 @@
 
     &--short {
       width: 58%;
+
+      @media (min-width: @screen-sm) {
+        width: 100%;
+      }
     }
   }
 
   &__now-arrival-descr {
     display: none;
+
+    @media (min-width: @screen-sm) {
+      display: block;
+      .make-sm-column(7);
+      margin-top: 0;
+      padding-left: 0;
+      padding-right: 0;
+      color: @gray--darker;
+      font-family: @font-family;
+      font-size: @font-size--small;
+      line-height: 18px;
+    }
   }
 
-  &__now-arrival-label {
+  &__now-arrival-text-label-left-column {
 
+    @media (min-width: @screen-sm) {
+      .make-sm-column(7);
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  &__now-arrival-text-label-right-column {
+
+    @media (min-width: @screen-sm) {
+      .make-sm-column(4);
+      width: 40.333333% !important;
+    }
+  }
+
+  &__now-arrival-text-label:last-child .payment-form__now-arrival-input-title {
+
+    @media (min-width: @screen-sm) {
+      margin-top: 18px;
+    }
   }
 
   &__now-arrival-input-title {
@@ -104,6 +196,10 @@
     font-weight: 400;
     line-height: 18px;
     text-transform: uppercase;
+
+    @media (min-width: @screen-sm) {
+      margin-top: 10px;
+    }
   }
 
   &__bill-block {
@@ -114,6 +210,15 @@
     display: inline-block;
     background-color: #fff;
     border: 1px solid @gray--light;
+
+    @media (min-width: @screen-sm) {
+      order: 1;
+      .make-sm-column(4);
+      width: 37% !important;
+      margin-right: 16px;
+      margin-top: 0;
+      margin-bottom: 0;
+    }
   }
 
   &__bill-block-title {
@@ -148,11 +253,6 @@
     line-height: 19px;
     color: @gray--darker;
     text-decoration: none;
-  }
-
-  &__btn {
-    max-width: 280px;
-    margin: 0 auto 28px;
   }
 }
 

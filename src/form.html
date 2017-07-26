@@ -166,7 +166,7 @@
       </div>
 
       <div class="form__step  form__step--bg-lightgrey  form__step--wide">
-        <div class="form__step-inner">
+        <div class="form__step-inner  form__step-inner--wide">
           <span class="form__step-number-title">шаг 5</span>
           <h2 class="item-title">Способ оплаты</h2>
           <div class="payment-form">
@@ -174,11 +174,11 @@
             <div class="payment-form__to-pay-block">
 
               <div class="payment-form__arrival">
-                <label for="payment-form__arrival-imput" class="payment-form__arrival-label">
+                <label for="payment-form__arrival-input" class="payment-form__arrival-label">
                   <input type="radio" name="arrival-type" value="whenarrive" class="payment-form__radio-input" id="payment-form__arrival-imput">
                   <span class="payment-form__block-title">По приезду</span>
                 </label>
-                <p class="payment-form__arrival-descr">На этот адрес мы вышлем вам подтверждение о забронированном номере.</p>
+                <p class="payment-form__arrival-descr">Вы можете произвести оплату по факту заселения.</p>
               </div>
 
               <div class="payment-form__now-arrival">
@@ -188,25 +188,29 @@
                 </label>
                 <p class="payment-form__now-arrival-descr">Прямо сейчас вы можете произвести оплату с помощью банковской карты.</p>
 
-                <label class="payment-form__now-arrival-label">
-                  <span class="payment-form__now-arrival-input-title">Номер карты</span>
-                  <input type="number" placeholder="0000-0000-0000-0000" data-validation="number" data-validation-error-msg="Введите номер карты" data-validation-error-msg-container="#payment-form__bill-block-notice-link" class="payment-form__now-arrival-input" id="payment-form__now-arrival-input-card-number">
-                </label>
+                <div class="payment-form__now-arrival-text-label-left-column">
+                  <label class="payment-form__now-arrival-text-label">
+                    <span class="payment-form__now-arrival-input-title">Номер карты</span>
+                    <input type="number" placeholder="0000-0000-0000-0000" data-validation="number" data-validation-error-msg="Введите номер карты" data-validation-error-msg-container="#payment-form__bill-block-notice-link" class="payment-form__now-arrival-input" id="payment-form__now-arrival-input-card-number">
+                  </label>
 
-                <label class="payment-form__now-arrival-label">
-                  <span class="payment-form__now-arrival-input-title">Фамилия владельца карты</span>
-                  <input type="text" placeholder="vladimir vladimirov" data-validation="required" data-validation-error-msg="Введите фамилию владельца карты" data-validation-error-msg-container="#payment-form__bill-block-notice-link" class="payment-form__now-arrival-input" id="payment-form__now-arrival-card-name">
-                </label>
+                  <label class="payment-form__now-arrival-text-label">
+                    <span class="payment-form__now-arrival-input-title">Фамилия владельца карты</span>
+                    <input type="text" placeholder="vladimir vladimirov" data-validation="required" data-validation-error-msg="Введите фамилию владельца карты" data-validation-error-msg-container="#payment-form__bill-block-notice-link" class="payment-form__now-arrival-input" id="payment-form__now-arrival-card-name">
+                  </label>
+                </div>
 
-                <label class="payment-form__now-arrival-label">
-                  <span class="payment-form__now-arrival-input-title">Код CVV</span>
-                  <input type="number" placeholder="123" data-validation="number" data-validation-error-msg="Введите код CVV" data-validation-error-msg-container="#payment-form__bill-block-notice-link" class="payment-form__now-arrival-input  payment-form__now-arrival-input--short" id="payment-form__now-arrival-input-cvv">
-                </label>
+                <div class="payment-form__now-arrival-text-label-right-column">
+                  <label class="payment-form__now-arrival-text-label">
+                    <span class="payment-form__now-arrival-input-title">Код CVV</span>
+                    <input type="number" placeholder="123" data-validation="number" data-validation-error-msg="Введите код CVV" data-validation-error-msg-container="#payment-form__bill-block-notice-link" class="payment-form__now-arrival-input  payment-form__now-arrival-input--short" id="payment-form__now-arrival-input-cvv">
+                  </label>
 
-                <label class="payment-form__now-arrival-label">
-                  <span class="payment-form__now-arrival-input-title">Действует до</span>
-                  <input type="number" placeholder="01/2018" data-validation="required" data-validation-error-msg="Введите период действия карты" data-validation-error-msg-container="#payment-form__bill-block-notice-link" class="payment-form__now-arrival-input  payment-form__now-arrival-input--short" id="payment-form__now-arrival-input-card-date">
-                </label>
+                  <label class="payment-form__now-arrival-text-label">
+                    <span class="payment-form__now-arrival-input-title">Действует до</span>
+                    <input type="number" placeholder="01/2018" data-validation="required" data-validation-error-msg="Введите период действия карты" data-validation-error-msg-container="#payment-form__bill-block-notice-link" class="payment-form__now-arrival-input  payment-form__now-arrival-input--short" id="payment-form__now-arrival-input-card-date">
+                  </label>
+                </div>
               </div>
 
             </div>
@@ -216,13 +220,12 @@
               <p class="payment-form__bill-block-sum">-</p>
               <div class="payment-form__bill-block-notice" id="payment-form__bill-block-notice"></div>
             </div>
+          </div>
 
-            <div class="payment-form__btn">
-              <button id="submit" type="submit" class="btn  btn--large  btn--green">
-                Забронировать
-              </button>
-            </div>
-
+          <div class="form__btn">
+            <button id="submit" type="submit" class="btn  btn--large  btn--green">
+              Забронировать
+            </button>
           </div>
         </div>
       </div>
