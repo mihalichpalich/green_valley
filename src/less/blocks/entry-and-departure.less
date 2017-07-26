@@ -1,11 +1,36 @@
 .entry-and-departure {
 
+  @media (min-width: @screen-lg) {
+    margin-top: 30px;
+    margin-bottom: 46px;
+  }
+
   &__item {
 
     @media (min-width: @screen-sm) {
       .make-sm-column(4);
       width: 30% !important;
       padding: 0 10px !important;
+    }
+
+    @media (min-width: @screen-lg) {
+      .make-lg-column(2);
+      width: 16.66666667% !important;
+      padding-bottom: 53px !important;
+      position: relative;
+      background-color: #fff;
+    }
+
+    &:first-child:after {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 1px;
+      height: 88px;
+      background-color: #ebebeb;
+      left: 100%;
+      top: 25px;
+      z-index: 1;
     }
   }
 
@@ -17,6 +42,10 @@
     font-size: @font-size--small;
     line-height: 18px;
     text-transform: uppercase;
+
+    @media (min-width: @screen-lg) {
+      margin-top: 26px;
+    }
   }
 
   &__item-input-block {
@@ -25,6 +54,11 @@
     width: 180px;
     height: 50px;
     border: 1px solid @gray--light;
+
+    @media (min-width: @screen-lg) {
+      width: 134px;
+      height: 27px;
+    }
   }
 
   &__item-input {
@@ -41,6 +75,10 @@
     .placeholder-form({
     color: @gray;
     });
+
+    @media (min-width: @screen-lg) {
+      width: 39px;
+    }
   }
 
   &__item-input:last-child {
