@@ -6,11 +6,21 @@
     margin-top: 31px;
   }
 
+  @media (min-width: @screen-lg) {
+    .make-lg-column(8);
+    width: 63.5% !important;
+    font-size: 0;
+  }
+
   &__block {
     position: relative;
 
     @media (min-width: @screen-sm) {
       .make-sm-column(6);
+    }
+
+    @media (min-width: @screen-lg) {
+      width: 49.7%;
     }
 
     &:not(:last-child) {
