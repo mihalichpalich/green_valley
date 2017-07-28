@@ -137,7 +137,10 @@
     }
 
     &--active {
-      display: inline-block !important;
+
+      @media (min-width: @screen-sm) {
+        display: inline-block !important;
+      }
     }
   }
 

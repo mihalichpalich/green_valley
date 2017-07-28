@@ -5,6 +5,14 @@
     display: flex;
   }
 
+  @media (min-width: @screen-lg) {
+    .make-lg-column(7);
+    width: 59% !important;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   &__to-pay-block {
 
     @media (min-width: @screen-sm) {
@@ -13,6 +21,10 @@
       width: 59% !important;
       padding-left: 0;
       padding-right: 0;
+    }
+
+    @media (min-width: @screen-lg) {
+      width: 60% !important;
     }
   }
 
@@ -32,6 +44,10 @@
       margin-bottom: 24px;
       padding-left: 20px;
       padding-right: 20px;
+    }
+
+    @media (min-width: @screen-lg) {
+      padding-right: 0;
     }
   }
 
@@ -93,6 +109,11 @@
       font-size: @font-size--small;
       line-height: 18px;
     }
+
+    @media (min-width: @screen-lg) {
+      width: 61%;
+      padding-right: 0;
+    }
   }
 
   &__now-arrival {
@@ -104,6 +125,10 @@
     @media (min-width: @screen-sm) {
       padding-left: 20px;
       padding-right: 20px;
+    }
+
+    @media (min-width: @screen-lg) {
+      padding-right: 0;
     }
   }
 
@@ -146,6 +171,44 @@
     }
   }
 
+  &__now-arrival-input-tooltip {
+    display: none;
+
+    @media (min-width: @screen-lg) {
+      display: inline-block;
+      position: relative;
+      width: 16px;
+      height: 17px;
+      top: 3px;
+      margin-left: 47%;
+      background-image: url(../img/sprite.png);
+      background-position: 18px -45px;
+    }
+
+    &:hover &-text {
+
+      @media (min-width: @screen-lg) {
+        display: block;
+      }
+    }
+  }
+
+  &__now-arrival-input-tooltip-text {
+
+    @media (min-width: @screen-lg) {
+      display: none;
+      background-color: #fff;
+      padding: 10px;
+      border: 1px solid @gray--light;
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translate(0,-50%);
+      width: 300px;
+      box-shadow: 3px 3px 10px rgba(0,0,0,.3);
+    }
+  }
+
   &__now-arrival-descr {
     display: none;
 
@@ -159,6 +222,10 @@
       font-family: @font-family;
       font-size: @font-size--small;
       line-height: 18px;
+    }
+
+    @media (min-width: @screen-lg) {
+      width: 65%;
     }
   }
 
@@ -198,6 +265,7 @@
     text-transform: uppercase;
 
     @media (min-width: @screen-sm) {
+      display: inline-block;
       margin-top: 10px;
     }
   }

@@ -7,7 +7,7 @@
       <section class="form__header">
         <div class="form__header-inner">
           <h1 class="form__header-title">Бронирование</h1>
-          <p class="form__text">Чтобы забронировать номер в отеле или коттедж, заполните форму ниже или просто позвоните по телефону: <a href="" class="form__text-phone">+7 812 777-55-88</a></p>
+          <p class="form__header-text">Чтобы забронировать номер в отеле или коттедж, заполните форму ниже или просто позвоните по телефону: <a href="" class="form__text-phone">+7 812 777-55-88</a></p>
         </div>
       </section>
 
@@ -203,6 +203,7 @@
                 <div class="payment-form__now-arrival-text-label-right-column">
                   <label class="payment-form__now-arrival-text-label">
                     <span class="payment-form__now-arrival-input-title">Код CVV</span>
+                    <a href="javascript:void(0);" class="payment-form__now-arrival-input-tooltip"><span class="payment-form__now-arrival-input-tooltip-text">Последние 3 цифры с обратной стороны Вашей банковской карты</span></a>
                     <input type="number" placeholder="123" data-validation="number" data-validation-error-msg="Введите код CVV" data-validation-error-msg-container="#payment-form__bill-block-notice-link" class="payment-form__now-arrival-input  payment-form__now-arrival-input--short" id="payment-form__now-arrival-input-cvv">
                   </label>
 
@@ -222,8 +223,8 @@
             </div>
           </div>
 
-          <div class="form__btn">
-            <button id="submit" type="submit" class="btn  btn--large  btn--green">
+          <div class="form__btn-block">
+            <button id="submit" type="submit" class="btn  btn--large  btn--green  btn__form">
               Забронировать
             </button>
           </div>

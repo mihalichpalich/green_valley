@@ -11,6 +11,7 @@
     @media (min-width: @screen-sm) {
       .make-row();
       .clearfix();
+      padding-top: 38px;
     }
   }
 
@@ -23,11 +24,11 @@
     letter-spacing: 0.05em;
 
     @media (min-width: @screen-sm) {
-
+      margin-bottom: 23px;
     }
   }
 
-  &__text {
+  &__header-text {
     padding: 0 30px;
     font-family: @font-family;
     font-size: @font-size;
@@ -36,12 +37,14 @@
 
     @media (min-width: @screen-sm) {
       .make-sm-column(6);
+      width: 55% !important;
       margin-top: 0;
       font-size: @font-size !important;
     }
 
     @media (min-width: @screen-lg) {
       .make-lg-column(4);
+      width: 33.33333333% !important;
       font-size: @font-size !important;
     }
   }
@@ -160,13 +163,17 @@
     }
   }
 
-  &__btn {
+  &__btn-block {
     max-width: 280px;
     margin: 0 auto 28px;
 
     @media (min-width: @screen-sm) {
       max-width: 100%;
       margin: 50px 0 27px;
+    }
+
+    @media (min-width: @screen-lg) {
+      .make-lg-column(7);
     }
   }
 }
