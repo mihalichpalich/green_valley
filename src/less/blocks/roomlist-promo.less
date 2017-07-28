@@ -1,0 +1,27 @@
+.roomlist-promo {
+  .container-fixed();
+  text-align: center;
+  background-image: url(../img/roomlist-promo-background-320px.jpg);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+
+  &__inner {
+    .make-row();
+    .clearfix();
+    padding-top: 32px;
+    padding-bottom: 40px;
+  }
+
+  &__title {
+    color: @btn-and-white-caption;
+    font-family: @font-family--caption;
+    font-size: @font-size--h2;
+    line-height: 42px;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+  }
+
+  &__text {
+    display: none;
+  }
+}
