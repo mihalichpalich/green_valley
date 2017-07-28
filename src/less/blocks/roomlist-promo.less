@@ -5,11 +5,20 @@
   background-repeat: no-repeat;
   background-size: 100% 100%;
 
+  @media (min-width: @screen-sm) {
+    background-image: url(../img/roomlist-promo-background-768px.jpg);
+  }
+
   &__inner {
     .make-row();
     .clearfix();
     padding-top: 32px;
     padding-bottom: 40px;
+
+    @media (min-width: @screen-sm) {
+      padding-top: 12px;
+      padding-bottom: 25px;
+    }
   }
 
   &__title {
@@ -19,9 +28,22 @@
     line-height: 42px;
     font-weight: 400;
     letter-spacing: 0.08em;
+
+    @media (min-width: @screen-sm) {
+      margin-bottom: 38px;
+      font-size: @font-size--h1;
+    }
   }
 
   &__text {
     display: none;
+
+    @media (min-width: @screen-sm) {
+      display: block;
+      color: @btn-and-white-caption;
+      font-family: @font-family;
+      font-size: @font-size--promo;
+      line-height: 24px;
+    }
   }
 }
