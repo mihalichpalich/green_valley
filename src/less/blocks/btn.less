@@ -7,32 +7,31 @@
   letter-spacing: 0.05em;
   line-height: 18px;
   border: none;
+  padding: 7px 20px 6px;
 
   @media (min-width: @screen-lg) {
     text-align: center;
-    padding: 7px 20px 6px;
   }
 
   &--icon-calendar {
+    display: inline-block;
+    min-height: 37px;
+    border-radius: 18px;
 
     @media (min-width: @screen-lg) {
-      border-radius: 18px;
       background-color: @color-btn;
     }
 
     &:before {
-
-      @media (min-width: @screen-lg) {
-        content: '';
-        display: inline-block;
-        margin-right: 9px;
-        position: relative;
-        top: 2px;
-        width: 15px;
-        height: 16px;
-        background-image: url(../img/sprite.png);
-        background-position: -51px 29px;
-      }
+      content: '';
+      display: inline-block;
+      margin-right: 9px;
+      position: relative;
+      top: 2px;
+      width: 15px;
+      height: 16px;
+      background-image: url(../img/sprite.png);
+      background-position: -189px 138px;
     }
 
     &:hover {
@@ -63,6 +62,10 @@
     &:hover {
       background-color: @color-form-btn--dark;
     }
+  }
+
+  &--orange {
+    background-color: @color-btn;
   }
 
   &--min-width-invisible {

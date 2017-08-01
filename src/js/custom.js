@@ -110,6 +110,17 @@ jQuery(function($) {
     }
   });
 
+  //single-room__slider
+
+  $('.single-room__slider-inner').not('.slick-initialized').slick({
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: false,
+    fade: false,
+    accessibility: false,
+    arrows: false,
+  });
+
 });
 
 
