@@ -9,6 +9,16 @@
     @media (min-width: @screen-sm) {
       padding-bottom: 81px;
     }
+
+    @media (min-width: @screen-lg) {
+      padding-left: 7%;
+      padding-right: 7%;
+      padding-bottom: 31px;
+    }
+  }
+
+  &__inner-lg {
+    display: flex;
   }
 
   &__title-block {
@@ -48,6 +58,21 @@
 
   &__slider {
     position: relative;
+
+    @media (min-width: @screen-lg) {
+      display: none;
+    }
+  }
+
+  &__slider-visible-lg {
+    display: none;
+
+    @media (min-width: @screen-lg) {
+      .make-lg-column(6);
+      display: block;
+      padding-left: 0;
+      padding-right: 0;
+    }
   }
 
   &__slider-zoom {
@@ -74,11 +99,19 @@
     @media (min-width: @screen-sm) {
       min-height: 524px;
     }
+
+    @media (min-width: @screen-sm) {
+      min-height: 397px;
+    }
   }
 
   &__info-wrapper {
     padding-left: 6%;
     padding-right: 6%;
+
+    @media (min-width: @screen-lg) {
+      .make-lg-column(6);
+    }
   }
 
   &__about-block {
@@ -99,6 +132,17 @@
     @media (min-width: @screen-sm) {
       margin-top: 42px;
     }
+
+    @media (min-width: @screen-sm) {
+      margin-top: 38px;
+    }
+  }
+
+  &__info-wrapper-about-block-title {
+
+    @media (min-width: @screen-sm) {
+      margin-top: 0;
+    }
   }
 
   &__about-block-text {
@@ -112,6 +156,10 @@
       .make-sm-column(10);
       padding-left: 0;
       font-size: @font-size;
+    }
+
+    @media (min-width: @screen-lg) {
+      width: 100%;
     }
   }
 
@@ -131,11 +179,19 @@
       width: 85%;
       margin-top: 24px;
     }
+
+    @media (min-width: @screen-lg) {
+      height: 110px;
+    }
   }
 
   &__list-included {
 
     @media (min-width: @screen-sm) {
+      height: auto;
+    }
+
+    @media (min-width: @screen-lg) {
       height: auto;
     }
   }
@@ -153,6 +209,14 @@
     @media (min-width: @screen-sm) {
       .make-sm-column(6);
       width: 52% !important;
+      padding-left: 0;
+      font-size: @font-size;
+    }
+
+    @media (min-width: @screen-lg) {
+      .make-lg-column(9);
+      width: 62% !important;
+      margin-top: 0;
       padding-left: 0;
       font-size: @font-size;
     }
@@ -179,6 +243,10 @@
 
     @media (min-width: @screen-sm) {
       margin-top: 37px;
+    }
+
+    @media (min-width: @screen-lg) {
+      margin-top: 75px;
     }
   }
 
