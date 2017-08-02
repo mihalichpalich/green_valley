@@ -10,27 +10,28 @@
         </div>
 
         <div class="room-info__slider">
+          <span class="room-info__slider-zoom"></span>
           <div class="room-info__slider-inner">
             <div class="room-info__slider-img-block">
-              <img src="img/room-info__slider-img.jpg" alt="" class="room-info__slider-img">
+              <img src="img/room-info__slider-img.jpg" alt="Эконом1" class="room-info__slider-img">
             </div>
             <div class="room-info__slider-img-block">
-              <img src="img/room-info__slider-img.jpg" alt="Галерея2" class="room-info__slider-img">
+              <img src="img/room-info__slider-img.jpg" alt="Эконом2" class="room-info__slider-img">
             </div>
             <div class="room-info__slider-img-block">
-              <img src="img/room-info__slider-img.jpg" alt="Галерея3" class="room-info__slider-img">
+              <img src="img/room-info__slider-img.jpg" alt="Эконом3" class="room-info__slider-img">
             </div>
             <div class="room-info__slider-img-block">
-              <img src="img/room-info__slider-img.jpg" alt="Галерея4" class="room-info__slider-img">
+              <img src="img/room-info__slider-img.jpg" alt="Эконом4" class="room-info__slider-img">
             </div>
             <div class="room-info__slider-img-block">
-              <img src="img/room-info__slider-img.jpg" alt="Галерея5" class="room-info__slider-img">
+              <img src="img/room-info__slider-img.jpg" alt="Эконом5" class="room-info__slider-img">
             </div>
             <div class="room-info__slider-img-block">
-              <img src="img/room-info__slider-img.jpg" alt="Галерея6" class="room-info__slider-img">
+              <img src="img/room-info__slider-img.jpg" alt="Эконом6" class="room-info__slider-img">
             </div>
             <div class="room-info__slider-img-block">
-              <img src="img/room-info__slider-img.jpg" alt="Галерея7" class="room-info__slider-img">
+              <img src="img/room-info__slider-img.jpg" alt="Эконом7" class="room-info__slider-img">
             </div>
           </div>
         </div>
@@ -42,7 +43,7 @@
             <p class="room-info__about-block-text">В отеле 30 таких номеров площадью от 16 до 20 кв.м. Рассчитаны на проживание 1-2 человек. Часть номеров с видом на Финский залив.</p>
           </div>
 
-          <div class="room-info__list-block">
+          <div class="room-info__accommodation">
             <h3 class="room-info__info-wrapper-block-title">Удобства</h3>
             <ul class="room-info__list">
               <li class="room-info__list-item">WI-FI</li>
@@ -59,7 +60,7 @@
 
           <div class="room-info__included">
             <h3 class="room-info__info-wrapper-block-title">В стоимость входит</h3>
-            <ul class="room-info__list">
+            <ul class="room-info__list  room-info__list-included">
               <li class="room-info__list-item">Бассейн с с 8.30 до 10.00</li>
               <li class="room-info__list-item">Завтрак и обед «шведский стол»</li>
             </ul>
@@ -79,17 +80,7 @@
       <div class="room-category__inner">
 
         <div class="accommodation-place  accommodation-place--left">
-          <picture>
-            <source
-              media="(min-width:1200px)"
-              srcset="img/room-category__image-1-1200px.jpg">
-            <source
-              media="(min-width:768px)"
-              srcset="img/room-category__image-1-768px.jpg">
-            <source
-              srcset="img/room-category__image-1-320px.jpg">
-            <img src="img/room-category__image-1-320px.jpg" alt="" class="accommodation-place__image">
-          </picture>
+          <img src="img/room-category__image-1-320px.jpg" alt="" class="accommodation-place__image">
           <div class="accommodation-place__descr">
             <h2 class="accommodation-place__title">Стандарт</h2>
             <p class="accommodation-place__price">от <span class="accommodation-place__price-number">4000</span> руб./сутки</p>
@@ -97,14 +88,7 @@
         </div>
 
         <div class="accommodation-place">
-          <picture>
-            <source
-              media="(min-width:1200px)"
-              srcset="img/room-category__image-2-1200px.jpg">
-            <source
-              srcset="img/room-category__image-2-768px.jpg">
-            <img src="img/room-category__image-2-768px.jpg" alt="" class="accommodation-place__image">
-          </picture>
+          <img src="img/room-category__image-2-320px.jpg" alt="" class="accommodation-place__image">
           <div class="accommodation-place__descr">
             <h2 class="accommodation-place__title">Стандарт+</h2>
             <p class="accommodation-place__price">от <span class="accommodation-place__price-number">4500</span> руб./сутки</p>
@@ -112,7 +96,7 @@
         </div>
 
         <div class="accommodation-place">
-          <img src="img/room-category__image-3-1200px.jpg" alt="" class="accommodation-place__image">
+          <img src="img/room-category__image-3-320px.jpg" alt="" class="accommodation-place__image">
           <div class="accommodation-place__descr">
             <h2 class="accommodation-place__title">Люкс</h2>
             <p class="accommodation-place__price">от <span class="accommodation-place__price-number">5700</span> руб./сутки</p>
@@ -121,6 +105,12 @@
 
       </div>
     </section>
+
+    <div class="zoomer__inner"></div>
+    <div class="zoomer" id="zoomer">
+      <span class="zoomer--unzoom"></span>
+      <img src="" alt="">
+    </div>
 
   </main>
 

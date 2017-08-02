@@ -110,15 +110,37 @@ jQuery(function($) {
     }
   });
 
-  //single-room__slider
+  //room-info__slider
 
   $('.room-info__slider-inner').not('.slick-initialized').slick({
     slidesToShow: 1,
     slidesToScroll: 1,
-    arrows: false,
+    infinite: true,
+    dots:!1,
+    arrows: true,
     fade: false,
     accessibility: false,
     arrows: false,
+  });
+
+  //room-info__slider-zoom
+
+  $('.room-info__slider-zoom').on('click', function(e){
+    e.preventDefault();
+    var zoomedImg = $(".slick-slide[class*='slick-current']").find('img').attr('src');
+    $('#zoomer img').attr('src', zoomedImg);
+    $('#zoomer').toggle(400);
+    $('.zoomer__inner').toggle(100);
+    $('.room-info__slider-zoom').toggle(400);
+    $('.slick-arrow').toggle();
+  });
+
+  $('.zoomer--unzoom').on('click', function(e){
+    e.preventDefault();
+    $('#zoomer').toggle(400);
+    $('.zoomer__inner').toggle(100);
+    $('.room-info__slider-zoom').toggle(400);
+    $('.slick-arrow').toggle();
   });
 
 });

@@ -1,13 +1,25 @@
 .room-info {
-  text-align: center;
+  .container-fixed();
 
   &__inner {
+    .make-row();
+    .clearfix();
     padding-bottom: 31px;
+
+    @media (min-width: @screen-sm) {
+      padding-bottom: 81px;
+    }
   }
 
   &__title-block {
     margin-top: 45px;
     margin-bottom: 26px;
+    text-align: center;
+
+    @media (min-width: @screen-sm) {
+      margin-top: 40px;
+      margin-bottom: 40px;
+    }
   }
 
   &__title {
@@ -35,12 +47,33 @@
   }
 
   &__slider {
+    position: relative;
+  }
 
+  &__slider-zoom {
+    display: none;
+
+    @media (min-width: @screen-sm) {
+      display: inline-block;
+      width: 22px;
+      height: 22px;
+      background-image: url(../img/sprite.png);
+      background-position: -162px -88px;
+      position: absolute;
+      top: 20px;
+      right: 21px;
+      cursor: pointer;
+      z-index: 1;
+    }
   }
 
   &__slider-img {
     width: 100%;
     min-height: 260px;
+
+    @media (min-width: @screen-sm) {
+      min-height: 524px;
+    }
   }
 
   &__info-wrapper {
@@ -54,6 +87,7 @@
 
   &__info-wrapper-block-title {
     margin-top: 49px;
+    margin-bottom: 14px;
     text-align: left;
     color: @gray--darkest;
     font-family: @font-family--caption;
@@ -61,6 +95,10 @@
     font-weight: 400;
     line-height: 19px;
     letter-spacing: 0.02em;
+
+    @media (min-width: @screen-sm) {
+      margin-top: 42px;
+    }
   }
 
   &__about-block-text {
@@ -69,15 +107,37 @@
     font-family: @font-family;
     font-size: @font-size;
     line-height: 22px;
+
+    @media (min-width: @screen-sm) {
+      .make-sm-column(10);
+      padding-left: 0;
+      font-size: @font-size;
+    }
   }
 
-  &__list-block {
+  &__accommodation {
 
   }
 
   &__list {
     display: block;
     padding-left: 0;
+
+    @media (min-width: @screen-sm) {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      height: 140px;
+      width: 85%;
+      margin-top: 24px;
+    }
+  }
+
+  &__list-included {
+
+    @media (min-width: @screen-sm) {
+      height: auto;
+    }
   }
 
   &__list-item {
@@ -89,6 +149,13 @@
     line-height: 22px;
     color: @gray--darkest;
     font-family: @font-family;
+
+    @media (min-width: @screen-sm) {
+      .make-sm-column(6);
+      width: 52% !important;
+      padding-left: 0;
+      font-size: @font-size;
+    }
 
     &:before {
       content: '';
@@ -108,6 +175,11 @@
 
   &__btn-block {
     margin-top: 45px;
+    text-align: center;
+
+    @media (min-width: @screen-sm) {
+      margin-top: 37px;
+    }
   }
 
   &__btn {

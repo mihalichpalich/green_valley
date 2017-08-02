@@ -1,0 +1,44 @@
+.zoomer {
+  margin-right: auto;
+  margin-left: auto;
+  align-items: center;
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  overflow: hidden;
+  max-height: 800px;
+
+  @media (min-width: @screen-sm) {
+    width: 768px;
+  }
+
+  &__inner {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(255,255,255,.9);
+    display: none;
+  }
+
+  &--unzoom {
+    content: '';
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    background-image: url(../img/sprite.png);
+    background-position: -184px -88px;
+    position: absolute;
+    top: 20px;
+    right: 21px;
+    z-index: 1;
+    cursor: pointer;
+  }
+
+  & img {
+    width: 100%;
+  }
+}
