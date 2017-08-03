@@ -244,6 +244,13 @@
 
   &__about-block {
 
+    @media (min-width: @screen-sm) {
+      margin-top: 49px;
+    }
+
+    @media (min-width: @screen-lg) {
+      margin-top: 0;
+    }
   }
 
   &__info-wrapper-block-title {
@@ -274,6 +281,7 @@
   }
 
   &__about-block-text {
+    margin-top: 30px;
     text-align: left;
     color: @gray--darkest;
     font-family: @font-family;
@@ -282,6 +290,7 @@
 
     @media (min-width: @screen-sm) {
       .make-sm-column(10);
+      margin-top: 15px;
       padding-left: 0;
       font-size: @font-size;
     }
@@ -298,6 +307,7 @@
   &__list {
     display: block;
     padding-left: 0;
+    margin-top: 29px;
 
     @media (min-width: @screen-sm) {
       display: flex;

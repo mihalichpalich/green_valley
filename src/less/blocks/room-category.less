@@ -26,7 +26,20 @@
     }
 
     &:last-child {
-      margin-left: 22px;
+      display: none;
+
+      @media (min-width: @screen-sm) {
+        display: none;
+      }
+
+      @media (min-width: @screen-lg) {
+        display: inline-block;
+        margin-left: 22px;
+      }
+    }
+
+    & .accommodation-place {
+      border: 1px solid  #e3e3e3;
     }
   }
 }

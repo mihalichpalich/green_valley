@@ -152,22 +152,23 @@ jQuery(function($) {
     $('.slick-arrow').css( 'visibility', 'visible');
   });
 
-  //room-category
-  $('.room-category__inner').not('.slick-initialized').slick({
-    infinite: true,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    arrows: false,
-    cssEase: 'ease-in-out',
-    speed: 400,
-    dots: true,
-    responsive: [
-      {
-        breakpoint: 1200,
-        settings: unslick,
-      }
-    ]
-  });
+  // //room-category
+  // $('.room-category__inner').not('.slick-initialized').slick({
+  //   infinite: true,
+  //   slidesToShow: 1,
+  //   slidesToScroll: 1,
+  //   arrows: false,
+  //   cssEase: 'ease-in-out',
+  //   speed: 400,
+  //   dots: true,
+  // });
+
+  // function initSlick() {
+  //   var width = jQuery(window).width();
+  //   if (width>1199) {
+  //       jQuery('.room-category__inner').unslick();
+  //   }
+  // }
 
 });
 
