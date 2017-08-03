@@ -8,5 +8,25 @@
     .make-row();
     .clearfix();
     padding: 0 42px;
+
+    & .slick-dots {
+      display: none !important;
+
+      @media (min-width: @screen-sm) {
+        display: block !important;
+        top: 98%;
+      }
+    }
+  }
+
+  &__accommodation-place-block {
+
+    @media (min-width: @screen-lg) {
+      display: inline-block;
+    }
+
+    &:last-child {
+      margin-left: 22px;
+    }
   }
 }
