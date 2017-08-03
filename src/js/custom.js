@@ -112,7 +112,7 @@ jQuery(function($) {
 
   //room-info__slider
 
-  $('.room-info__slider-inner').not('.slick-initialized').slick({
+  $('#room-info__slider').not('.slick-initialized').slick({
     slidesToShow: 1,
     slidesToScroll: 1,
     infinite: true,
@@ -120,7 +120,16 @@ jQuery(function($) {
     arrows: true,
     fade: false,
     accessibility: false,
-    arrows: false,
+  });
+
+  $('#room-info__slider-visible-lg').not('.slick-initialized').slick({
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    infinite: true,
+    dots:!1,
+    arrows: true,
+    fade: false,
+    accessibility: false,
   });
 
   //room-info__slider-zoom
@@ -132,7 +141,7 @@ jQuery(function($) {
     $('#zoomer').toggle(400);
     $('.zoomer__inner').toggle(100);
     $('.room-info__slider-zoom').toggle(400);
-    $('.slick-arrow').toggle();
+    $('.slick-arrow').css( 'visibility', 'hidden');
   });
 
   $('.zoomer--unzoom').on('click', function(e){
@@ -140,7 +149,7 @@ jQuery(function($) {
     $('#zoomer').toggle(400);
     $('.zoomer__inner').toggle(100);
     $('.room-info__slider-zoom').toggle(400);
-    $('.slick-arrow').toggle();
+    $('.slick-arrow').css( 'visibility', 'visible');
   });
 
 });
