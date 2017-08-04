@@ -14,7 +14,7 @@
       <div class="form__step  form__step--bg-lightgrey">
         <div class="form__step-inner">
           <span class="form__step-number-title">шаг 1</span>
-          <h2 class="item-title">Дата отдыха</h2>
+          <h2 class="form__step-title">Дата отдыха</h2>
           <div class="entry-and-departure">
 
             <label class="entry-and-departure__item">
@@ -42,7 +42,7 @@
       <div class="form__step">
         <div class="form__step-inner">
           <span class="form__step-number-title">шаг 2</span>
-          <h2 class="item-title  item-title__rest-place">Место проживания</h2>
+          <h2 class="form__step-title  form__step-title-rest-place">Место проживания</h2>
           <div class="rest-place">
 
             <div class="rest-place__item  rest-place__item-rest-place">
@@ -66,7 +66,7 @@
       <div class="form__step  form__step--bg-lightgrey  form__step--wide">
         <div class="form__step-inner  form__step-inner--wide">
           <span class="form__step-number-title">шаг 3</span>
-          <h2 class="item-title">Тип коттеджа</h2>
+          <h2 class="form__step-title">Тип коттеджа</h2>
           <div class="cottages-type">
 
             <div class="cottages-type__item">
@@ -141,23 +141,23 @@
       <div class="form__step">
         <div class="form__step-inner  form__step-inner--wide">
           <span class="form__step-number-title">шаг 4</span>
-          <h2 class="item-title">Персональная информация</h2>
+          <h2 class="form__step-title">Персональная информация</h2>
           <div class="personal-info">
             <div class="personal-info__block">
-              <input type="text" placeholder="имя" data-validation="required" data-validation-error-msg="Введите имя" data-validation-error-msg-container="#payment-form__bill-block-notice-link" class="personal-info__input">
+              <input type="text" placeholder="имя" data-validation="required" data-validation-error-msg="Введите имя" data-validation-error-msg-container="#payment-form__bill-block-notice-link" class="personal-info__input" required>
               <span class="personal-info__check-mark"></span>
             </div>
             <div class="personal-info__block">
-              <input type="text" placeholder="фамилия" data-validation="required" data-validation-error-msg="Введите фамилию" data-validation-error-msg-container="#payment-form__bill-block-notice-link" class="personal-info__input">
+              <input type="text" placeholder="фамилия" data-validation="required" data-validation-error-msg="Введите фамилию" data-validation-error-msg-container="#payment-form__bill-block-notice-link" class="personal-info__input" required>
               <span class="personal-info__check-mark"></span>
             </div>
             <div class="personal-info__block">
-              <input type="number" placeholder="номер телефона" data-validation="number" data-validation-error-msg="Введите номер телефона" data-validation-error-msg-container="#payment-form__bill-block-notice-link" class="personal-info__input">
+              <input type="number" placeholder="номер телефона" data-validation="number" data-validation-error-msg="Введите номер телефона" data-validation-error-msg-container="#payment-form__bill-block-notice-link" class="personal-info__input" required>
               <span class="personal-info__check-mark"></span>
               <p class="personal-info__descr">Мы свяжемся с вами в случае необходимости.</p>
             </div>
             <div class="personal-info__block">
-              <input type="text" placeholder="e-mail" data-validation="email" data-validation-error-msg="Введите e-mail" data-validation-error-msg-container="#payment-form__bill-block-notice-link" class="personal-info__input">
+              <input type="text" placeholder="e-mail" data-validation="email" data-validation-error-msg="Введите e-mail" data-validation-error-msg-container="#payment-form__bill-block-notice-link" class="personal-info__input" required>
               <span class="personal-info__check-mark"></span>
               <p class="personal-info__descr">На этот адрес мы вышлем вам подтверждение о забронированном номере.</p>
             </div>
@@ -168,14 +168,14 @@
       <div class="form__step  form__step--bg-lightgrey  form__step--wide">
         <div class="form__step-inner  form__step-inner--wide">
           <span class="form__step-number-title">шаг 5</span>
-          <h2 class="item-title">Способ оплаты</h2>
+          <h2 class="form__step-title">Способ оплаты</h2>
           <div class="payment-form">
 
             <div class="payment-form__to-pay-block">
 
               <div class="payment-form__arrival">
                 <label for="payment-form__arrival-input" class="payment-form__arrival-label">
-                  <input type="radio" name="arrival-type" value="whenarrive" class="payment-form__radio-input" id="payment-form__arrival-imput">
+                  <input type="radio" name="arrival-type" value="whenarrive" class="payment-form__radio-input" id="payment-form__arrival-input">
                   <span class="payment-form__block-title">По приезду</span>
                 </label>
                 <p class="payment-form__arrival-descr">Вы можете произвести оплату по факту заселения.</p>
