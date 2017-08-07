@@ -25,6 +25,7 @@
     margin-top: 45px;
     margin-bottom: 26px;
     text-align: center;
+    word-wrap: break-word;
 
     @media (min-width: @screen-sm) {
       margin-top: 40px;
@@ -104,6 +105,8 @@
         }
       }
     }
+
+
 
     & .slick-prev:before,
     & .slick-next:before {
@@ -376,14 +379,17 @@
   }
 
   &__btn-block {
-    margin-top: 45px;
+    width: 57%;
+    margin: 45px auto 0;
     text-align: center;
 
     @media (min-width: @screen-sm) {
+      width: 23.7%;
       margin-top: 37px;
     }
 
     @media (min-width: @screen-lg) {
+      width: 15.6%;
       margin-top: 75px;
     }
   }

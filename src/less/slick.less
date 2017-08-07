@@ -93,13 +93,17 @@
 
 .slick-dots {
   display: inline-block;
-  margin-top: 8px !important;
+  margin-top: 15px !important;
   padding-left: 0;
   position: absolute;
   left: 50%;
-  top: 314px;
+  top: 0;
   transform: translate(-50%);
   bottom: -42px;
+
+  @media (min-width: 1200px) {
+    margin-top: 23px !important;
+  }
 
   & li {
     position: relative;

@@ -29,12 +29,13 @@
   }
 
   &__title {
-    display: inline-block;
+    display: block;
     color: @btn-and-white-caption;
     font-family: @font-family--caption;
     font-size: @font-size--block-title;
     font-weight: 400;
     letter-spacing: 0.08em;
+    word-wrap: break-word;
 
     @media (min-width: @screen-sm) {
       font-size: @font-size--h2;
@@ -44,6 +45,7 @@
 
   &__slick {
     .make-row();
+    .clearfix();
   }
 
   &__slide-block {
@@ -61,7 +63,7 @@
 
   &__slide {
     .make-xs-column(12);
-    margin: 34px 0 66px;
+    margin: 34px 0 51px;
     padding-bottom: 25px;
     display: flex !important;
     flex-flow: column;
@@ -71,7 +73,7 @@
 
     @media (min-width: @screen-sm) {
       width: 59%;
-      margin: 34px auto 57px;
+      margin: 34px auto 50px;
     }
 
     @media (min-width: @screen-lg) {
@@ -121,6 +123,10 @@
     letter-spacing: 0.05em;
 
     @media (min-width: @screen-sm) {
+      padding: 0 139px;
+    }
+
+    @media (min-width: @screen-lg) {
       padding: 0 141px;
     }
   }
@@ -182,11 +188,19 @@
   }
 
   &__btn {
+    width: 46%;
+    margin-left: auto;
+    margin-right: auto;
     position: relative;
     top: -12px;
 
+    @media (min-width: @screen-sm) {
+      width: 19%;
+    }
+
     @media (min-width: @screen-lg) {
-      padding: 10px 26px 8px;
+      width: 10.9%;
+      padding: 8px 26px 7px;
     }
   }
 }

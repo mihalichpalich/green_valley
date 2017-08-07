@@ -356,11 +356,6 @@
     "max-empty-lines": [3, {
       "message": "Максимум линий пустых допустимо — 3"
     }],
-    "max-nesting-depth": [3, {
-      "message": "Вложения боле 3 уровней — на тёмную сторону путь",
-      "ignore": ["at-rules-without-declaration-blocks"],
-      "severity": "warning"
-    }],
     "no-browser-hacks": [true, {
       "message": "Браузерные хаки не используем мы"
     }],

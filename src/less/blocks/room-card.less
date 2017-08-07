@@ -48,6 +48,7 @@
     font-size: @font-size--block-title;
     font-weight: 400;
     line-height: 19px;
+    word-wrap: break-word;
 
     @media (min-width: @screen-lg) {
       text-align: center;
@@ -143,6 +144,7 @@
 
   &__link-in-details {
     display: inline-block;
+    max-width: 100%;
     margin-top: 23px;
     color: @gray--darkest;
     font-family: @font-family;
@@ -151,6 +153,7 @@
     line-height: 18px;
     text-transform: uppercase;
     border-bottom: 1px dashed;
+    word-wrap: break-word;
 
     @media (min-width: @screen-sm) {
       margin-left: 20%;

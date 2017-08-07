@@ -9,7 +9,89 @@
     }
   }
 
-  &--hotel {
+  &__title {
+    display: inline-block;
+    position: relative;
+    color: @gray--darker;
+    font-family: @font-family;
+    font-size: @font-size--small;
+    line-height: 18px;
+    text-transform: uppercase;
+    word-wrap: break-word;
 
+    &--hotel {
+
+      &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 26px;
+        left: -50%;
+        background-image: url(../img/sprite.png);
+        background-position: 0 -9px;
+        width: 82px;
+        height: 64px;
+        opacity: 0.4;
+      }
+
+      &:after {
+        content: '';
+        display: none;
+        position: absolute;
+        top: 108px;
+        left: 33%;
+        transform: translate(-7%);
+        background-image: url(../img/sprite.png);
+        background-position: -143px -82px;
+        width: 16px;
+        height: 12px;
+      }
+    }
+
+    &--cottage {
+
+      &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 26px;
+        left: -17%;
+        transform: translate(0%);
+        background-image: url(../img/sprite.png);
+        background-position: 125px -9px;
+        width: 80px;
+        height: 62px;
+        opacity: 0.4;
+      }
+
+      &:after {
+        content: '';
+        display: none;
+        position: absolute;
+        top: 108px;
+        left: 38%;
+        transform: translate(-9%);
+        background-image: url(../img/sprite.png);
+        background-position: -143px -82px;
+        width: 16px;
+        height: 12px;
+      }
+    }
   }
+}
+
+.accommodation-choice__input:checked + .accommodation-choice__title--hotel:before {
+  opacity: 1;
+}
+
+.accommodation-choice__input:checked + .accommodation-choice__title--hotel:after {
+  display: block;
+}
+
+.accommodation-choice__input:checked + .accommodation-choice__title--cottage:before {
+  opacity: 1;
+}
+
+.accommodation-choice__input:checked + .accommodation-choice__title--cottage:after {
+  display: block;
 }
