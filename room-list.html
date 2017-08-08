@@ -1,99 +1,299 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Бронирование</title>
+  <meta charset="UTF-8">
+  <script>
+    // Подгрущка шрифтов
+    function loadFont(fontName, woffUrl, woff2Url) {
+      // 0. Многие неподдерживаемые браузеры должны останавливать работу тут.
+      var nua = navigator.userAgent;
+      var noSupport = !window.addEventListener // IE8 и ниже
+            || (nua.match(/(Android (2|3|4.0|4.1|4.2|4.3))|(Opera (Mini|Mobi))/) && !nua.match(/Chrome/)) // Android Stock Browser до 4.4 и Opera Mini
+
+      if (noSupport) {
+        return;
+      }
+
+      // 1. Настраиваем localStorage
+      var loSto = {};
+      try {
+        // Устанавливаем вспомогательную переменную для помощи с localStorage,
+        // например, для случаев когда cookies отключены и браузер не даёт к ним доступа.
+        // Иначе могут быть получены исключения, которые полностью остановят загрузку шрифтов.
+        loSto = localStorage || {};
+      } catch(ex) {}
+
+      var localStoragePrefix = 'x-font-' + fontName;
+      var localStorageUrlKey = localStoragePrefix + 'url';
+      var localStorageCssKey = localStoragePrefix + 'css';
+      var storedFontUrl = loSto[localStorageUrlKey];
+      var storedFontCss = loSto[localStorageCssKey];
+
+      // 2. Создаём элемент <style>, который мы используем для вставки шрифта, закодированного в base64.
+      var styleElement = document.createElement('style');
+      styleElement.rel = 'stylesheet';
+      document.head.appendChild(styleElement);
+      // Из-за ошибок IE9 установка styleElement.textContent должна быть после этой строки.
+
+      // 3. Проверяем, находится ли шрифт уже в localStorage и последней ли он версии.
+      if (storedFontCss && (storedFontUrl === woffUrl || storedFontUrl === woff2Url)) {
+        // css до сих пор в localStorage
+        // и были загружены из одного из текущих адресов
+
+        // 4. Применяем стили шрифта.
+        styleElement.textContent = storedFontCss;
+      } else {
+        // Данных нет, или они загружены с устаревшего URL,
+        // поэтому мы должны загрузить их снова.
+
+        // 5. Проверяем поддержку WOFF2 чтобы узнать, какой URL использовать.
+        var url = (woff2Url && supportsWoff2())
+        ? woff2Url // WOFF2 URL передан в функцию и поддерживается.
+        : woffUrl; // Поддерживается только WOFF.
+
+        // 6. Получаем данные с сервера.
+        var request = new XMLHttpRequest();
+        request.open('GET', url);
+        request.onload = function() {
+          if (request.status >= 200 && request.status < 400) {
+            // 7. Обновляем localStorage новыми данными и применяем стили шрифта.
+            loSto[localStorageUrlKey] = url;
+            loSto[localStorageCssKey] = styleElement.textContent = request.responseText;
+          }
+        };
+        request.send();
+      }
+
+      function supportsWoff2() {
+        // https://github.com/filamentgroup/woff2-feature-test
+        if( !( "FontFace" in window ) ) {
+          return false;
+        }
+
+        var f = new FontFace('t', 'url( "data:application/font-woff2;base64,d09GMgABAAAAAADcAAoAAAAAAggAAACWAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABk4ALAoUNAE2AiQDCAsGAAQgBSAHIBtvAcieB3aD8wURQ+TZazbRE9HvF5vde4KCYGhiCgq/NKPF0i6UIsZynbP+Xi9Ng+XLbNlmNz/xIBBqq61FIQRJhC/+QA/08PJQJ3sK5TZFMlWzC/iK5GUN40psgqvxwBjBOg6JUSJ7ewyKE2AAaXZrfUB4v+hze37ugJ9d+DeYqiDwVgCawviwVFGnuttkLqIMGivmDg" ) format( "woff2" )', {});
+        f.load()['catch'](function() {});
+
+        return f.status == 'loading';
+      }
+    }
+
+  </script>
+  <script>
+    loadFont(
+      'Open Sans_my', 'Open Serif_my',
+      '../css/font_fira-sans_woff.css',
+      '../css/font_pt-sans_woff.css',
+      '../css/font_fira-sans_woff2.css',
+      '../css/font_pt-sans_woff2.css',
+      '../css/font_pt-serif_woff.css',
+      '../css/font_pt-serif_woff2.css',
+      '../css/font_pt-serif_caption_woff.css',
+      '../css/font_pt-serif_caption_woff2.css'
+    );
+  </script>
+  <noscript><link rel="stylesheet" href="/css/font_fira-sans_woff.css"></noscript>
+  <noscript><link rel="stylesheet" href="/css/font_pt-sans_woff.css"></noscript>
+
+  <link rel="stylesheet" href="css/style.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Номера</title>
 </head>
 <body>
 
   <header class="page-header">
     <div class="page-header__inner">
 
-      <a href="" class="logo"><img src="" alt=""></a>
+      <a href="index.html" class="logo"><img src="img/logo.png" class="logo__image" alt=""></a>
 
       <nav class="main-nav">
         <ul class="main-nav__list">
-          <li class="main-nav__item"><a href="" class="main-nav__link"></a></li>
-          <li class="main-nav__item"><a href="" class="main-nav__link"></a></li>
-          <li class="main-nav__item"><a href="" class="main-nav__link"></a></li>
-          <li class="main-nav__item"><a href="" class="main-nav__link"></a></li>
-          <li class="main-nav__item"><a href="" class="main-nav__link"></a></li>
+          <li class="main-nav__item"><a href="room-list.html" class="main-nav__link">Номера</a></li>
+          <li class="main-nav__item"><a href="#" class="main-nav__link">Коттедж</a></li>
+          <li class="main-nav__item"><a href="#" class="main-nav__link">Ресторан</a></li>
+          <li class="main-nav__item"><a href="#" class="main-nav__link">Отдых</a></li>
+          <li class="main-nav__item"><a href="#" class="main-nav__link">Контакты</a></li>
         </ul>
-        <span class="main-nav__toggler"></span>
+      </nav>
+
+      <span class="toggler" id="toggler"><span></span></span>
+
+      <nav class="main-nav__mobile">
+        <ul class="main-nav__mobile-list" id="nav">
+          <li class="main-nav__mobile-item"><a href="" class="main-nav__mobile-link  main-nav__mobile-link--active">Номера</a></li>
+          <li class="main-nav__mobile-item"><a href="" class="main-nav__mobile-link">Коттедж</a></li>
+          <li class="main-nav__mobile-item"><a href="" class="main-nav__mobile-link">Ресторан</a></li>
+          <li class="main-nav__mobile-item"><a href="" class="main-nav__mobile-link">Отдых</a></li>
+          <li class="main-nav__mobile-item"><a href="" class="main-nav__mobile-link">Контакты</a></li>
+        </ul>
       </nav>
 
       <div class="page-header__contacts">
-        <a href="tel:+7 812 777-55-88" class="">+7 812 777-55-88</a>
-        address
+        <a href="tel:88127775588" class="page-header__telephone">+7 812 777-55-88</a>
+        <address class="page-header__address">г. Санкт-Петербург, Приморское ш.600</address>
       </div>
 
-      <a href="" class="btn  btn--icon-calendar">Забронировать</a>
+      <div class="page-header__booking-button">
+        <a href="form.html" class="btn  btn--icon-calendar  btn--min-width-invisible">Забронировать</a>
+      </div>
 
     </div>
   </header>
 
   <main>
 
-    <div class="room-list-promo">
-      <div class="room-list-promo__inner">
-        <h1 class="room-list-promo__title">Номера в отеле Green Valley</h1>
-        <p class="room-list-promo__text">Комфорт и живописный вид на Финский залив и сосновый парк.<br> 4 этажа | 70 номеров</p>
+    <div class="roomlist-promo">
+      <div class="roomlist-promo__inner">
+        <h1 class="roomlist-promo__title">Номера в отеле Green Valley</h1>
+        <p class="roomlist-promo__text">Комфорт и живописный вид на Финский залив и сосновый парк.<br> 4 этажа | 70 номеров</p>
       </div>
     </div>
 
     <article class="roomlist">
       <div class="roomlist__inner">
-        <h2 class="block-title">Категории</h2>
+        <h2 class="roomlist__title">Категории</h2>
 
         <section class="room-card">
-          <h3 class="item-title">Эконом</h3>
-          <p class="room-price">от <span class="room-price__number">3400</span> руб./сутки</p>
-          <p class="block-text  block-text--lighter">В отеле 30 таких номеров площадью от 16 до 20 кв.м. Рассчитаны на проживание 1-2 человек. Часть номеров с видом на Финский залив.</p>
-          <div class="room-card__btn-wrapper">
-            <a href="" class="btn">Забронировать</a>
-            <a href="" class="link-in-details">подробнее</a>
-          </div>
-          <div class="room-card__image-wrapper">
-            <img src="" alt="" class="room-card__image">
+          <div class="room-card__inner">
+            <div class="room-card__content">
+              <h3 class="room-card__title">Эконом</h3>
+              <p class="room-card__price">от <span class="room-card__price-number">3400</span> руб./сутки</p>
+              <div class="room-card__image-wrapper">
+                <picture>
+                  <source
+                    media="(min-width:768px)"
+                    srcset="img/room-card__image-1-768px.jpg">
+                  <source
+                    srcset="img/room-card__image-1-320px.jpg">
+                  <img src="img/room-card__image-1-320px.jpg" alt="" class="room-card__image">
+                </picture>
+              </div>
+              <div class="room-card__descr-and-btn-block">
+                <p class="room-card__text">В отеле 30 таких номеров площадью от 16 до 20 кв.м. Рассчитаны на проживание 1-2 человек. Часть номеров с видом на Финский залив.</p>
+                <div class="room-card__btn-wrapper">
+                  <a href="form.html" class="btn  room-card__btn">Забронировать</a>
+                  <a href="single-room.html" class="room-card__link-in-details">подробнее</a>
+                </div>
+              </div>
+            </div>
+            <div class="room-card__image-wrapper-visible-lg">
+              <picture>
+                <source
+                  media="(min-width:768px)"
+                  srcset="img/room-card__image-1-768px.jpg">
+                <source
+                  srcset="img/room-card__image-1-320px.jpg">
+                <img src="img/room-card__image-1-320px.jpg" alt="" class="room-card__image">
+              </picture>
+            </div>
           </div>
         </section>
 
         <section class="room-card">
-          <h3 class="item-title">Стандарт</h3>
-          <p class="room-price">от <span class="room-price__number">4000</span> руб./сутки</p>
-          <p class="block-text  block-text--lighter">В отеле 20 таких номеров. Рассчитаны на проживание 2-3 человек. Площадь номера 20-25 кв.м., состоит из гостевой и спальной зоны.</p>
-          <div class="room-card__btn-wrapper">
-            <a href="" class="btn">Забронировать</a>
-            <a href="" class="link-in-details">подробнее</a>
-          </div>
-          <div class="room-card__image-wrapper">
-            <img src="" alt="" class="room-card__image">
+          <div class="room-card__inner">
+            <div class="room-card__content">
+              <h3 class="room-card__title">Стандарт</h3>
+              <p class="room-card__price">от <span class="room-card__price-number">4000</span> руб./сутки</p>
+              <div class="room-card__image-wrapper">
+                <picture>
+                  <source
+                    media="(min-width:768px)"
+                    srcset="img/room-card__image-2-768px.jpg">
+                  <source
+                    srcset="img/room-card__image-2-320px.jpg">
+                  <img src="img/room-card__image-2-320px.jpg" alt="" class="room-card__image">
+                </picture>
+              </div>
+              <div class="room-card__descr-and-btn-block">
+                <p class="room-card__text">В отеле 20 таких номеров. Рассчитаны на проживание 2-3 человек. Площадь номера 20-25 кв.м., состоит из гостевой и спальной зоны.</p>
+                <div class="room-card__btn-wrapper">
+                  <a href="form.html" class="btn  room-card__btn">Забронировать</a>
+                  <a href="single-room.html" class="room-card__link-in-details">подробнее</a>
+                </div>
+              </div>
+            </div>
+            <div class="room-card__image-wrapper-visible-lg">
+              <picture>
+                <source
+                  media="(min-width:768px)"
+                  srcset="img/room-card__image-2-768px.jpg">
+                <source
+                  srcset="img/room-card__image-2-320px.jpg">
+                <img src="img/room-card__image-2-320px.jpg" alt="" class="room-card__image">
+              </picture>
+            </div>
           </div>
         </section>
 
         <section class="room-card">
-          <h3 class="item-title">Стандарт +</h3>
-          <p class="room-price">от <span class="room-price__number">4500</span> руб./сутки</p>
-          <p class="block-text  block-text--lighter">В отеле 15 таких номеров. 2-комнатный номер предназначен для проживания 2-4 человек. Площадь номера 35 кв.м.</p>
-          <div class="room-card__btn-wrapper">
-            <a href="" class="btn">Забронировать</a>
-            <a href="" class="link-in-details">подробнее</a>
-          </div>
-          <div class="room-card__image-wrapper">
-            <img src="" alt="" class="room-card__image">
+          <div class="room-card__inner">
+            <div class="room-card__content">
+              <h3 class="room-card__title">Стандарт +</h3>
+              <p class="room-card__price">от <span class="room-card__price-number">4500</span> руб./сутки</p>
+              <div class="room-card__image-wrapper">
+                <picture>
+                  <source
+                    media="(min-width:768px)"
+                    srcset="img/room-card__image-3-768px.jpg">
+                  <source
+                    srcset="img/room-card__image-3-320px.jpg">
+                  <img src="img/room-card__image-3-320px.jpg" alt="" class="room-card__image">
+                </picture>
+              </div>
+              <div class="room-card__descr-and-btn-block">
+                <p class="room-card__text">В отеле 15 таких номеров. 2-комнатный номер предназначен для проживания 2-4 человек. Площадь номера 35 кв.м.</p>
+                <div class="room-card__btn-wrapper">
+                  <a href="form.html" class="btn  room-card__btn">Забронировать</a>
+                  <a href="single-room.html" class="room-card__link-in-details">подробнее</a>
+                </div>
+              </div>
+            </div>
+            <div class="room-card__image-wrapper-visible-lg">
+              <picture>
+                <source
+                  media="(min-width:768px)"
+                  srcset="img/room-card__image-3-768px.jpg">
+                <source
+                  srcset="img/room-card__image-3-320px.jpg">
+                <img src="img/room-card__image-3-320px.jpg" alt="" class="room-card__image">
+              </picture>
+            </div>
           </div>
         </section>
 
         <section class="room-card">
-          <h3 class="item-title">Люкс</h3>
-          <p class="room-price">от <span class="room-price__number">5700</span> руб./сутки</p>
-          <p class="block-text  block-text--lighter">В отеле 5 таких номеров. Просторные номера площадью до 40 кв.м. с видом на Финский залив, выполнены в оригинальном стиле.</p>
-          <div class="room-card__btn-wrapper">
-            <a href="" class="btn">Забронировать</a>
-            <a href="" class="link-in-details">подробнее</a>
-          </div>
-          <div class="room-card__image-wrapper">
-            <img src="" alt="" class="room-card__image">
+          <div class="room-card__inner">
+            <div class="room-card__content">
+              <h3 class="room-card__title">Люкс</h3>
+              <p class="room-card__price">от <span class="room-card__price-number">5700</span> руб./сутки</p>
+              <div class="room-card__image-wrapper">
+                <picture>
+                  <source
+                    media="(min-width:768px)"
+                    srcset="img/room-card__image-4-768px.jpg">
+                  <source
+                    srcset="img/room-card__image-4-320px.jpg">
+                  <img src="img/room-card__image-4-320px.jpg" alt="" class="room-card__image">
+                </picture>
+              </div>
+              <div class="room-card__descr-and-btn-block">
+                <p class="room-card__text">В отеле 5 таких номеров. Просторные номера площадью до 40 кв.м. с видом на Финский залив, выполнены в оригинальном стиле.</p>
+                <div class="room-card__btn-wrapper">
+                  <a href="form.html" class="btn  room-card__btn">Забронировать</a>
+                  <a href="single-room.html" class="room-card__link-in-details">подробнее</a>
+                </div>
+              </div>
+            </div>
+            <div class="room-card__image-wrapper-visible-lg">
+              <picture>
+                <source
+                  media="(min-width:768px)"
+                  srcset="img/room-card__image-4-768px.jpg">
+                <source
+                  srcset="img/room-card__image-4-320px.jpg">
+                <img src="img/room-card__image-4-320px.jpg" alt="" class="room-card__image">
+              </picture>
+            </div>
           </div>
         </section>
 
@@ -103,27 +303,31 @@
   </main>
 
   <footer class="page-footer">
+    <div class="page-footer__inner">
 
-    <p class="page-footer__address">г. Санкт-Петербург Приморское ш.600</p>
+      <p class="page-footer__address">г. Санкт-Петербург Приморское ш.600</p>
 
-    <div class="logo-set">
-      <a href="" class="logo"><img src="" alt=""></a>
-      <ul class="page-footer__social-links">
-        <li class="page-footer__social-item">
-          <a href="https://vk.com" class="page-footer__link  page-footer__link--vk">Вконтакте</a>
-        </li>
-        <li class="page-footer__social-item">
-          <a href="https://www.instagram.com/" class="page-footer__link  page-footer__link--instagram">Инстаграм</a>
-        </li>
-        <li class="page-footer__social-item">
-          <a href="https://facebook.com" class="page-footer__link  page-footer__link--fb">Фейсбук</a>
-        </li>
-      </ul>
+      <div class="page-footer__logo-set">
+        <a href="" class="logo  page-footer__logo"><img src="img/logo.png" alt=""></a>
+        <ul class="page-footer__social-links">
+          <li class="page-footer__social-item">
+            <a href="https://vk.com" class="page-footer__link  page-footer__link--vk">Вко</a>
+          </li>
+          <li class="page-footer__social-item">
+            <a href="https://www.instagram.com/" class="page-footer__link  page-footer__link--instagram">Ин</a>
+          </li>
+          <li class="page-footer__social-item">
+            <a href="https://facebook.com" class="page-footer__link  page-footer__link--fb">Фб</a>
+          </li>
+        </ul>
+      </div>
+
+      <p class="page-footer__contacts">+7 812 777-55-88 info@greenvalley.ru</p>
+
     </div>
-
-    <p class="page-footer__contacts">+7 812 777-55-88 info@greenvalley.ru</p>
-
   </footer>
 
+  <script src="js/vendor.min.js"></script>
+  <script src="js/custom.min.js"></script>
 </body>
 </html>

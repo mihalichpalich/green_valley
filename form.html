@@ -1,73 +1,179 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <script>
+    // Подгрущка шрифтов
+    function loadFont(fontName, woffUrl, woff2Url) {
+      // 0. Многие неподдерживаемые браузеры должны останавливать работу тут.
+      var nua = navigator.userAgent;
+      var noSupport = !window.addEventListener // IE8 и ниже
+            || (nua.match(/(Android (2|3|4.0|4.1|4.2|4.3))|(Opera (Mini|Mobi))/) && !nua.match(/Chrome/)) // Android Stock Browser до 4.4 и Opera Mini
+
+      if (noSupport) {
+        return;
+      }
+
+      // 1. Настраиваем localStorage
+      var loSto = {};
+      try {
+        // Устанавливаем вспомогательную переменную для помощи с localStorage,
+        // например, для случаев когда cookies отключены и браузер не даёт к ним доступа.
+        // Иначе могут быть получены исключения, которые полностью остановят загрузку шрифтов.
+        loSto = localStorage || {};
+      } catch(ex) {}
+
+      var localStoragePrefix = 'x-font-' + fontName;
+      var localStorageUrlKey = localStoragePrefix + 'url';
+      var localStorageCssKey = localStoragePrefix + 'css';
+      var storedFontUrl = loSto[localStorageUrlKey];
+      var storedFontCss = loSto[localStorageCssKey];
+
+      // 2. Создаём элемент <style>, который мы используем для вставки шрифта, закодированного в base64.
+      var styleElement = document.createElement('style');
+      styleElement.rel = 'stylesheet';
+      document.head.appendChild(styleElement);
+      // Из-за ошибок IE9 установка styleElement.textContent должна быть после этой строки.
+
+      // 3. Проверяем, находится ли шрифт уже в localStorage и последней ли он версии.
+      if (storedFontCss && (storedFontUrl === woffUrl || storedFontUrl === woff2Url)) {
+        // css до сих пор в localStorage
+        // и были загружены из одного из текущих адресов
+
+        // 4. Применяем стили шрифта.
+        styleElement.textContent = storedFontCss;
+      } else {
+        // Данных нет, или они загружены с устаревшего URL,
+        // поэтому мы должны загрузить их снова.
+
+        // 5. Проверяем поддержку WOFF2 чтобы узнать, какой URL использовать.
+        var url = (woff2Url && supportsWoff2())
+        ? woff2Url // WOFF2 URL передан в функцию и поддерживается.
+        : woffUrl; // Поддерживается только WOFF.
+
+        // 6. Получаем данные с сервера.
+        var request = new XMLHttpRequest();
+        request.open('GET', url);
+        request.onload = function() {
+          if (request.status >= 200 && request.status < 400) {
+            // 7. Обновляем localStorage новыми данными и применяем стили шрифта.
+            loSto[localStorageUrlKey] = url;
+            loSto[localStorageCssKey] = styleElement.textContent = request.responseText;
+          }
+        };
+        request.send();
+      }
+
+      function supportsWoff2() {
+        // https://github.com/filamentgroup/woff2-feature-test
+        if( !( "FontFace" in window ) ) {
+          return false;
+        }
+
+        var f = new FontFace('t', 'url( "data:application/font-woff2;base64,d09GMgABAAAAAADcAAoAAAAAAggAAACWAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABk4ALAoUNAE2AiQDCAsGAAQgBSAHIBtvAcieB3aD8wURQ+TZazbRE9HvF5vde4KCYGhiCgq/NKPF0i6UIsZynbP+Xi9Ng+XLbNlmNz/xIBBqq61FIQRJhC/+QA/08PJQJ3sK5TZFMlWzC/iK5GUN40psgqvxwBjBOg6JUSJ7ewyKE2AAaXZrfUB4v+hze37ugJ9d+DeYqiDwVgCawviwVFGnuttkLqIMGivmDg" ) format( "woff2" )', {});
+        f.load()['catch'](function() {});
+
+        return f.status == 'loading';
+      }
+    }
+
+  </script>
+  <script>
+    loadFont(
+      'Open Sans_my', 'Open Serif_my',
+      '../css/font_fira-sans_woff.css',
+      '../css/font_pt-sans_woff.css',
+      '../css/font_fira-sans_woff2.css',
+      '../css/font_pt-sans_woff2.css',
+      '../css/font_pt-serif_woff.css',
+      '../css/font_pt-serif_woff2.css',
+      '../css/font_pt-serif_caption_woff.css',
+      '../css/font_pt-serif_caption_woff2.css'
+    );
+  </script>
+  <noscript><link rel="stylesheet" href="/css/font_fira-sans_woff.css"></noscript>
+  <noscript><link rel="stylesheet" href="/css/font_pt-sans_woff.css"></noscript>
+
+  <link rel="stylesheet" href="css/style.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <title>Бронирование</title>
-  <link rel="stylesheet" href="css/style.min.css">
 </head>
 <body>
 
   <header class="page-header">
     <div class="page-header__inner">
 
-      <a href="" class="logo"><img src="http://placehold.it/143x49" alt=""></a>
+      <a href="index.html" class="logo"><img src="img/logo.png" class="logo__image" alt=""></a>
 
       <nav class="main-nav">
-        <a class="main-nav__toggler"><span></span></a>
         <ul class="main-nav__list">
-          <li class="main-nav__item"><a href="" class="main-nav__link  main-nav__link--active">Номера</a></li>
-          <li class="main-nav__item"><a href="" class="main-nav__link">Коттедж</a></li>
-          <li class="main-nav__item"><a href="" class="main-nav__link">Ресторан</a></li>
-          <li class="main-nav__item"><a href="" class="main-nav__link">Отдых</a></li>
-          <li class="main-nav__item"><a href="" class="main-nav__link">Контакты</a></li>
+          <li class="main-nav__item"><a href="room-list.html" class="main-nav__link">Номера</a></li>
+          <li class="main-nav__item"><a href="#" class="main-nav__link">Коттедж</a></li>
+          <li class="main-nav__item"><a href="#" class="main-nav__link">Ресторан</a></li>
+          <li class="main-nav__item"><a href="#" class="main-nav__link">Отдых</a></li>
+          <li class="main-nav__item"><a href="#" class="main-nav__link">Контакты</a></li>
+        </ul>
+      </nav>
+
+      <span class="toggler" id="toggler"><span></span></span>
+
+      <nav class="main-nav__mobile">
+        <ul class="main-nav__mobile-list" id="nav">
+          <li class="main-nav__mobile-item"><a href="" class="main-nav__mobile-link  main-nav__mobile-link--active">Номера</a></li>
+          <li class="main-nav__mobile-item"><a href="" class="main-nav__mobile-link">Коттедж</a></li>
+          <li class="main-nav__mobile-item"><a href="" class="main-nav__mobile-link">Ресторан</a></li>
+          <li class="main-nav__mobile-item"><a href="" class="main-nav__mobile-link">Отдых</a></li>
+          <li class="main-nav__mobile-item"><a href="" class="main-nav__mobile-link">Контакты</a></li>
         </ul>
       </nav>
 
       <div class="page-header__contacts">
-        <a href="tel:+7 812 777-55-88" class="">+7 812 777-55-88</a>
-        <address class="page-header__address"></address>
+        <a href="tel:88127775588" class="page-header__telephone">+7 812 777-55-88</a>
+        <address class="page-header__address">г. Санкт-Петербург, Приморское ш.600</address>
       </div>
 
-      <a href="" class="btn  btn--icon-calendar  btn--min-width-invisible">Забронировать</a>
+      <div class="page-header__booking-button">
+        <a href="form.html" class="btn  btn--icon-calendar  btn--min-width-invisible">Забронировать</a>
+      </div>
 
     </div>
   </header>
 
   <main>
 
-    <form action="" class="form">
+    <form action="#" class="form" id="form">
 
       <section class="form__header">
         <div class="form__header-inner">
           <h1 class="form__header-title">Бронирование</h1>
-          <p class="form__text">Чтобы забронировать номер в отеле или коттедж, заполните форму ниже или просто позвоните по телефону: <a href="" class="form__text-phone">+7 812 777-55-88</a></p>
+          <p class="form__header-text">Чтобы забронировать номер в отеле или коттедж, заполните форму ниже или просто позвоните по телефону: <a href="" class="form__text-phone">+7 812 777-55-88</a></p>
         </div>
       </section>
 
       <div class="form__step  form__step--bg-lightgrey">
         <div class="form__step-inner">
           <span class="form__step-number-title">шаг 1</span>
-          <h2 class="item-title">Дата отдыха</h2>
+          <h2 class="form__step-title">Дата отдыха</h2>
           <div class="entry-and-departure">
 
-            <label class="entry-and-departure__item">
+            <div class="entry-and-departure__item">
               <span class="entry-and-departure__step-input-title">Дата въезда</span>
-              <div for="" class="entry-and-departure__item-input-block">
-                <input type="number" class="entry-and-departure__item-input">
-                <input type="number" class="entry-and-departure__item-input">
-                <input type="number" class="entry-and-departure__item-input" name="entry-year">
+              <div class="entry-and-departure__item-input-block">
+                <input type="number" placeholder="дд" class="entry-and-departure__item-input" data-validation="number" data-validation-error-msg="Введите день въезда" data-validation-error-msg-container="#payment-form__bill-block-notice-link" >
+                <input type="number" placeholder="мм" data-validation="number" data-validation-error-msg="Введите месяц въезда" data-validation-error-msg-container="#payment-form__bill-block-notice-link" class="entry-and-departure__item-input">
+                <input type="number" placeholder="гггг" data-validation="number" data-validation-error-msg="Введите год въезда" data-validation-error-msg-container="#payment-form__bill-block-notice-link" class="entry-and-departure__item-input" name="entry-year">
               </div>
-            </label>
+            </div>
 
-            <label class="entry-and-departure__item">
+            <div class="entry-and-departure__item">
               <span class="entry-and-departure__step-input-title">Дата выезда</span>
-              <div for="" class="entry-and-departure__item-input-block">
-                <input type="text" class="entry-and-departure__item-input">
-                <input type="text" class="entry-and-departure__item-input">
-                <input type="text" class="entry-and-departure__item-input" name="departure-year">
+              <div class="entry-and-departure__item-input-block">
+                <input type="text" placeholder="дд" data-validation="number" data-validation-error-msg="Введите день выезда" class="entry-and-departure__item-input" data-validation-error-msg-container="#payment-form__bill-block-notice-link">
+                <input type="text" placeholder="мм" data-validation="number" data-validation-error-msg="Введите месяц выезда" data-validation-error-msg-container="#payment-form__bill-block-notice-link" class="entry-and-departure__item-input">
+                <input type="text" placeholder="гггг" data-validation="number" data-validation-error-msg="Введите год выезда" data-validation-error-msg-container="#payment-form__bill-block-notice-link" class="entry-and-departure__item-input" name="departure-year">
               </div>
-            </label>
+            </div>
 
           </div>
         </div>
@@ -76,20 +182,20 @@
       <div class="form__step">
         <div class="form__step-inner">
           <span class="form__step-number-title">шаг 2</span>
-          <h2 class="item-title">Место проживания</h2>
-          <div class="choise-block">
+          <h2 class="form__step-title  form__step-title-rest-place">Место проживания</h2>
+          <div class="rest-place">
 
-            <div class="choise-block__item">
-              <label class="accommodation-choice  accommodation-choice--hotel">
-                <input class="accommodation-choice__input" name="accommodation" type="radio" value="hotel" checked>
-                <span class="form__step-subtitle">Отель</span>
+            <div class="rest-place__item  rest-place__item-rest-place">
+              <label for="hotel" class="accommodation-choice  accommodation-choice--hotel">
+                <input class="accommodation-choice__input" name="accommodation-choice" type="radio" value="hotel" id="hotel" checked="checked">
+                <span class="accommodation-choice__title  accommodation-choice__title--hotel">Отель</span>
               </label>
             </div>
 
-            <div class="choise-block__item">
-              <label class="accommodation-choice  accommodation-choice--cottage">
-                <input class="accommodation-choice__input" name="accommodation" type="radio" value="cottage">
-                <span class="form__step-subtitle">Коттедж</span>
+            <div class="rest-place__item  rest-place__item-rest-place">
+              <label for="cottage" class="accommodation-choice  accommodation-choice--cottage">
+                <input class="accommodation-choice__input" name="accommodation-choice" type="radio" value="cottage" id="cottage">
+                <span class="accommodation-choice__title  accommodation-choice__title--cottage">Коттедж</span>
               </label>
             </div>
 
@@ -97,75 +203,75 @@
         </div>
       </div>
 
-      <div class="form__step  form__step--bg-lightgrey">
-        <div class="form__step-inner">
+      <div class="form__step  form__step--bg-lightgrey  form__step--wide">
+        <div class="form__step-inner  form__step-inner--wide">
           <span class="form__step-number-title">шаг 3</span>
-          <h2 class="item-title">Тип коттеджа</h2>
-          <div class="choise-block">
+          <h2 class="form__step-title">Тип коттеджа</h2>
+          <div class="cottages-type">
 
-            <div class="choise-block__item">
-              <label class="cottages-type">
-                <input class="cottages-type__input" name="grade" type="radio" value="flagman"><span class="cottages-type__title">Флагман</span>
+            <div class="cottages-type__item">
+              <label class="cottages-type__label">
+                <input class="cottages-type__input" name="grade" type="radio" value="flagman" checked="checked"><span class="cottages-type__title">Флагман</span>
               </label>
             </div>
 
-            <div class="choise-block__item">
-              <label class="cottages-type">
+            <div class="cottages-type__item">
+              <label class="cottages-type__label">
                 <input class="cottages-type__input" name="grade" type="radio" value="ozyorniy"><span class="cottages-type__title">Озерный</span>
               </label>
             </div>
 
-            <div class="choise-block__item">
-              <label class="cottages-type">
+            <div class="cottages-type__item">
+              <label class="cottages-type__label">
                 <input class="cottages-type__input" name="grade" type="radio" value="olhovka"><span class="cottages-type__title">Ольховка</span>
               </label>
             </div>
 
-            <div class="choise-block__item">
-              <label class="cottages-type">
+            <div class="cottages-type__item">
+              <label class="cottages-type__label">
                 <input class="cottages-type__input" name="grade" type="radio" value="portoviy"><span class="cottages-type__title">Портовый</span>
               </label>
             </div>
 
           </div>
 
-          <div class="cottages-type__descr  cottages-type__descr--flagman">
+          <div class="cottages-type__descr  cottages-type__descr--flagman  cottages-type__descr--active">
             <ul class="cottages-type__descr-list">
-              <li class="cottages-type__descr-list-item">Площадь 100м<sup>2</sup></li>
-              <li class="cottages-type__descr-list-item">3 комнаты</li>
-              <li class="cottages-type__descr-list-item">5 спальных мест</li>
-              <li class="cottages-type__descr-list-item">Раздельный санузел</li>
-              <li class="cottages-type__descr-list-item">Wi-fi</li>
+              <li class="cottages-type__descr-list-item  cottages-type__descr-list-item--square">Площадь 100м<sup>2</sup></li>
+              <li class="cottages-type__descr-list-item  cottages-type__descr-list-item--rooms">3 комнаты</li>
+              <li class="cottages-type__descr-list-item  cottages-type__descr-list-item--berth">5 спальных мест</li>
+              <li class="cottages-type__descr-list-item  cottages-type__descr-list-item--bathroom">Раздельный санузел</li>
+              <li class="cottages-type__descr-list-item  cottages-type__descr-list-item--wi-fi">Wi-fi</li>
             </ul>
           </div>
 
           <div class="cottages-type__descr  cottages-type__descr--ozyorniy">
             <ul class="cottages-type__descr-list">
-              <li class="cottages-type__descr-list-item">Площадь 100м<sup>2</sup></li>
-              <li class="cottages-type__descr-list-item">3 комнаты</li>
-              <li class="cottages-type__descr-list-item">5 спальных мест</li>
-              <li class="cottages-type__descr-list-item">Раздельный санузел</li>
-              <li class="cottages-type__descr-list-item">Wi-fi</li>
+              <li class="cottages-type__descr-list-item  cottages-type__descr-list-item--square">Площадь 100м<sup>2</sup></li>
+              <li class="cottages-type__descr-list-item  cottages-type__descr-list-item--rooms">3 комнаты</li>
+              <li class="cottages-type__descr-list-item  cottages-type__descr-list-item--berth">5 спальных мест</li>
+              <li class="cottages-type__descr-list-item  cottages-type__descr-list-item--bathroom">Раздельный санузел</li>
+              <li class="cottages-type__descr-list-item  cottages-type__descr-list-item--wi-fi">Wi-fi</li>
             </ul>
           </div>
 
           <div class="cottages-type__descr  cottages-type__descr--olhovka">
             <ul class="cottages-type__descr-list">
-              <li class="cottages-type__descr-list-item">Площадь 100м<sup>2</sup></li>
-              <li class="cottages-type__descr-list-item">3 комнаты</li>
-              <li class="cottages-type__descr-list-item">5 спальных мест</li>
-              <li class="cottages-type__descr-list-item">Раздельный санузел</li>
-              <li class="cottages-type__descr-list-item">Wi-fi</li>
+              <li class="cottages-type__descr-list-item  cottages-type__descr-list-item--square">Площадь 100м<sup>2</sup></li>
+              <li class="cottages-type__descr-list-item  cottages-type__descr-list-item--rooms">3 комнаты</li>
+              <li class="cottages-type__descr-list-item  cottages-type__descr-list-item--berth">5 спальных мест</li>
+              <li class="cottages-type__descr-list-item  cottages-type__descr-list-item--bathroom">Раздельный санузел</li>
+              <li class="cottages-type__descr-list-item  cottages-type__descr-list-item--wi-fi">Wi-fi</li>
             </ul>
           </div>
 
           <div class="cottages-type__descr  cottages-type__descr--portoviy">
             <ul class="cottages-type__descr-list">
-              <li class="cottages-type__descr-list-item">Площадь 100м<sup>2</sup></li>
-              <li class="cottages-type__descr-list-item">3 комнаты</li>
-              <li class="cottages-type__descr-list-item">5 спальных мест</li>
-              <li class="cottages-type__descr-list-item">Раздельный санузел</li>
-              <li class="cottages-type__descr-list-item">Wi-fi</li>
+              <li class="cottages-type__descr-list-item  cottages-type__descr-list-item--square">Площадь 100м<sup>2</sup></li>
+              <li class="cottages-type__descr-list-item  cottages-type__descr-list-item--rooms">3 комнаты</li>
+              <li class="cottages-type__descr-list-item  cottages-type__descr-list-item--berth">5 спальных мест</li>
+              <li class="cottages-type__descr-list-item  cottages-type__descr-list-item--bathroom">Раздельный санузел</li>
+              <li class="cottages-type__descr-list-item  cottages-type__descr-list-item--wi-fi">Wi-fi</li>
             </ul>
           </div>
 
@@ -173,82 +279,94 @@
       </div>
 
       <div class="form__step">
-        <div class="form__step-inner">
+        <div class="form__step-inner  form__step-inner--wide">
           <span class="form__step-number-title">шаг 4</span>
-          <h2 class="item-title">Персональная информация</h2>
+          <h2 class="form__step-title">Персональная информация</h2>
           <div class="personal-info">
-            <div class="field-text">
-              <input type="text" class="field-text__input">
+            <div class="personal-info__block">
+              <input type="text" placeholder="имя" data-validation="required" data-validation-error-msg="Введите имя" data-validation-error-msg-container="#payment-form__bill-block-notice-link" class="personal-info__input" required>
+              <span class="personal-info__check-mark"></span>
             </div>
-            <div class="field-text">
-              <input type="text" class="field-text__input">
+            <div class="personal-info__block">
+              <input type="text" placeholder="фамилия" data-validation="required" data-validation-error-msg="Введите фамилию" data-validation-error-msg-container="#payment-form__bill-block-notice-link" class="personal-info__input" required>
+              <span class="personal-info__check-mark"></span>
             </div>
-            <div class="field-text">
-              <input type="text" class="field-text__input">
-              <p class="field-text__descr">Мы свяжемся с вами в случае необходимости.</p>
+            <div class="personal-info__block">
+              <input type="number" placeholder="номер телефона" data-validation="number" data-validation-error-msg="Введите номер телефона" data-validation-error-msg-container="#payment-form__bill-block-notice-link" class="personal-info__input" required>
+              <span class="personal-info__check-mark"></span>
+              <p class="personal-info__descr">Мы свяжемся с вами в случае необходимости.</p>
             </div>
-            <div class="field-text">
-              <input type="text" class="field-text__input">
-              <p class="field-text__descr">На этот адрес мы вышлем вам подтверждение о забронированном номере.</p>
+            <div class="personal-info__block">
+              <input type="text" placeholder="e-mail" data-validation="email" data-validation-error-msg="Введите e-mail" data-validation-error-msg-container="#payment-form__bill-block-notice-link" class="personal-info__input" required>
+              <span class="personal-info__check-mark"></span>
+              <p class="personal-info__descr">На этот адрес мы вышлем вам подтверждение о забронированном номере.</p>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="form__step  form__step--bg-lightgrey">
-        <div class="form__step-inner">
+      <div class="form__step  form__step--bg-lightgrey  form__step--wide">
+        <div class="form__step-inner  form__step-inner--wide">
           <span class="form__step-number-title">шаг 5</span>
-          <h2 class="item-title">Способ оплаты</h2>
+          <h2 class="form__step-title">Способ оплаты</h2>
           <div class="payment-form">
 
             <div class="payment-form__to-pay-block">
 
               <div class="payment-form__arrival">
-                <input type="radio" class="payment-form__arrival-input">
-                <h3 class="payment-form__block-title">По приезду</h3>
-                <p class="field-text-descr">На этот адрес мы вышлем вам подтверждение о забронированном номере.</p>
+                <label for="payment-form__arrival-input" class="payment-form__arrival-label">
+                  <input type="radio" name="arrival-type" value="whenarrive" class="payment-form__radio-input" id="payment-form__arrival-input">
+                  <span class="payment-form__block-title">По приезду</span>
+                </label>
+                <p class="payment-form__arrival-descr">Вы можете произвести оплату по факту заселения.</p>
               </div>
 
               <div class="payment-form__now-arrival">
-                <input type="radio" class="payment-form__arrival-input">
-                <h3 class="payment-form__block-title">Сейчас</h3>
-                <p class="field-text-descr">Прямо сейчас вы можете произвести оплату с помощью банковской карты.</p>
-
-                <label class="field-text  field-text--large">
-                  <span class="field-text__title">Номер карты</span>
-                  <input type="text" class="field-text__input">
+                <label for="payment-form__now-input" class="payment-form__now-arrival-label">
+                  <input type="radio" name="arrival-type" value="now" class="payment-form__radio-input" id="payment-form__now-input" checked="checked">
+                  <span class="payment-form__block-title">Сейчас</span>
                 </label>
+                <p class="payment-form__now-arrival-descr">Прямо сейчас вы можете произвести оплату с помощью банковской карты.</p>
 
-                <label class="field-text  field-text--large">
-                  <span class="field-text__title">Фамилия владельца карты</span>
-                  <input type="text" class="field-text__input">
-                </label>
+                <div class="payment-form__now-arrival-text-label-left-column">
+                  <label class="payment-form__now-arrival-text-label">
+                    <span class="payment-form__now-arrival-input-title">Номер карты</span>
+                    <input type="number" placeholder="0000-0000-0000-0000" data-validation="number" data-validation-error-msg="Введите номер карты" data-validation-error-msg-container="#payment-form__bill-block-notice-link" class="payment-form__now-arrival-input" id="payment-form__now-arrival-input-card-number">
+                  </label>
 
-                <label class="field-text  field-text--small">
-                  <span class="field-text__title">Код CVV</span>
-                  <input type="text" class="field-text__input">
-                </label>
+                  <label class="payment-form__now-arrival-text-label">
+                    <span class="payment-form__now-arrival-input-title">Фамилия владельца карты</span>
+                    <input type="text" placeholder="vladimir vladimirov" data-validation="required" data-validation-error-msg="Введите фамилию владельца карты" data-validation-error-msg-container="#payment-form__bill-block-notice-link" class="payment-form__now-arrival-input" id="payment-form__now-arrival-card-name">
+                  </label>
+                </div>
 
-                <label class="field-text  field-text--small">
-                  <span class="field-text__title">Действует до</span>
-                  <input type="text" class="field-text__input">
-                </label>
+                <div class="payment-form__now-arrival-text-label-right-column">
+                  <label class="payment-form__now-arrival-text-label">
+                    <span class="payment-form__now-arrival-input-title">Код CVV</span>
+                    <a href="javascript:void(0);" class="payment-form__now-arrival-input-tooltip"><span class="payment-form__now-arrival-input-tooltip-text">Последние 3 цифры с обратной стороны Вашей банковской карты</span></a>
+                    <input type="number" placeholder="123" data-validation="number" data-validation-error-msg="Введите код CVV" data-validation-error-msg-container="#payment-form__bill-block-notice-link" class="payment-form__now-arrival-input  payment-form__now-arrival-input--short" id="payment-form__now-arrival-input-cvv">
+                  </label>
+
+                  <label class="payment-form__now-arrival-text-label">
+                    <span class="payment-form__now-arrival-input-title">Действует до</span>
+                    <input type="number" placeholder="01/2018" data-validation="required" data-validation-error-msg="Введите период действия карты" data-validation-error-msg-container="#payment-form__bill-block-notice-link" class="payment-form__now-arrival-input  payment-form__now-arrival-input--short" id="payment-form__now-arrival-input-card-date">
+                  </label>
+                </div>
               </div>
 
             </div>
 
             <div class="payment-form__bill-block">
-              <h3 class="payment-form__block-title  payment-form__block-title--grey">К оплате</h3>
-              <p class="payment-form__bill-sum">14 000 руб.</p>
-              <p class="field-text-descr">Пожалуйста, <a href="" class="payment-form__bill-notice-link">выберите дату</a> въезда и выезда, чтобы увидеть сумму к оплате</p>
+              <span class="payment-form__bill-block-title">К оплате</span>
+              <p class="payment-form__bill-block-sum">-</p>
+              <div class="payment-form__bill-block-notice" id="payment-form__bill-block-notice"></div>
             </div>
+          </div>
 
-            <div class="payment-form__btn">
-              <button class="btn  btn--large  btn--green">
-                Забронировать
-              </button>
-            </div>
-
+          <div class="form__btn-block">
+            <button id="submit" type="submit" class="btn  btn--large  btn--green  btn__form">
+              Забронировать
+            </button>
           </div>
         </div>
       </div>
@@ -258,27 +376,31 @@
   </main>
 
   <footer class="page-footer">
+    <div class="page-footer__inner">
 
-    <p class="page-footer__address">г. Санкт-Петербург Приморское ш.600</p>
+      <p class="page-footer__address">г. Санкт-Петербург Приморское ш.600</p>
 
-    <div class="logo-set">
-      <a href="" class="logo"><img src="" alt=""></a>
-      <ul class="page-footer__social-links">
-        <li class="page-footer__social-item">
-          <a href="https://vk.com" class="page-footer__link  page-footer__link--vk">Вконтакте</a>
-        </li>
-        <li class="page-footer__social-item">
-          <a href="https://www.instagram.com/" class="page-footer__link  page-footer__link--instagram">Инстаграм</a>
-        </li>
-        <li class="page-footer__social-item">
-          <a href="https://facebook.com" class="page-footer__link  page-footer__link--fb">Фейсбук</a>
-        </li>
-      </ul>
+      <div class="page-footer__logo-set">
+        <a href="" class="logo  page-footer__logo"><img src="img/logo.png" alt=""></a>
+        <ul class="page-footer__social-links">
+          <li class="page-footer__social-item">
+            <a href="https://vk.com" class="page-footer__link  page-footer__link--vk">Вко</a>
+          </li>
+          <li class="page-footer__social-item">
+            <a href="https://www.instagram.com/" class="page-footer__link  page-footer__link--instagram">Ин</a>
+          </li>
+          <li class="page-footer__social-item">
+            <a href="https://facebook.com" class="page-footer__link  page-footer__link--fb">Фб</a>
+          </li>
+        </ul>
+      </div>
+
+      <p class="page-footer__contacts">+7 812 777-55-88 info@greenvalley.ru</p>
+
     </div>
-
-    <p class="page-footer__contacts">+7 812 777-55-88 info@greenvalley.ru</p>
-
   </footer>
 
+  <script src="js/vendor.min.js"></script>
+  <script src="js/custom.min.js"></script>
 </body>
 </html>

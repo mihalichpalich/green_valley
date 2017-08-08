@@ -1,139 +1,318 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Бронирование</title>
+  <meta charset="UTF-8">
+  <script>
+    // Подгрущка шрифтов
+    function loadFont(fontName, woffUrl, woff2Url) {
+      // 0. Многие неподдерживаемые браузеры должны останавливать работу тут.
+      var nua = navigator.userAgent;
+      var noSupport = !window.addEventListener // IE8 и ниже
+            || (nua.match(/(Android (2|3|4.0|4.1|4.2|4.3))|(Opera (Mini|Mobi))/) && !nua.match(/Chrome/)) // Android Stock Browser до 4.4 и Opera Mini
+
+      if (noSupport) {
+        return;
+      }
+
+      // 1. Настраиваем localStorage
+      var loSto = {};
+      try {
+        // Устанавливаем вспомогательную переменную для помощи с localStorage,
+        // например, для случаев когда cookies отключены и браузер не даёт к ним доступа.
+        // Иначе могут быть получены исключения, которые полностью остановят загрузку шрифтов.
+        loSto = localStorage || {};
+      } catch(ex) {}
+
+      var localStoragePrefix = 'x-font-' + fontName;
+      var localStorageUrlKey = localStoragePrefix + 'url';
+      var localStorageCssKey = localStoragePrefix + 'css';
+      var storedFontUrl = loSto[localStorageUrlKey];
+      var storedFontCss = loSto[localStorageCssKey];
+
+      // 2. Создаём элемент <style>, который мы используем для вставки шрифта, закодированного в base64.
+      var styleElement = document.createElement('style');
+      styleElement.rel = 'stylesheet';
+      document.head.appendChild(styleElement);
+      // Из-за ошибок IE9 установка styleElement.textContent должна быть после этой строки.
+
+      // 3. Проверяем, находится ли шрифт уже в localStorage и последней ли он версии.
+      if (storedFontCss && (storedFontUrl === woffUrl || storedFontUrl === woff2Url)) {
+        // css до сих пор в localStorage
+        // и были загружены из одного из текущих адресов
+
+        // 4. Применяем стили шрифта.
+        styleElement.textContent = storedFontCss;
+      } else {
+        // Данных нет, или они загружены с устаревшего URL,
+        // поэтому мы должны загрузить их снова.
+
+        // 5. Проверяем поддержку WOFF2 чтобы узнать, какой URL использовать.
+        var url = (woff2Url && supportsWoff2())
+        ? woff2Url // WOFF2 URL передан в функцию и поддерживается.
+        : woffUrl; // Поддерживается только WOFF.
+
+        // 6. Получаем данные с сервера.
+        var request = new XMLHttpRequest();
+        request.open('GET', url);
+        request.onload = function() {
+          if (request.status >= 200 && request.status < 400) {
+            // 7. Обновляем localStorage новыми данными и применяем стили шрифта.
+            loSto[localStorageUrlKey] = url;
+            loSto[localStorageCssKey] = styleElement.textContent = request.responseText;
+          }
+        };
+        request.send();
+      }
+
+      function supportsWoff2() {
+        // https://github.com/filamentgroup/woff2-feature-test
+        if( !( "FontFace" in window ) ) {
+          return false;
+        }
+
+        var f = new FontFace('t', 'url( "data:application/font-woff2;base64,d09GMgABAAAAAADcAAoAAAAAAggAAACWAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABk4ALAoUNAE2AiQDCAsGAAQgBSAHIBtvAcieB3aD8wURQ+TZazbRE9HvF5vde4KCYGhiCgq/NKPF0i6UIsZynbP+Xi9Ng+XLbNlmNz/xIBBqq61FIQRJhC/+QA/08PJQJ3sK5TZFMlWzC/iK5GUN40psgqvxwBjBOg6JUSJ7ewyKE2AAaXZrfUB4v+hze37ugJ9d+DeYqiDwVgCawviwVFGnuttkLqIMGivmDg" ) format( "woff2" )', {});
+        f.load()['catch'](function() {});
+
+        return f.status == 'loading';
+      }
+    }
+
+  </script>
+  <script>
+    loadFont(
+      'Open Sans_my', 'Open Serif_my',
+      '../css/font_fira-sans_woff.css',
+      '../css/font_pt-sans_woff.css',
+      '../css/font_fira-sans_woff2.css',
+      '../css/font_pt-sans_woff2.css',
+      '../css/font_pt-serif_woff.css',
+      '../css/font_pt-serif_woff2.css',
+      '../css/font_pt-serif_caption_woff.css',
+      '../css/font_pt-serif_caption_woff2.css'
+    );
+  </script>
+  <noscript><link rel="stylesheet" href="/css/font_fira-sans_woff.css"></noscript>
+  <noscript><link rel="stylesheet" href="/css/font_pt-sans_woff.css"></noscript>
+
+  <link rel="stylesheet" href="css/style.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Описание номера</title>
 </head>
 <body>
 
   <header class="page-header">
     <div class="page-header__inner">
 
-      <a href="" class="logo"><img src="" alt=""></a>
+      <a href="index.html" class="logo"><img src="img/logo.png" class="logo__image" alt=""></a>
 
       <nav class="main-nav">
         <ul class="main-nav__list">
-          <li class="main-nav__item"><a href="" class="main-nav__link"></a></li>
-          <li class="main-nav__item"><a href="" class="main-nav__link"></a></li>
-          <li class="main-nav__item"><a href="" class="main-nav__link"></a></li>
-          <li class="main-nav__item"><a href="" class="main-nav__link"></a></li>
-          <li class="main-nav__item"><a href="" class="main-nav__link"></a></li>
+          <li class="main-nav__item"><a href="room-list.html" class="main-nav__link">Номера</a></li>
+          <li class="main-nav__item"><a href="#" class="main-nav__link">Коттедж</a></li>
+          <li class="main-nav__item"><a href="#" class="main-nav__link">Ресторан</a></li>
+          <li class="main-nav__item"><a href="#" class="main-nav__link">Отдых</a></li>
+          <li class="main-nav__item"><a href="#" class="main-nav__link">Контакты</a></li>
         </ul>
-        <span class="main-nav__toggler"></span>
+      </nav>
+
+      <span class="toggler" id="toggler"><span></span></span>
+
+      <nav class="main-nav__mobile">
+        <ul class="main-nav__mobile-list" id="nav">
+          <li class="main-nav__mobile-item"><a href="" class="main-nav__mobile-link  main-nav__mobile-link--active">Номера</a></li>
+          <li class="main-nav__mobile-item"><a href="" class="main-nav__mobile-link">Коттедж</a></li>
+          <li class="main-nav__mobile-item"><a href="" class="main-nav__mobile-link">Ресторан</a></li>
+          <li class="main-nav__mobile-item"><a href="" class="main-nav__mobile-link">Отдых</a></li>
+          <li class="main-nav__mobile-item"><a href="" class="main-nav__mobile-link">Контакты</a></li>
+        </ul>
       </nav>
 
       <div class="page-header__contacts">
-        <a href="tel:+7 812 777-55-88" class="">+7 812 777-55-88</a>
-        address
+        <a href="tel:88127775588" class="page-header__telephone">+7 812 777-55-88</a>
+        <address class="page-header__address">г. Санкт-Петербург, Приморское ш.600</address>
       </div>
 
-      <a href="" class="btn  btn--icon-calendar">Забронировать</a>
+      <div class="page-header__booking-button">
+        <a href="form.html" class="btn  btn--icon-calendar  btn--min-width-invisible">Забронировать</a>
+      </div>
 
     </div>
   </header>
 
   <main>
 
-    <section class="single-room">
-      <div class="single-room__inner">
-        <div class="single-room__title-block">
-          <h2 class="block-title">Эконом</h2>
-          <p class="room-price">от <span class="room-price__number">3400</span> руб./сутки</p>
-        </div>
-        <div class="single-room__info-wrapper">
-
-          <div class="single-room__about-block">
-            <h3 class="item-title">О номере</h3>
-            <p class="block-text  block-text--lighter">В отеле 30 таких номеров площадью от 16 до 20 кв.м. Рассчитаны на проживание 1-2 человек. Часть номеров с видом на Финский залив.</p>
-          </div>
-
-          <div class="single-room__list-block">
-            <h3 class="item-title">Удобства</h3>
-            <ul class="single-room__list">
-              <li class="single-room__list-item  block-text  block-text--lighter">WI-FI</li>
-              <li class="single-room__list-item  block-text  block-text--lighter">Двуспальная кровать</li>
-              <li class="single-room__list-item  block-text  block-text--lighter">Кресло</li>
-              <li class="single-room__list-item  block-text  block-text--lighter">Раскладывающийся диван</li>
-              <li class="single-room__list-item  block-text  block-text--lighter">Фен</li>
-              <li class="single-room__list-item  block-text  block-text--lighter">Рабочий стол</li>
-              <li class="single-room__list-item  block-text  block-text--lighter">Шкаф для одежды</li>
-              <li class="single-room__list-item  block-text  block-text--lighter">Багажная тумба</li>
-              <li class="single-room__list-item  block-text  block-text--lighter">Сейф</li>
-            </ul>
-          </div>
-
-          <div class="single-room__included">
-            <h3 class="item-title">В стоимость входит</h3>
-            <ul class="single-room__list">
-              <li class="single-room__list-item  block-text  block-text--lighter">Бассейн с с 8.30 до 10.00</li>
-              <li class="single-room__list-item  block-text  block-text--lighter">Завтрак и обед «шведский стол»</li>
-            </ul>
-          </div>
-
+    <section class="room-info">
+      <div class="room-info__inner">
+        <div class="room-info__title-block">
+          <h2 class="room-info__title">Эконом</h2>
+          <p class="room-info__price">от <span class="room-info__price-number">3400</span> руб./сутки</p>
         </div>
 
-        <div class="single-room__slider">
-          <div class="owl-carousel"></div>
+        <div class="room-info__slider">
+          <span class="room-info__slider-zoom"></span>
+          <div id="room-info__slider" class="room-info__slider-inner">
+            <div class="room-info__slider-img-block">
+              <img src="img/room-info__slider-img.jpg" alt="Эконом1" class="room-info__slider-img">
+            </div>
+            <div class="room-info__slider-img-block">
+              <img src="img/room-info__slider-img.jpg" alt="Эконом2" class="room-info__slider-img">
+            </div>
+            <div class="room-info__slider-img-block">
+              <img src="img/room-info__slider-img.jpg" alt="Эконом3" class="room-info__slider-img">
+            </div>
+            <div class="room-info__slider-img-block">
+              <img src="img/room-info__slider-img.jpg" alt="Эконом4" class="room-info__slider-img">
+            </div>
+            <div class="room-info__slider-img-block">
+              <img src="img/room-info__slider-img.jpg" alt="Эконом5" class="room-info__slider-img">
+            </div>
+            <div class="room-info__slider-img-block">
+              <img src="img/room-info__slider-img.jpg" alt="Эконом6" class="room-info__slider-img">
+            </div>
+            <div class="room-info__slider-img-block">
+              <img src="img/room-info__slider-img.jpg" alt="Эконом7" class="room-info__slider-img">
+            </div>
+          </div>
         </div>
 
-        <div class="single-room__btn-block">
-          <a href="" class="btn  btn--icon-calendar  btn--orange">Забронировать</a>
-          <p class="room-price">от <span class="room-price__number">3400</span> руб./сутки</p>
+        <div class="room-info__inner-lg">
+          <div class="room-info__info-wrapper">
+
+            <div class="room-info__about-block">
+              <h3 class="room-info__info-wrapper-block-title  room-info__info-wrapper-about-block-title">О номере</h3>
+              <p class="room-info__about-block-text">В отеле 30 таких номеров площадью от 16 до 20 кв.м. Рассчитаны на проживание 1-2 человек. Часть номеров с видом на Финский залив.</p>
+            </div>
+
+            <div class="room-info__accommodation">
+              <h3 class="room-info__info-wrapper-block-title">Удобства</h3>
+              <ul class="room-info__list">
+                <li class="room-info__list-item">WI-FI</li>
+                <li class="room-info__list-item">Двуспальная кровать</li>
+                <li class="room-info__list-item">Кресло</li>
+                <li class="room-info__list-item">Раскладывающийся диван</li>
+                <li class="room-info__list-item">Фен</li>
+                <li class="room-info__list-item">Рабочий стол</li>
+                <li class="room-info__list-item">Шкаф для одежды</li>
+                <li class="room-info__list-item">Багажная тумба</li>
+                <li class="room-info__list-item">Сейф</li>
+              </ul>
+            </div>
+
+            <div class="room-info__included">
+              <h3 class="room-info__info-wrapper-block-title">В стоимость входит</h3>
+              <ul class="room-info__list  room-info__list-included">
+                <li class="room-info__list-item">Бассейн с с 8.30 до 10.00</li>
+                <li class="room-info__list-item">Завтрак и обед «шведский стол»</li>
+              </ul>
+            </div>
+
+          </div>
+
+          <div class="room-info__slider  room-info__slider-visible-lg">
+            <span class="room-info__slider-zoom"></span>
+            <div id="room-info__slider-visible-lg" class="room-info__slider-inner">
+              <div class="room-info__slider-img-block">
+                <img src="img/room-info__slider-img.jpg" alt="Эконом1" class="room-info__slider-img">
+              </div>
+              <div class="room-info__slider-img-block">
+                <img src="img/room-info__slider-img.jpg" alt="Эконом2" class="room-info__slider-img">
+              </div>
+              <div class="room-info__slider-img-block">
+                <img src="img/room-info__slider-img.jpg" alt="Эконом3" class="room-info__slider-img">
+              </div>
+              <div class="room-info__slider-img-block">
+                <img src="img/room-info__slider-img.jpg" alt="Эконом4" class="room-info__slider-img">
+              </div>
+              <div class="room-info__slider-img-block">
+                <img src="img/room-info__slider-img.jpg" alt="Эконом5" class="room-info__slider-img">
+              </div>
+              <div class="room-info__slider-img-block">
+                <img src="img/room-info__slider-img.jpg" alt="Эконом6" class="room-info__slider-img">
+              </div>
+              <div class="room-info__slider-img-block">
+                <img src="img/room-info__slider-img.jpg" alt="Эконом7" class="room-info__slider-img">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="room-info__btn-block">
+          <a href="form.html" class="btn  btn--icon-calendar  btn--orange  room-info__btn">Забронировать</a>
+          <p class="room-info__price">от <span class="room-info__price-number">3400</span> руб./сутки</p>
         </div>
 
       </div>
     </section>
 
-    <section class="accommodation  accommodation--lightgrey-bg">
-      <div class="accomodation__inner  accommodation__inner--lightgrey-bg">
-        <div class="accomodation-place">
-          <img src="" alt="" class="accomodation-place__image">
-          <div class="accomodation-place__descr">
-            <h2 class="item-title">Стандарт</h2>
-            <p class="room-price">от <span class="room-price__number">4000</span> руб./сутки</p>
+    <section class="room-category">
+      <div class="room-category__inner">
+
+        <div class="room-category__accommodation-place-block">
+          <div class="accommodation-place  accommodation-place--left">
+            <img src="img/room-category__image-1-320px.jpg" alt="" class="accommodation-place__image">
+            <div class="accommodation-place__descr">
+              <h2 class="accommodation-place__title">Стандарт</h2>
+              <p class="accommodation-place__price">от <span class="accommodation-place__price-number">4000</span> руб./сутки</p>
+            </div>
+          </div>
+
+          <div class="accommodation-place">
+            <img src="img/room-category__image-2-320px.jpg" alt="" class="accommodation-place__image">
+            <div class="accommodation-place__descr">
+              <h2 class="accommodation-place__title">Стандарт+</h2>
+              <p class="accommodation-place__price">от <span class="accommodation-place__price-number">4500</span> руб./сутки</p>
+            </div>
           </div>
         </div>
-        <div class="accomodation-place">
-          <img src="" alt="" class="accomodation-place__image">
-          <div class="accomodation-place__descr">
-            <h2 class="item-title">Стандарт+</h2>
-            <p class="room-price">от <span class="room-price__number">4500</span> руб./сутки</p>
+
+        <div class="room-category__accommodation-place-block">
+          <div class="accommodation-place">
+            <img src="img/room-category__image-3-320px.jpg" alt="" class="accommodation-place__image">
+            <div class="accommodation-place__descr">
+              <h2 class="accommodation-place__title">Люкс</h2>
+              <p class="accommodation-place__price">от <span class="accommodation-place__price-number">5700</span> руб./сутки</p>
+            </div>
           </div>
         </div>
-        <div class="accomodation-place">
-          <img src="" alt="" class="accomodation-place__image">
-          <div class="accomodation-place__descr">
-            <h2 class="item-title">Люкс</h2>
-            <p class="room-price">от <span class="room-price__number">5700</span> руб./сутки</p>
-          </div>
-        </div>
+
       </div>
     </section>
+
+    <div class="zoomer__inner"></div>
+    <div class="zoomer" id="zoomer">
+      <span class="zoomer--unzoom"></span>
+      <img src="#" alt="">
+    </div>
 
   </main>
 
   <footer class="page-footer">
+    <div class="page-footer__inner">
 
-    <p class="page-footer__address">г. Санкт-Петербург Приморское ш.600</p>
+      <p class="page-footer__address">г. Санкт-Петербург Приморское ш.600</p>
 
-    <div class="logo-set">
-      <a href="" class="logo"><img src="" alt=""></a>
-      <ul class="page-footer__social-links">
-        <li class="page-footer__social-item">
-          <a href="https://vk.com" class="page-footer__link  page-footer__link--vk">Вконтакте</a>
-        </li>
-        <li class="page-footer__social-item">
-          <a href="https://www.instagram.com/" class="page-footer__link  page-footer__link--instagram">Инстаграм</a>
-        </li>
-        <li class="page-footer__social-item">
-          <a href="https://facebook.com" class="page-footer__link  page-footer__link--fb">Фейсбук</a>
-        </li>
-      </ul>
+      <div class="page-footer__logo-set">
+        <a href="" class="logo  page-footer__logo"><img src="img/logo.png" alt=""></a>
+        <ul class="page-footer__social-links">
+          <li class="page-footer__social-item">
+            <a href="https://vk.com" class="page-footer__link  page-footer__link--vk">Вко</a>
+          </li>
+          <li class="page-footer__social-item">
+            <a href="https://www.instagram.com/" class="page-footer__link  page-footer__link--instagram">Ин</a>
+          </li>
+          <li class="page-footer__social-item">
+            <a href="https://facebook.com" class="page-footer__link  page-footer__link--fb">Фб</a>
+          </li>
+        </ul>
+      </div>
+
+      <p class="page-footer__contacts">+7 812 777-55-88 info@greenvalley.ru</p>
+
     </div>
-
-    <p class="page-footer__contacts">+7 812 777-55-88 info@greenvalley.ru</p>
-
   </footer>
 
+  <script src="js/vendor.min.js"></script>
+  <script src="js/custom.min.js"></script>
 </body>
 </html>

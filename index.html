@@ -1,48 +1,154 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <script>
+    // Подгрущка шрифтов
+    function loadFont(fontName, woffUrl, woff2Url) {
+      // 0. Многие неподдерживаемые браузеры должны останавливать работу тут.
+      var nua = navigator.userAgent;
+      var noSupport = !window.addEventListener // IE8 и ниже
+            || (nua.match(/(Android (2|3|4.0|4.1|4.2|4.3))|(Opera (Mini|Mobi))/) && !nua.match(/Chrome/)) // Android Stock Browser до 4.4 и Opera Mini
+
+      if (noSupport) {
+        return;
+      }
+
+      // 1. Настраиваем localStorage
+      var loSto = {};
+      try {
+        // Устанавливаем вспомогательную переменную для помощи с localStorage,
+        // например, для случаев когда cookies отключены и браузер не даёт к ним доступа.
+        // Иначе могут быть получены исключения, которые полностью остановят загрузку шрифтов.
+        loSto = localStorage || {};
+      } catch(ex) {}
+
+      var localStoragePrefix = 'x-font-' + fontName;
+      var localStorageUrlKey = localStoragePrefix + 'url';
+      var localStorageCssKey = localStoragePrefix + 'css';
+      var storedFontUrl = loSto[localStorageUrlKey];
+      var storedFontCss = loSto[localStorageCssKey];
+
+      // 2. Создаём элемент <style>, который мы используем для вставки шрифта, закодированного в base64.
+      var styleElement = document.createElement('style');
+      styleElement.rel = 'stylesheet';
+      document.head.appendChild(styleElement);
+      // Из-за ошибок IE9 установка styleElement.textContent должна быть после этой строки.
+
+      // 3. Проверяем, находится ли шрифт уже в localStorage и последней ли он версии.
+      if (storedFontCss && (storedFontUrl === woffUrl || storedFontUrl === woff2Url)) {
+        // css до сих пор в localStorage
+        // и были загружены из одного из текущих адресов
+
+        // 4. Применяем стили шрифта.
+        styleElement.textContent = storedFontCss;
+      } else {
+        // Данных нет, или они загружены с устаревшего URL,
+        // поэтому мы должны загрузить их снова.
+
+        // 5. Проверяем поддержку WOFF2 чтобы узнать, какой URL использовать.
+        var url = (woff2Url && supportsWoff2())
+        ? woff2Url // WOFF2 URL передан в функцию и поддерживается.
+        : woffUrl; // Поддерживается только WOFF.
+
+        // 6. Получаем данные с сервера.
+        var request = new XMLHttpRequest();
+        request.open('GET', url);
+        request.onload = function() {
+          if (request.status >= 200 && request.status < 400) {
+            // 7. Обновляем localStorage новыми данными и применяем стили шрифта.
+            loSto[localStorageUrlKey] = url;
+            loSto[localStorageCssKey] = styleElement.textContent = request.responseText;
+          }
+        };
+        request.send();
+      }
+
+      function supportsWoff2() {
+        // https://github.com/filamentgroup/woff2-feature-test
+        if( !( "FontFace" in window ) ) {
+          return false;
+        }
+
+        var f = new FontFace('t', 'url( "data:application/font-woff2;base64,d09GMgABAAAAAADcAAoAAAAAAggAAACWAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABk4ALAoUNAE2AiQDCAsGAAQgBSAHIBtvAcieB3aD8wURQ+TZazbRE9HvF5vde4KCYGhiCgq/NKPF0i6UIsZynbP+Xi9Ng+XLbNlmNz/xIBBqq61FIQRJhC/+QA/08PJQJ3sK5TZFMlWzC/iK5GUN40psgqvxwBjBOg6JUSJ7ewyKE2AAaXZrfUB4v+hze37ugJ9d+DeYqiDwVgCawviwVFGnuttkLqIMGivmDg" ) format( "woff2" )', {});
+        f.load()['catch'](function() {});
+
+        return f.status == 'loading';
+      }
+    }
+
+  </script>
+  <script>
+    loadFont(
+      'Open Sans_my', 'Open Serif_my',
+      '../css/font_fira-sans_woff.css',
+      '../css/font_pt-sans_woff.css',
+      '../css/font_fira-sans_woff2.css',
+      '../css/font_pt-sans_woff2.css',
+      '../css/font_pt-serif_woff.css',
+      '../css/font_pt-serif_woff2.css',
+      '../css/font_pt-serif_caption_woff.css',
+      '../css/font_pt-serif_caption_woff2.css'
+    );
+  </script>
+  <noscript><link rel="stylesheet" href="/css/font_fira-sans_woff.css"></noscript>
+  <noscript><link rel="stylesheet" href="/css/font_pt-sans_woff.css"></noscript>
+
+  <link rel="stylesheet" href="css/style.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <title>Главная</title>
-  <link rel="stylesheet" href="css/style.min.css">
 </head>
 <body>
 
   <header class="page-header">
     <div class="page-header__inner">
 
-      <a href="" class="logo"><img src="http://placehold.it/143x49" alt=""></a>
+      <a href="index.html" class="logo"><img src="img/logo.png" class="logo__image" alt=""></a>
 
       <nav class="main-nav">
-        <a class="main-nav__toggler"><span></span></a>
         <ul class="main-nav__list">
-          <li class="main-nav__item"><a href="" class="main-nav__link  main-nav__link--active">Номера</a></li>
-          <li class="main-nav__item"><a href="" class="main-nav__link">Коттедж</a></li>
-          <li class="main-nav__item"><a href="" class="main-nav__link">Ресторан</a></li>
-          <li class="main-nav__item"><a href="" class="main-nav__link">Отдых</a></li>
-          <li class="main-nav__item"><a href="" class="main-nav__link">Контакты</a></li>
+          <li class="main-nav__item"><a href="room-list.html" class="main-nav__link">Номера</a></li>
+          <li class="main-nav__item"><a href="#" class="main-nav__link">Коттедж</a></li>
+          <li class="main-nav__item"><a href="#" class="main-nav__link">Ресторан</a></li>
+          <li class="main-nav__item"><a href="#" class="main-nav__link">Отдых</a></li>
+          <li class="main-nav__item"><a href="#" class="main-nav__link">Контакты</a></li>
+        </ul>
+      </nav>
+
+      <span class="toggler" id="toggler"><span></span></span>
+
+      <nav class="main-nav__mobile">
+        <ul class="main-nav__mobile-list" id="nav">
+          <li class="main-nav__mobile-item"><a href="" class="main-nav__mobile-link  main-nav__mobile-link--active">Номера</a></li>
+          <li class="main-nav__mobile-item"><a href="" class="main-nav__mobile-link">Коттедж</a></li>
+          <li class="main-nav__mobile-item"><a href="" class="main-nav__mobile-link">Ресторан</a></li>
+          <li class="main-nav__mobile-item"><a href="" class="main-nav__mobile-link">Отдых</a></li>
+          <li class="main-nav__mobile-item"><a href="" class="main-nav__mobile-link">Контакты</a></li>
         </ul>
       </nav>
 
       <div class="page-header__contacts">
-        <a href="tel:+7 812 777-55-88" class="">+7 812 777-55-88</a>
-        <address class="page-header__address"></address>
+        <a href="tel:88127775588" class="page-header__telephone">+7 812 777-55-88</a>
+        <address class="page-header__address">г. Санкт-Петербург, Приморское ш.600</address>
       </div>
 
-      <a href="" class="btn  btn--icon-calendar  btn--min-width-invisible">Забронировать</a>
+      <div class="page-header__booking-button">
+        <a href="form.html" class="btn  btn--icon-calendar  btn--min-width-invisible">Забронировать</a>
+      </div>
 
     </div>
   </header>
 
   <main>
 
-
-
       <div class="promo-main">
         <div class="promo-main__inner">
-          <p class="promo-main__title">Семейный отдых на берегу</p>
-          <p class="promo-main__title">Финского залива</p>
-          <p class="promo-main__text">Green Valley - это современная база отдыха в курортном районе для здорового отдыха всей семьёй.</p>
+
+          <span class="promo-main__title">Семейный отдых на берегу</span>
+          <span class="promo-main__title">Финского залива</span>
+          <p class="promo-main__text"><span class="promo-main__text-line">Green Valley - это современная база отдыха</span><br><span class="promo-main__text-line"> в курортном районе для здорового отдыха всей семьёй.</span></p>
+
         </div>
       </div>
 
@@ -50,37 +156,41 @@
         <div class="rest-tabs__inner">
 
           <ul class="rest-tabs__switcher">
-            <li class="rest-tabs__item"><a href="">семейный отдых</a></li>
-            <li class="rest-tabs__item"><a href="">корпоративный</a></li>
+            <li class="rest-tabs__tab  rest-tabs__tab--active"><a href="#healthy-relax" class="rest-tabs__link">семейный отдых</a></li>
+            <li class="rest-tabs__tab"><a href="#corporate-relax" class="rest-tabs__link">корпоративный</a></li>
           </ul>
 
-          <div class="rest-tabs__item">
+          <div id="healthy-relax" class="rest-tabs__item  rest-tabs__item--active">
             <div class="rest-tabs__item-inner">
-              <p class="block-title  block-title--narrow">Здоровый отдых</p>
-              <p class="block-text">Плавайте в бассейне, играйте в воллейбол, футбол и другие игры. Утройте семейный пикник с шашлыками или снимите напряжение в бане или спа. Почувствуйте отдых!</p>
+
+              <p class="rest-tabs__item-header">Здоровый отдых</p>
+              <p class="rest-tabs__item-text">Плавайте в бассейне, играйте в воллейбол, футбол и другие игры. Устройте семейный пикник с шашлыками или снимите напряжение в бане или спа. Почувствуйте отдых!</p>
               <ul class="rest-tabs__list">
-                <li><span style="background-image: url();"></span>бассейн</li>
-                <li><span style="background-image: url();"></span>спортивная площадка</li>
-                <li><span style="background-image: url();"></span>бильярд</li>
-                <li><span style="background-image: url();"></span>спа</li>
-                <li><span style="background-image: url();"></span>бани</li>
-                <li><span style="background-image: url();"></span>анимация</li>
+                <li class="rest-tabs__list-item"><img src="img/rest-tabs__list-item-image1.png" alt="" class="rest-tabs__list-item-image" width="80"><span class="rest-tabs__list-item-name">бассейн</span></li>
+                <li class="rest-tabs__list-item"><img src="img/rest-tabs__list-item-image2.png" alt="" class="rest-tabs__list-item-image" width="80"><span class="rest-tabs__list-item-name">спортивная<br> площадка</span></li>
+                <li class="rest-tabs__list-item"><img src="img/rest-tabs__list-item-image3.png" alt="" class="rest-tabs__list-item-image" width="80"><span class="rest-tabs__list-item-name">бильярд</span></li>
+                <li class="rest-tabs__list-item"><img src="img/rest-tabs__list-item-image4.png" alt="" class="rest-tabs__list-item-image" width="80"><span class="rest-tabs__list-item-name">спа</span></li>
+                <li class="rest-tabs__list-item"><img src="img/rest-tabs__list-item-image5.png" alt="" class="rest-tabs__list-item-image" width="80"><span class="rest-tabs__list-item-name">бани</span></li>
+                <li class="rest-tabs__list-item"><img src="img/rest-tabs__list-item-image6.png" alt="" class="rest-tabs__list-item-image" width="80"><span class="rest-tabs__list-item-name">анимация</span></li>
               </ul>
+
             </div>
           </div>
 
-          <div class="rest-tabs__item">
+          <div id="corporate-relax" class="rest-tabs__item">
             <div class="rest-tabs__item-inner">
-              <p class="block-title  block-title--narrow">Здоровый отдых</p>
-              <p class="block-text">Плавайте в бассейне, играйте в воллейбол, футбол и другие игры. Утройте семейный пикник с шашлыками или снимите напряжение в бане или спа. Почувствуйте отдых!</p>
+
+              <p class="rest-tabs__item-header">Корпоративный отдых</p>
+              <p class="rest-tabs__item-text">Плавайте в бассейне, играйте в воллейбол, футбол и другие игры. Устройте корпоративный пикник с шашлыками или снимите напряжение в бане или спа. Почувствуйте отдых!</p>
               <ul class="rest-tabs__list">
-                <li><span style="background-image: url();"></span>бассейн</li>
-                <li><span style="background-image: url();"></span>спортивная площадка</li>
-                <li><span style="background-image: url();"></span>бильярд</li>
-                <li><span style="background-image: url();"></span>спа</li>
-                <li><span style="background-image: url();"></span>бани</li>
-                <li><span style="background-image: url();"></span>анимация</li>
+                  <li class="rest-tabs__list-item"><img src="img/rest-tabs__list-item-image1.png" alt="" class="rest-tabs__list-item-image" width="80"><span class="rest-tabs__list-item-name">бассейн</span></li>
+                  <li class="rest-tabs__list-item"><img src="img/rest-tabs__list-item-image2.png" alt="" class="rest-tabs__list-item-image" width="80"><span class="rest-tabs__list-item-name">спортивная<br> площадка</span></li>
+                  <li class="rest-tabs__list-item"><img src="img/rest-tabs__list-item-image3.png" alt="" class="rest-tabs__list-item-image" width="80"><span class="rest-tabs__list-item-name">бильярд</span></li>
+                  <li class="rest-tabs__list-item"><img src="img/rest-tabs__list-item-image4.png" alt="" class="rest-tabs__list-item-image" width="80"><span class="rest-tabs__list-item-name">спа</span></li>
+                  <li class="rest-tabs__list-item"><img src="img/rest-tabs__list-item-image5.png" alt="" class="rest-tabs__list-item-image" width="80"><span class="rest-tabs__list-item-name">бани</span></li>
+                  <li class="rest-tabs__list-item"><img src="img/rest-tabs__list-item-image6.png" alt="" class="rest-tabs__list-item-image" width="80"><span class="rest-tabs__list-item-name">анимация</span></li>
               </ul>
+
             </div>
           </div>
 
@@ -89,125 +199,228 @@
 
 
     <div class="gallery">
-      <img src="" alt="" class="gallery__main-img">
-      <div class="owl-carousel"></div>
+      <div class="gallery__inner">
+
+        <div class="gallery__main-img-list">
+          <div class="gallery__main-img-list-item">
+            <img src="img/gallery__main-img1-320px.jpg" alt="" class="gallery__main-img">
+          </div>
+          <div class="gallery__main-img-list-item">
+            <img src="img/gallery__main-img2-320px.jpg" alt="Галерея2" class="gallery__main-img">
+          </div>
+          <div class="gallery__main-img-list-item">
+            <img src="img/gallery__main-img3-320px.jpg" alt="Галерея3" class="gallery__main-img">
+          </div>
+          <div class="gallery__main-img-list-item">
+            <img src="img/gallery__main-img4-320px.jpg" alt="Галерея4" class="gallery__main-img">
+          </div>
+          <div class="gallery__main-img-list-item">
+            <img src="img/gallery__main-img5-320px.jpg" alt="Галерея5" class="gallery__main-img">
+          </div>
+          <div class="gallery__main-img-list-item">
+            <img src="img/gallery__main-img6-320px.jpg" alt="Галерея6" class="gallery__main-img">
+          </div>
+          <div class="gallery__main-img-list-item">
+            <img src="img/gallery__main-img7-320px.jpg" alt="Галерея7" class="gallery__main-img">
+          </div>
+        </div>
+
+        <div class="gallery__nav-img-list">
+          <div>
+            <img src="img/gallery__main-nav-img1-768px.jpg" alt="Галерея1" class="gallery__nav-img">
+          </div>
+          <div>
+            <img src="img/gallery__main-nav-img2-768px.jpg" alt="Галерея2" class="gallery__nav-img">
+          </div>
+          <div>
+            <img src="img/gallery__main-nav-img3-768px.jpg" alt="Галерея3" class="gallery__nav-img">
+          </div>
+          <div>
+            <img src="img/gallery__main-nav-img4-768px.jpg" alt="Галерея4" class="gallery__nav-img">
+          </div>
+          <div>
+            <img src="img/gallery__main-nav-img5-768px.jpg" alt="Галерея5" class="gallery__nav-img">
+          </div>
+          <div>
+            <img src="img/gallery__main-nav-img6-768px.jpg" alt="Галерея6" class="gallery__nav-img">
+          </div>
+          <div>
+            <img src="img/gallery__main-nav-img7-768px.jpg" alt="Галерея7" class="gallery__nav-img">
+          </div>
+        </div>
+
+      </div>
     </div>
 
     <section class="reviews">
-      <h1 class="block-title  block-title--white">Отзывы</h1>
-      <div class="owl-carousel">
-        <div>
-          <blockquote class="reviews__slide  reviews__slide--shown">
-            <p class="block-text">Наша семья счастлива, что открыла для себя Green Valley. Замечательный, комфортный отдых. Хорошее место, приветливый персонал, вкусная еда. Стали постоянными гостями!</p>
-            <footer class="reviews__slide-footer">
-              <div class="reviews__date">Дата отдыха: 01.06.2015 - 08.06.2015</div>
-              <div class="reviews__author">
-                <img src="" class="reviews__userpic" alt="Аватар">Екатерина В.
-                <div class="reviews__social-links-block"><a href="" class="reviews__social-link  reviews__social-link--vk">Вконтакте</a></div>
-              </div>
-            </footer>
-          </blockquote>
-        </div>
-        <div>
-          <blockquote class="reviews__slide  reviews__slide--shown">
-            <p class="block-text">Спасибо всем без исключения сотрудникам отеля за прекрасные дни, проведённые у вас! Наслаждались тишиной, отдохнули прекрасно. Понравилось всё: тёплый приём персоналом.</p>
-            <footer class="reviews__slide-footer">
-              <div class="reviews__date">Дата отдыха: 15.05.2015 - 20.05.2015</div>
-              <div class="reviews__author">
-                <img src="" class="reviews__userpic" alt="Аватар">Екатерина В.
-                <div class="reviews__social-links-block"><a href="" class="reviews__social-link  reviews__social-link--fb">Фейсбук</a></div>
-              </div>
-            </footer>
-          </blockquote>
-        </div>
-        <div>
-          <blockquote class="reviews__slide">
-            <p class="block-text">Наша семья счастлива, что открыла для себя Green Valley. Замечательный, комфортный отдых. Хорошее место, приветливый персонал, вкусная еда. Стали постоянными гостями!</p>
-            <footer class="reviews__slide-footer">
-              <div class="reviews__date">Дата отдыха: 01.06.2015 - 08.06.2015</div>
-              <div class="reviews__author">
-                <img src="" class="reviews__userpic" alt="Аватар">Екатерина В.
-                <div class="reviews__social-links-block"><a href="" class="reviews__social-link  reviews__social-link--vk">Вконтакте</a></div>
-              </div>
-            </footer>
-          </blockquote>
-        </div>
-        <div>
-          <blockquote class="reviews__slide">
-            <p class="block-text">Спасибо всем без исключения сотрудникам отеля за прекрасные дни, проведённые у вас! Наслаждались тишиной, отдохнули прекрасно. Понравилось всё: тёплый приём персоналом.</p>
-            <footer class="reviews__slide-footer">
-              <div class="reviews__date">Дата отдыха: 15.05.2015 - 20.05.2015</div>
-              <div class="reviews__author">
-                <span class="reviews__author-name">Екатерина В.</span>
-                <img src="" class="reviews__userpic" alt="Аватар">
-                <div class="reviews__social-links-block"><a href="" class="reviews__social-link  reviews__social-link--fb">Фейсбук</a></div>
-              </div>
-            </footer>
-          </blockquote>
-        </div>
+      <div class="reviews__inner">
+        <h1 class="reviews__title">Отзывы</h1>
+          <div id="reviews" class="reviews__slick">
+
+            <div class="reviews__slide-block">
+
+              <blockquote class="reviews__slide ">
+                <p class="reviews__slide-text">Наша семья счастлива, что открыла для себя Green Valley. Замечательный, комфортный отдых. Хорошее место, приветливый персонал, вкусная еда. Стали постоянными гостями!</p>
+                <div class="reviews__date">Дата отдыха: 01.06.2015 - 08.06.2015</div>
+                <footer class="reviews__author">
+                  <img src="img/reviews__userpic-img1.jpg" class="reviews__userpic" alt="Аватар">
+                  <span class="reviews__name">Екатерина В.</span>
+                  <div class="reviews__social-links-block"><a href="#" class="reviews__social-link  reviews__social-link--vk"></a></div>
+                </footer>
+              </blockquote>
+
+              <blockquote class="reviews__slide  reviews__slide--hidden">
+                <p class="reviews__slide-text">Спасибо всем без исключения сотрудникам отеля за прекрасные дни, проведённые у вас! Наслаждались тишиной, отдохнули прекрасно. Понравилось всё: тёплый приём персоналом.</p>
+                <div class="reviews__date">Дата отдыха: 15.05.2015 - 20.05.2015</div>
+                <footer class="reviews__author">
+                  <img src="img/reviews__userpic-img2.jpg" class="reviews__userpic" alt="Аватар">
+                  <span class="reviews__name">Екатерина В.</span>
+                  <div class="reviews__social-links-block"><a href="#" class="reviews__social-link  reviews__social-link--fb"></a></div>
+                </footer>
+              </blockquote>
+
+            </div>
+
+            <div class="reviews__slide-block">
+
+              <blockquote class="reviews__slide">
+                <p class="reviews__slide-text">Наша семья счастлива, что открыла для себя Green Valley. Замечательный, комфортный отдых. Хорошее место, приветливый персонал, вкусная еда. Стали постоянными гостями!</p>
+                <div class="reviews__date">Дата отдыха: 01.06.2015 - 08.06.2015</div>
+                <footer class="reviews__author">
+                  <img src="img/reviews__userpic-img1.jpg" class="reviews__userpic" alt="Аватар">
+                  <span class="reviews__name">Екатерина В.</span>
+                  <div class="reviews__social-links-block"><a href="#" class="reviews__social-link  reviews__social-link--vk"></a></div>
+                </footer>
+              </blockquote>
+
+              <blockquote class="reviews__slide  reviews__slide--hidden">
+                <p class="reviews__slide-text">Спасибо всем без исключения сотрудникам отеля за прекрасные дни, проведённые у вас! Наслаждались тишиной, отдохнули прекрасно. Понравилось всё: тёплый приём персоналом.</p>
+                <div class="reviews__date">Дата отдыха: 15.05.2015 - 20.05.2015</div>
+                <footer class="reviews__author">
+                  <img src="img/reviews__userpic-img2.jpg" class="reviews__userpic" alt="Аватар">
+                  <span class="reviews__name">Екатерина В.</span>
+                  <div class="reviews__social-links-block"><a href="#" class="reviews__social-link  reviews__social-link--fb"></a></div>
+                </footer>
+              </blockquote>
+
+            </div>
+
+            <div class="reviews__slide-block">
+
+              <blockquote class="reviews__slide">
+                <p class="reviews__slide-text">Наша семья счастлива, что открыла для себя Green Valley. Замечательный, комфортный отдых. Хорошее место, приветливый персонал, вкусная еда. Стали постоянными гостями!</p>
+                <div class="reviews__date">Дата отдыха: 01.06.2015 - 08.06.2015</div>
+                <footer class="reviews__author">
+                  <img src="img/reviews__userpic-img1.jpg" class="reviews__userpic" alt="Аватар">
+                  <span class="reviews__name">Екатерина В.</span>
+                  <div class="reviews__social-links-block"><a href="" class="reviews__social-link  reviews__social-link--vk"></a></div>
+                </footer>
+              </blockquote>
+
+              <blockquote class="reviews__slide  reviews__slide--hidden">
+                <p class="reviews__slide-text">Спасибо всем без исключения сотрудникам отеля за прекрасные дни, проведённые у вас! Наслаждались тишиной, отдохнули прекрасно. Понравилось всё: тёплый приём персоналом.</p>
+                <div class="reviews__date">Дата отдыха: 15.05.2015 - 20.05.2015</div>
+                <footer class="reviews__author">
+                  <img src="img/reviews__userpic-img2.jpg" class="reviews__userpic" alt="Аватар">
+                  <span class="reviews__name">Екатерина В.</span>
+                  <div class="reviews__social-links-block"><a href="" class="reviews__social-link  reviews__social-link--fb"></a></div>
+                </footer>
+              </blockquote>
+
+            </div>
+
+          </div>
+        <a href="#" class="btn  btn--bordered  reviews__btn">Все отзывы</a>
       </div>
-      <a href="" class="btn  btn--bordered">Все отзывы</a>
     </section>
 
     <section class="offers">
-      <h1 class="block-title">Акции и предложения</h1>
-      <div class="owl-carousel">
-        <div class="div">
-          <div class="offers__item  offers__item--active  offers__item--maydiscount">
+      <div class="offers__inner">
+        <p class="offers__title">Акции и предложения</p>
+        <div class="offers__slider">
+
+          <div class="offers__item  offers__item--active  offers__item--discount">
             <div class="offers__item-descr">
               <strong class="offers__item-descr-title">Скидки в мае</strong>
-              <p class="block-text  block-text--lighter  block-text--small-line-height">Забронируйте номер или коттедж любой категории до 31 июня и получите скидку 10%!</p>
+              <p class="offers__item-descr-text">Забронируйте номер или коттедж любой категории до 31 июня и получите скидку 10%!</p>
             </div>
           </div>
-        </div>
-        <div class="div">
-          <div class="offers__item  offers__item--active  offers__item--maydiscount">
+
+          <div class="offers__item  offers__item--active  offers__item--discount">
             <div class="offers__item-descr">
-              <strong class="offers__item-descr-title">Скидки в мае</strong>
-              <p class="block-text  block-text--lighter  block-text--small-line-height">Забронируйте номер или коттедж любой категории до 31 июня и получите скидку 10%!</p>
+              <strong class="offers__item-descr-title">Скидки в июне</strong>
+              <p class="offers__item-descr-text">Забронируйте номер или коттедж любой категории до 31 июня и получите скидку 10%!</p>
             </div>
           </div>
+
         </div>
       </div>
     </section>
 
     <section class="location">
-      <h1 class="block-title  block-title--lighter">Как до нас добраться</h1>
-      <div class="location__map" id="map"></div>
-      <div class="transport">
-        <div class="transport__wrapper">
-          <div class="transport__item">
-            <h2 class="transport__name  transport__name--bus">Автобусы</h2>
-            <ul class="transport__list">
-              <li class="transport__text"><b class="transport__number">№ 211</b> от станции метро "Черная речка" до остановки "Санаторий Репино"</li>
-              <li class="transport__text"><b class="transport__number">№ 305К</b> от станции метро "Старая деревня"</li>
-              <li class="transport__text"><b class="transport__number">№ 680К</b> от станции метро "Проспект Просвещения"</li>
-              <li class="transport__text"><b class="transport__number">№ 400К</b> от станции метро "Площадь Ленина"</li>
-            </ul>
-          </div>
-          <div class="transport__item">
-            <h2 class="transport__name  transport__name--train">Электропоезд</h2>
-            <p class="transport__text">Электропоезд Выборгского направления от Финляндского вокзала Санкт-Петерурга до платформы "Репино"</p>
+      <div class="location__inner">
+        <h1 class="location__title">Как до нас добраться</h1>
+        <div class="location__map">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1983.3129967463035!2d29.63812701610734!3d60.192102881969035!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x469655a8f7aaa509%3A0x4571dd0a1f950e95!2z0J_RgNC40LzQvtGA0YHQutC-0LUg0YguLCA2MDAsINCzLiDQodCw0L3QutGCLdCf0LXRgtC10YDQsdGD0YDQsywgMTk5MDA0!5e0!3m2!1sru!2sru!4v1453324512974" style="border:0" allowfullscreen></iframe>
+        </div>
+        <div class="transport">
+          <div class="transport__wrapper">
+
+            <div class="transport__item">
+              <h2 class="transport__name  transport__name--bus">Автобусы</h2>
+              <ul class="transport__list">
+                <li class="transport__text"><b class="transport__number">№ 211</b> от станции метро "Черная речка" до остановки "Санаторий Репино"</li>
+                <li class="transport__text"><b class="transport__number">№ 305К</b> от станции метро "Старая деревня"</li>
+                <li class="transport__text"><b class="transport__number">№ 680К</b> от станции метро "Проспект Просвещения"</li>
+                <li class="transport__text"><b class="transport__number">№ 400К</b> от станции метро "Площадь Ленина"</li>
+              </ul>
+            </div>
+
+            <div class="transport__item">
+              <h2 class="transport__name  transport__name--train">Электропоезд</h2>
+              <p class="transport__text  transport__text--narrow">Электропоезд Выборгского направления от Финляндского вокзала Санкт-Петербурга до платформы "Репино"</p>
+            </div>
+
           </div>
         </div>
       </div>
     </section>
 
     <section class="accommodation">
-      <div class="accomodation__inner">
-        <h2 class="block-title  block-title--white">Где вы хотите отдохнуть?</h2>
-        <div class="accomodation-place">
-          <img src="" alt="" class="accomodation-place__image">
-          <div class="accomodation-place__descr">
-            <h2 class="item-title">В отеле</h2>
-            <p class="room-price">от <span class="room-price__number">4000</span> руб./сутки</p>
+      <div class="accommodation__inner">
+        <h2 class="accommodation__title">Где вы хотите отдохнуть?</h2>
+        <div class="accommodation-place  accommodation-place--left">
+          <picture>
+            <source
+              media="(min-width:1200px)"
+              srcset="img/accommodation-place__image-1-1200px.jpg">
+            <source
+              media="(min-width:768px)"
+              srcset="img/accommodation-place__image-1-768px.jpg">
+            <source
+              srcset="img/accommodation-place__image-1-320px.jpg">
+            <img src="img/accommodation-place__image-1-320px.jpg" alt="" class="accommodation-place__image">
+          </picture>
+          <div class="accommodation-place__descr">
+            <h2 class="accommodation-place__title">В отеле</h2>
+            <p class="accommodation-place__price">от <span class="accommodation-place__price-number">4000</span> руб./сутки</p>
           </div>
         </div>
-        <div class="accomodation-place">
-          <img src="" alt="" class="accomodation-place__image">
-          <div class="accomodation-place__descr">
-            <h2 class="item-title">В коттедже</h2>
-            <p class="room-price">от <span class="room-price__number">6800</span> руб./сутки</p>
+        <div class="accommodation-place">
+          <picture>
+            <source
+              media="(min-width:1200px)"
+              srcset="img/accommodation-place__image-2-1200px.jpg">
+            <source
+              media="(min-width:768px)"
+              srcset="img/accommodation-place__image-2-768px.jpg">
+            <source
+              srcset="img/accommodation-place__image-2-320px.jpg">
+            <img src="img/accommodation-place__image-2-320px.jpg" alt="" class="accommodation-place__image">
+          </picture>
+          <div class="accommodation-place__descr">
+            <h2 class="accommodation-place__title">В коттедже</h2>
+            <p class="accommodation-place__price">от <span class="accommodation-place__price-number">6800</span> руб./сутки</p>
           </div>
         </div>
       </div>
@@ -216,28 +429,31 @@
   </main>
 
   <footer class="page-footer">
+    <div class="page-footer__inner">
 
-    <p class="page-footer__address">г. Санкт-Петербург Приморское ш.600</p>
+      <p class="page-footer__address">г. Санкт-Петербург Приморское ш.600</p>
 
-    <div class="logo-set">
-      <a href="" class="logo"><img src="" alt=""></a>
-      <ul class="page-footer__social-links">
-        <li class="page-footer__social-item">
-          <a href="https://vk.com" class="page-footer__link  page-footer__link--vk">Вконтакте</a>
-        </li>
-        <li class="page-footer__social-item">
-          <a href="https://www.instagram.com/" class="page-footer__link  page-footer__link--instagram">Инстаграм</a>
-        </li>
-        <li class="page-footer__social-item">
-          <a href="https://facebook.com" class="page-footer__link  page-footer__link--fb">Фейсбук</a>
-        </li>
-      </ul>
+      <div class="page-footer__logo-set">
+        <a href="" class="logo  page-footer__logo"><img src="img/logo.png" alt=""></a>
+        <ul class="page-footer__social-links">
+          <li class="page-footer__social-item">
+            <a href="https://vk.com" class="page-footer__link  page-footer__link--vk">Вко</a>
+          </li>
+          <li class="page-footer__social-item">
+            <a href="https://www.instagram.com/" class="page-footer__link  page-footer__link--instagram">Ин</a>
+          </li>
+          <li class="page-footer__social-item">
+            <a href="https://facebook.com" class="page-footer__link  page-footer__link--fb">Фб</a>
+          </li>
+        </ul>
+      </div>
+
+      <p class="page-footer__contacts">+7 812 777-55-88 info@greenvalley.ru</p>
+
     </div>
-
-    <p class="page-footer__contacts">+7 812 777-55-88 info@greenvalley.ru</p>
-
   </footer>
 
-  <script src="js/live.js"></script>
+  <script src="js/vendor.min.js"></script>
+  <script src="js/custom.min.js"></script>
 </body>
 </html>
